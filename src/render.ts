@@ -123,7 +123,7 @@ const certificateRow = (certificate: Certificate): string =>
 const languageRow = (language: Language): string =>
 	row(esc(language.language), `<p>${esc(language.fluency)}</p>`);
 
-const head = (resume: Resume): string => {
+const head = (resume: Resume, pdfVersion: string): string => {
 	const { basics, meta } = resume;
 	const place = joined([basics.location.city, COUNTRIES[basics.location.countryCode]]);
 	const contacts = [
@@ -145,7 +145,7 @@ const head = (resume: Resume): string => {
 		`<p class="label">${esc(basics.label)}</p>` +
 		(meta?.openToWork ? `<p class="status">Open to work</p>` : '') +
 		`<ul class="contacts">${contacts}</ul>` +
-		`<a class="download" href="${esc(pdfFileName(resume))}" download>Download PDF</a>` +
+		`<a class="download" href="${esc(pdfHref(resume, pdfVersion))}" download>Download PDF</a>` +
 		`</header>`
 	);
 };
@@ -156,13 +156,35 @@ export function pdfFileName(resume: Resume): string {
 	return `${resume.basics.name.replace(/\s+/g, '-')}-CV.pdf`;
 }
 
-export function renderResume(resume: Resume): string {
+/*
+ * The link carries a version of the document it points at.
+ *
+ * The PDF sits at a fixed path and the CDN in front of Pages caches it for four
+ * hours, so without this a freshly published CV keeps handing out the previous
+ * one for the rest of the afternoon. The page itself expires in ten minutes,
+ * and once it does the new link is a cache miss and fetches the new file.
+ *
+ * The version is a hash of what the document is made of, not a timestamp: one
+ * commit still produces exactly one page. `download` ignores the query, so the
+ * saved file is named the same either way.
+ */
+function pdfHref(resume: Resume, version: string): string {
+	const name = pdfFileName(resume);
+	return version ? `${name}?v=${version}` : name;
+}
+
+export interface RenderOptions {
+	/** Cache-busting stamp for the PDF link; see pdfHref. */
+	pdfVersion?: string;
+}
+
+export function renderResume(resume: Resume, options: RenderOptions = {}): string {
 	const detailed = resume.work.filter((job) => job.startDate >= DETAILED_SINCE);
 	const earlier = resume.work.filter((job) => job.startDate < DETAILED_SINCE);
 
 	return (
 		`<main>` +
-		head(resume) +
+		head(resume, options.pdfVersion ?? '') +
 		`<p class="summary">${esc(resume.basics.summary)}</p>` +
 		section('Experience', detailed.map(jobRow).join('')) +
 		(earlier.length > 0 ? section('Earlier', earlier.map(briefRow).join('')) : '') +

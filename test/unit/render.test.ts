@@ -25,6 +25,13 @@ describe('renderResume', () => {
 		expect(html).toContain('href="Alexander-Slavschik-CV.pdf" download');
 	});
 
+	/* The CDN caches the PDF for four hours at a fixed path, so a new build has
+	   to ask for it under a new URL or it hands out the previous document. */
+	it('stamps the download link when given a version', () => {
+		const stamped = renderResume(resume, { pdfVersion: 'a1b2c3d4' });
+		expect(stamped).toContain('href="Alexander-Slavschik-CV.pdf?v=a1b2c3d4" download');
+	});
+
 	it('dates an entry from its own span', () => {
 		expect(html).toContain('Mar 2020 — Feb 2023');
 	});

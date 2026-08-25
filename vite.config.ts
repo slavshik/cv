@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { defineConfig, type Plugin } from 'vite';
@@ -17,6 +18,17 @@ import { renderJsonLd, renderResume } from './src/render.ts';
  */
 
 const RESUME = fileURLToPath(new URL('content/resume.json', import.meta.url));
+const STYLES = fileURLToPath(new URL('src/styles.css', import.meta.url));
+
+/* Stamps the PDF link so a new build is not served the previous PDF out of the
+   CDN's cache — see pdfHref in src/render.ts. Hashing the two files the printed
+   document is made of keeps it deterministic: same commit, same page. */
+const documentVersion = (): string =>
+	createHash('sha256')
+		.update(readFileSync(RESUME))
+		.update(readFileSync(STYLES))
+		.digest('hex')
+		.slice(0, 8);
 
 const readResume = (): ReturnType<typeof parseResume> =>
 	parseResume(JSON.parse(readFileSync(RESUME, 'utf8')));
@@ -40,7 +52,7 @@ const bakeResume = (): Plugin => ({
 			// shows up, and a build only ever asks once.
 			const resume = readResume();
 			return html
-				.replace('<!--resume-->', renderResume(resume))
+				.replace('<!--resume-->', renderResume(resume, { pdfVersion: documentVersion() }))
 				.replace(
 					'<!--jsonld-->',
 					`<script type="application/ld+json">${renderJsonLd(resume)}</script>`,
