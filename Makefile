@@ -13,8 +13,14 @@ URL    := http://localhost:$(PORT)/cv/
 PW_IMAGE := mcr.microsoft.com/playwright:v1.62.1-noble
 DOCKER   := docker run --rm -v "$(CURDIR)":/repo -v /repo/node_modules -w /repo
 
+# The container ships no Palatino-class serif and no plain mono, so Chromium
+# would fall back to Liberation Serif and a CJK mono — see the comment on
+# --serif in src/styles.css. CI installs the same package before doing the
+# same work; if these two ever disagree, the baselines are meaningless.
+FONTS := apt-get update -qq && apt-get install -y -qq fonts-texgyre
+
 .DEFAULT_GOAL := help
-.PHONY: help install dev preview build pdf check test unit e2e e2e-update size format lint
+.PHONY: help install dev preview build pdf pdf-ci check test unit e2e e2e-update size format lint
 
 help: ## Show this list
 	@grep -hE '^[a-z-]+:.*?## ' $(MAKEFILE_LIST) \
@@ -51,10 +57,13 @@ unit: ## Unit tests over the data and the renderer
 	npm run test:unit
 
 e2e: ## Screenshot tests in the pinned container
-	$(DOCKER) $(PW_IMAGE) sh -c "npm ci && npx vite build && npx playwright test"
+	$(DOCKER) $(PW_IMAGE) sh -c "$(FONTS) && npm ci && npx vite build && npx playwright test"
 
 e2e-update: ## Retake the screenshot baselines in that same container
-	$(DOCKER) $(PW_IMAGE) sh -c "npm ci && npx vite build && npx playwright test --update-snapshots"
+	$(DOCKER) $(PW_IMAGE) sh -c "$(FONTS) && npm ci && npx vite build && npx playwright test --update-snapshots"
+
+pdf-ci: ## Render the PDF the way CI does, to see the fonts it will actually use
+	$(DOCKER) $(PW_IMAGE) sh -c "$(FONTS) && npm ci && npx vite build && node scripts/pdf.mjs"
 
 size: build ## Check the weight budget
 	node test/size.mjs
