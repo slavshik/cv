@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Alexander Slavschik — CV</title>
+  <meta name="description" content="CV of Alexander Slavschik — senior frontend engineer and game developer in Warsaw. Eighteen years of web and games: Evolution, BrainRocket, Diesel Puppet, FRVR. Downloadable as PDF.">
+  <meta name="author" content="Alexander Slavschik">
+  <link rel="canonical" href="https://slavshik.me/cv/">
+
+  <!-- Preview card when the link is pasted into a chat. The image is the one
+       the main site already serves — one file, one identity, no second copy to
+       keep in sync. -->
+  <meta property="og:type" content="profile">
+  <meta property="og:url" content="https://slavshik.me/cv/">
+  <meta property="og:site_name" content="Alexander Slavschik">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Alexander Slavschik — CV">
+  <meta property="og:description" content="Senior frontend engineer and game developer. Warsaw.">
+  <meta property="og:image" content="https://slavshik.me/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Alexander Slavschik — software engineer, web and games, Warsaw">
+  <meta property="profile:first_name" content="Alexander">
+  <meta property="profile:last_name" content="Slavschik">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Alexander Slavschik — CV">
+  <meta name="twitter:description" content="Senior frontend engineer and game developer. Warsaw.">
+  <meta name="twitter:image" content="https://slavshik.me/og.png">
+
+  <link rel="icon" href="/cv/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#f4f1ec" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#101014" media="(prefers-color-scheme: dark)">
+
+  <!-- The chosen theme is applied before the first paint. This script is
+       blocking on purpose: move it down and a dark-theme visitor gets a white
+       flash. Everything else the button does lives in src/main.ts. -->
+  <script>
+    try {
+      var t = localStorage.getItem('theme');
+      if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  </script>
+
+  <!-- Generated from content/resume.json at build time — see vite.config.ts.
+       It claims nothing the page itself does not say. -->
+  <!--jsonld-->
+
+  <script type="module" src="/src/main.ts"></script>
+
+</head>
+<body>
+
+  <!-- The CV, baked in at build time from content/resume.json. Nothing here is
+       assembled in the browser. -->
+  <!--resume-->
+
+  <button id="theme" type="button" hidden aria-label="Toggle theme" title="Theme">
+    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/>
+      <path d="M12 3a9 9 0 0 0 0 18Z" fill="currentColor"/>
+    </svg>
+  </button>
+
+</body>
+</html>

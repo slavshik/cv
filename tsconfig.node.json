@@ -1,0 +1,17 @@
+/*
+ * Build configs and tests: Node exists here, and so does the DOM —
+ * page.evaluate() runs in the browser but is written on this side.
+ */
+{
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		"types": ["node"]
+	},
+	"include": [
+		"test",
+		"vite.config.ts",
+		"vitest.config.ts",
+		"playwright.config.ts",
+		"eslint.config.js"
+	]
+}

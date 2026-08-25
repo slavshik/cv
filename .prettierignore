@@ -1,0 +1,13 @@
+dist
+node_modules
+test-results
+playwright-report
+test/e2e/__screenshots__
+package-lock.json
+.claude
+
+# The markup is written and aligned by hand: comments sit next to what they
+# explain and attributes are laid out so the head reads in one piece. Prettier
+# reflows both and gives nothing back — this HTML does not grow and is not
+# generated.
+*.html

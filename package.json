@@ -1,0 +1,34 @@
+{
+	"name": "slavshik-cv",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"engines": {
+		"node": ">=22"
+	},
+	"scripts": {
+		"dev": "vite",
+		"build": "npm run typecheck && vite build",
+		"preview": "vite preview",
+		"pdf": "node scripts/pdf.mjs",
+		"typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.node.json",
+		"lint": "eslint .",
+		"format": "prettier --write .",
+		"format:check": "prettier --check .",
+		"test:unit": "vitest run",
+		"test:e2e": "playwright test"
+	},
+	"devDependencies": {
+		"@eslint/js": "^10.0.1",
+		"@jsonresume/schema": "^1.3.1",
+		"@playwright/test": "^1.62.1",
+		"@types/node": "^26.2.0",
+		"eslint": "^10.8.1",
+		"globals": "^17.11.0",
+		"prettier": "^3.9.6",
+		"typescript": "^6.0.3",
+		"typescript-eslint": "^8.67.0",
+		"vite": "^8.2.1",
+		"vitest": "^4.1.10"
+	}
+}

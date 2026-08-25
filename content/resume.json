@@ -1,0 +1,301 @@
+{
+	"$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+	"basics": {
+		"name": "Alexander Slavschik",
+		"label": "Senior Frontend Engineer · Game Developer",
+		"email": "slavshik@me.com",
+		"url": "https://slavshik.me",
+		"summary": "As a software engineer, I specialize in web and game development. My passion and dedication to programming are not limited to any specific language. I am constantly searching for ways to enhance efficiency and performance in my work. Learning and growing are important to me, and I am eager to make meaningful contributions to my clients' success.",
+		"location": {
+			"city": "Warsaw",
+			"region": "Mazowieckie",
+			"countryCode": "PL"
+		},
+		"profiles": [
+			{
+				"network": "GitHub",
+				"username": "slavshik",
+				"url": "https://github.com/slavshik"
+			},
+			{
+				"network": "LinkedIn",
+				"username": "slavshik",
+				"url": "https://www.linkedin.com/in/slavshik"
+			}
+		]
+	},
+	"work": [
+		{
+			"name": "BrainRocket",
+			"position": "Senior Game Developer",
+			"location": "Valencia, Spain",
+			"startDate": "2025-09",
+			"endDate": "2026-07"
+		},
+		{
+			"name": "Evolution",
+			"position": "Frontend Engineer",
+			"location": "Warsaw, Poland",
+			"startDate": "2023-02",
+			"endDate": "2026-05",
+			"summary": "Building real-money live casino and game-show titles for a global iGaming platform. Took multiple game clients from empty repository to production and maintained a portfolio of live titles played by users worldwide.",
+			"highlights": [
+				"Built new game clients end-to-end — project scaffolding, MobX stores, WebSocket transport and message handlers, betting grid, drag-and-drop chips, flying-chip animations, statistics and help screens.",
+				"Engineered complex interactive betting UX: drag-and-drop chip placement with distance/scaling math, bet and table-limit validation, real-time bet statistics and winner lists.",
+				"Delivered responsive, multi-orientation layouts across desktop, tablet and mobile.",
+				"Integrated Rive real-time animations behind feature flags and built audio / voice-over systems with regulatory variants.",
+				"Implemented regulatory and compliance features and operator-specific branding for multiple game skins.",
+				"Drove code quality and testing: led migration from Enzyme to React Testing Library, set up Jest/SWC, and maintained GitLab CI visual-regression (WDIO) coverage."
+			],
+			"keywords": [
+				"TypeScript",
+				"React (hooks)",
+				"MobX",
+				"Redux",
+				"PostCSS / CSS Modules",
+				"WebSocket",
+				"Rive",
+				"Storybook",
+				"Jest",
+				"React Testing Library",
+				"GitLab CI",
+				"i18n"
+			]
+		},
+		{
+			"name": "Diesel Puppet",
+			"position": "Game Developer",
+			"location": "Minsk, Belarus",
+			"startDate": "2020-03",
+			"endDate": "2023-02",
+			"summary": "Built and owned the core technology for Diesel Puppet, a casual HTML5 instant-games studio, across roughly five years. Designed and maintained a shared TypeScript/PixiJS/Preact game engine (dp-instant) and its NestJS/Firebase backend, used to ship the same game codebase to seven-plus platforms including Facebook Instant Games, VK, OK.ru, Yandex Games, GameDistribution and YouTube Playables.",
+			"highlights": [
+				"Built several titles end to end on that platform: a 3D physics puzzle game (Babylon.js/cannon.js), a block-fit puzzle game, an asynchronous multiplayer word game that shipped 45-plus versioned releases over a year of near-daily development, a hidden-object puzzle game, and the core simulation engine for a territory-conquest strategy game built with an entity-component-system architecture.",
+				"Built the backend systems behind these games: a Firebase-backed Messenger bot service, and its successor, a multi-tenant NestJS backend serving eight-plus titles with shared auth, scoring, leaderboards, in-game payments and an asynchronous challenge/matchmaking system.",
+				"Set up and iterated on the studio's CI/CD release pipeline, including a migration from Bitbucket Pipelines to GitHub Actions."
+			],
+			"keywords": [
+				"TypeScript",
+				"PixiJS",
+				"Preact",
+				"Babylon.js",
+				"cannon.js",
+				"NestJS",
+				"Firebase",
+				"GitHub Actions"
+			]
+		},
+		{
+			"name": "FRVR",
+			"position": "Game Developer / HTML5 Frontend Engineer",
+			"location": "Malta",
+			"startDate": "2019-07",
+			"endDate": "2020-03",
+			"summary": "Built gameplay features and live-ops systems in JavaScript on a custom PixiJS-based engine, with deep Facebook Instant Games SDK integration (cloud saves, leaderboards, social contexts, rewarded video).",
+			"highlights": [
+				"Owned the long-term goals and progression system for Basketball FRVR end-to-end — data model, animated UI, reward economy and cross-session cloud sync — shipped behind A/B tests.",
+				"Drove engine 2.0 migration, low-end device performance work and ad-monetization integrations (LifeStreet, AdMob, Facebook Audience Network).",
+				"Ran 436 releases of 10 titles across web and Facebook Instant, localized into 29 languages."
+			],
+			"keywords": [
+				"JavaScript",
+				"PixiJS",
+				"WebGL / Canvas",
+				"webpack",
+				"Facebook Instant Games SDK",
+				"PWA",
+				"Ruby",
+				"Google Analytics",
+				"GameAnalytics",
+				"A/B testing",
+				"Android / iOS wrappers"
+			]
+		},
+		{
+			"name": "Gismart",
+			"position": "Senior Game Developer",
+			"location": "Minsk, Belarus",
+			"startDate": "2018-07",
+			"endDate": "2019-06",
+			"summary": "Music games and apps for the Facebook Instant platform. A company of 150 people, a team of 12, collaborating with developers, QA, artists, game designers and product owners. Developed a range of 2D games in a team of two developers, plus two 3D games for the Facebook Instant platform."
+		},
+		{
+			"name": "Skywind Group",
+			"position": "Senior Game Developer",
+			"location": "Minsk, Belarus",
+			"startDate": "2017-04",
+			"endDate": "2018-07",
+			"summary": "Worked in a group of front-end developers on casino games — the vast majority slot games, also card games. Participated in the core team.",
+			"keywords": ["Scrum", "Jira", "Confluence"]
+		},
+		{
+			"name": "Exadel",
+			"position": "Frontend Engineer",
+			"location": "Minsk, Belarus",
+			"startDate": "2016-01",
+			"endDate": "2017-04",
+			"summary": "Worked on a video player supporting HQ video streaming, live streaming and video-on-demand playback, plus an ad experience and other features across different vendors and platforms. Led the transition from a legacy Flash solution to HTML/JS.",
+			"keywords": ["Vanilla JS", "Flash", "Scrum", "Jira", "Confluence"]
+		},
+		{
+			"name": "Playtika",
+			"position": "Game Developer (ActionScript)",
+			"location": "Minsk, Belarus",
+			"startDate": "2014-03",
+			"endDate": "2015-06",
+			"summary": "Worked with a group of ActionScript developers on the Android client for a popular slot-game application. Team of 16–20 developers plus QA and artists.",
+			"keywords": ["ActionScript", "Java (Adobe Native Extensions)", "ant", "groovy"]
+		},
+		{
+			"name": "Diesel Puppet",
+			"position": "Game Developer (iOS)",
+			"location": "Minsk, Belarus",
+			"startDate": "2013-05",
+			"endDate": "2013-11",
+			"summary": "Worked on the \"Russian Lotto Online\" project — UI, UX and client-side programming.",
+			"keywords": ["Objective-C", "CocoaTouch"]
+		},
+		{
+			"name": "Monterosa",
+			"position": "Flash / iOS Developer",
+			"location": "Minsk, Belarus",
+			"startDate": "2012-08",
+			"endDate": "2013-05",
+			"summary": "Support of a Flash game project, plus an internal iOS client-server communication framework."
+		},
+		{
+			"name": "Melesta",
+			"position": "Flash Developer",
+			"location": "Minsk, Belarus",
+			"startDate": "2009-08",
+			"endDate": "2012-05",
+			"summary": "Developed and supported Flash games for social networks — Facebook, Odnoklassniki, VKontakte and Mail.ru."
+		},
+		{
+			"name": "Flamap",
+			"position": "Flash Developer",
+			"location": "Minsk, Belarus",
+			"startDate": "2007-07",
+			"endDate": "2010-02",
+			"summary": "Worked on flamap.de, a visual social network."
+		},
+		{
+			"name": "Intetics",
+			"position": "Junior Flash Developer",
+			"location": "Minsk, Belarus",
+			"startDate": "2007-11",
+			"endDate": "2008-06",
+			"summary": "GUI and interface animations."
+		}
+	],
+	"projects": [
+		{
+			"name": "Chain Cube 3D",
+			"startDate": "2020-09"
+		},
+		{
+			"name": "Hidden Object: Brain Teaser (web)",
+			"startDate": "2020-03",
+			"endDate": "2020-03"
+		},
+		{
+			"name": "Color Galaxy",
+			"startDate": "2018-11",
+			"endDate": "2019-05"
+		},
+		{
+			"name": "Fireballs and Friends",
+			"startDate": "2018-03",
+			"endDate": "2019-02"
+		}
+	],
+	"skills": [
+		{
+			"name": "Core",
+			"keywords": ["TypeScript", "JavaScript", "HTML / CSS", "Node.js"]
+		},
+		{
+			"name": "Frontend",
+			"keywords": [
+				"React",
+				"MobX",
+				"Redux",
+				"Preact",
+				"PostCSS / CSS Modules",
+				"Storybook",
+				"WebSocket",
+				"i18n"
+			]
+		},
+		{
+			"name": "Games",
+			"keywords": [
+				"PixiJS",
+				"Babylon.js",
+				"Unity",
+				"Defold",
+				"WebGL / Canvas",
+				"Rive",
+				"Entity-component-system"
+			]
+		},
+		{
+			"name": "Backend & infrastructure",
+			"keywords": ["NestJS", "Firebase", "GitHub Actions", "GitLab CI", "webpack", "Vite"]
+		},
+		{
+			"name": "Testing",
+			"keywords": ["Jest", "React Testing Library", "WDIO visual regression", "Playwright"]
+		},
+		{
+			"name": "Earlier background",
+			"keywords": ["Flash / ActionScript", "Objective-C / Swift", "Python", "Ruby"]
+		}
+	],
+	"education": [
+		{
+			"institution": "Belarusian State University of Informatics and Radioelectronics",
+			"area": "Computer Science",
+			"startDate": "2008",
+			"endDate": "2012"
+		},
+		{
+			"institution": "College of Business and Law",
+			"studyType": "Associate's degree",
+			"area": "Computer Science",
+			"startDate": "2003",
+			"endDate": "2007"
+		}
+	],
+	"certificates": [
+		{
+			"name": "CSS for JavaScript Developers",
+			"issuer": "Josh Comeau",
+			"date": "2024-03"
+		},
+		{
+			"name": "NestJS Zero to Hero — Modern TypeScript Back-end Development",
+			"issuer": "Udemy",
+			"date": "2024-03"
+		}
+	],
+	"languages": [
+		{
+			"language": "English",
+			"fluency": "Professional working"
+		},
+		{
+			"language": "Russian",
+			"fluency": "Native or bilingual"
+		},
+		{
+			"language": "Polish",
+			"fluency": "Elementary"
+		}
+	],
+	"meta": {
+		"canonical": "https://slavshik.me/cv/",
+		"version": "v1.0.0",
+		"openToWork": true
+	}
+}

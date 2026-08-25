@@ -1,0 +1,33 @@
+/*
+ * The page's own code. No Node globals on purpose: everything under src ends
+ * up in the browser, and process.env in that bundle is a bug, not a
+ * convenience. Configs and tests are checked separately — tsconfig.node.json.
+ */
+{
+	"compilerOptions": {
+		"target": "ES2022",
+		"lib": ["ES2022", "DOM", "DOM.Iterable"],
+		"module": "ESNext",
+		"moduleResolution": "bundler",
+		"types": ["vite/client"],
+
+		"strict": true,
+		"noUncheckedIndexedAccess": true,
+		"noImplicitOverride": true,
+		"noFallthroughCasesInSwitch": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"exactOptionalPropertyTypes": true,
+
+		"isolatedModules": true,
+		"verbatimModuleSyntax": true,
+		"noEmit": true,
+		"skipLibCheck": true,
+		"resolveJsonModule": true,
+
+		/* Imports carry explicit .ts extensions: Vite's native config loader is
+		   Node itself, and Node resolves what is written rather than guessing. */
+		"allowImportingTsExtensions": true
+	},
+	"include": ["src"]
+}

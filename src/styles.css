@@ -1,0 +1,446 @@
+/*
+ * The whole design. Two ideas hold it together:
+ *
+ *  — the page is paper, not an interface. Warm neutral, a serif for the words,
+ *    a mono only where something is being labelled rather than read;
+ *  — every section is the same two-column row: a narrow gutter for dates or a
+ *    label, the body beside it. Repeating one shape is what keeps a document
+ *    this long quiet, and it is why the print rules below are short.
+ */
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+
+:root {
+	/* Warm neutral, not grey: paper, not interface. Same values as slavshik.me —
+	   the two pages are one site and must not read as two. */
+	--paper: #f4f1ec;
+	--ink: #16151a;
+	--muted: #6f6a63;
+	--faint: #a9a29a;
+	--hair: #d8d2c8;
+
+	/* Set from the visitor's local time in src/main.ts. The default is the
+	   daytime value, which is also what the page shows without JavaScript. */
+	--accent: #2f6b57;
+
+	/* The accent as text. On slavshik.me the accent is only ever a rule, a dot
+	   or a focus ring, so it never had to be legible on a dark ground; here it
+	   labels things and carries the list marks, and the raw colour goes muddy
+	   against #101014. Lifted for dark themes only, below. */
+	--accent-text: var(--accent);
+
+	--serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
+	--mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
+
+	--gutter: 8.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme='light']) {
+		--paper: #101014;
+		--ink: #ece7de;
+		--muted: #8a8378;
+		--faint: #5d574f;
+		--hair: #2a2830;
+		--accent-text: color-mix(in oklab, var(--accent), #fff 42%);
+	}
+}
+
+/* A theme chosen with the button has to beat the system one in both
+   directions, so the values are repeated. */
+:root[data-theme='dark'] {
+	--paper: #101014;
+	--ink: #ece7de;
+	--muted: #8a8378;
+	--faint: #5d574f;
+	--hair: #2a2830;
+	--accent-text: color-mix(in oklab, var(--accent), #fff 42%);
+}
+
+body {
+	background: var(--paper);
+	color: var(--ink);
+	font-family: var(--serif);
+	font-size: 17px;
+	line-height: 1.6;
+	-webkit-font-smoothing: antialiased;
+	transition:
+		background-color 1.2s ease,
+		color 1.2s ease;
+}
+
+main {
+	width: 100%;
+	max-width: 48rem;
+	margin: 0 auto;
+	padding: 4rem 2rem 6rem;
+}
+
+a {
+	color: inherit;
+	text-decoration-color: var(--hair);
+	text-underline-offset: 0.2em;
+}
+a:hover {
+	color: var(--accent-text);
+	text-decoration-color: currentColor;
+}
+
+/* ── Head ──────────────────────────────────────────────────────────────── */
+
+.head h1 {
+	font-size: clamp(2.1rem, 7vw, 2.9rem);
+	font-weight: 600;
+	letter-spacing: -0.02em;
+	line-height: 1.05;
+	margin: 0;
+}
+
+.head .label {
+	font-size: 1.05rem;
+	color: var(--muted);
+	margin: 0.5rem 0 0;
+}
+
+.head .status {
+	font-family: var(--mono);
+	font-size: 0.68rem;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--accent-text);
+	margin: 0.9rem 0 0;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+.head .status::before {
+	content: '';
+	width: 0.45rem;
+	height: 0.45rem;
+	border-radius: 50%;
+	background: var(--accent-text);
+}
+
+.contacts {
+	list-style: none;
+	margin: 1.3rem 0 0;
+	padding: 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.15rem 0.6rem;
+	font-family: var(--mono);
+	font-size: 0.76rem;
+	color: var(--muted);
+}
+/* The phone number exists only in the PDF — scripts/pdf.mjs fills this in.
+   Empty on the web page, and an empty item must not leave a gap. */
+.contacts .phone:empty {
+	display: none;
+}
+/* The separator belongs to the item before it, not the one after: put it on
+   ::before and a wrapped line opens with a stray dot. */
+.contacts li:not(:empty):not(:last-child)::after {
+	content: ' ·';
+	color: var(--faint);
+}
+
+.download {
+	display: inline-block;
+	margin-top: 1.8rem;
+	padding: 0.55rem 1rem;
+	border: 1px solid var(--hair);
+	border-radius: 2px;
+	font-family: var(--mono);
+	font-size: 0.72rem;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: var(--muted);
+	transition:
+		color 0.2s ease,
+		border-color 0.2s ease;
+}
+.download:hover {
+	color: var(--accent-text);
+	border-color: var(--accent-text);
+}
+
+.summary {
+	max-width: 40rem;
+	margin: 2.6rem 0 0;
+	font-size: 1.05rem;
+	color: var(--ink);
+}
+
+/* ── Sections ──────────────────────────────────────────────────────────── */
+
+section {
+	margin-top: 3.2rem;
+}
+
+h2 {
+	font-family: var(--mono);
+	font-size: 0.68rem;
+	font-weight: 400;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	color: var(--faint);
+	margin: 0 0 1.6rem;
+	padding-bottom: 0.5rem;
+	border-bottom: 1px solid var(--hair);
+}
+
+.row {
+	display: grid;
+	grid-template-columns: var(--gutter) 1fr;
+	gap: 1.6rem;
+	margin-bottom: 2rem;
+}
+.row.brief {
+	margin-bottom: 1.1rem;
+}
+
+.side {
+	font-family: var(--mono);
+	font-size: 0.72rem;
+	line-height: 1.5;
+	color: var(--muted);
+	margin: 0.35rem 0 0;
+}
+
+.body h3 {
+	font-size: 1.08rem;
+	font-weight: 600;
+	line-height: 1.35;
+	margin: 0;
+}
+
+.body .org {
+	font-family: var(--mono);
+	font-size: 0.74rem;
+	color: var(--muted);
+	margin: 0.25rem 0 0;
+}
+
+.body p {
+	margin: 0.7rem 0 0;
+	font-size: 0.96rem;
+}
+/* Rows whose body is nothing but text — skills, languages — must line their
+   first line up with the label in the gutter. */
+.body > p:first-child {
+	margin-top: 0;
+}
+
+.highlights {
+	list-style: none;
+	margin: 0.7rem 0 0;
+	padding: 0;
+	font-size: 0.96rem;
+}
+.highlights li {
+	padding-left: 1.2rem;
+	margin-top: 0.45rem;
+}
+.highlights li::before {
+	content: '—';
+	color: var(--accent-text);
+	float: left;
+	margin-left: -1.2rem;
+}
+
+.tech {
+	font-family: var(--mono);
+	font-size: 0.7rem;
+	line-height: 1.9;
+	color: var(--faint);
+}
+.body .tech {
+	margin-top: 0.9rem;
+}
+
+/* ── Theme button ──────────────────────────────────────────────────────── */
+
+#theme {
+	position: fixed;
+	right: 1.2rem;
+	bottom: 1.2rem;
+	width: 2.4rem;
+	height: 2.4rem;
+	display: grid;
+	place-items: center;
+	background: var(--paper);
+	color: var(--faint);
+	border: 1px solid var(--hair);
+	border-radius: 50%;
+	cursor: pointer;
+	transition: color 0.2s ease;
+}
+/* An id selector outranks the browser's own `[hidden] { display: none }`, so
+   without this the button is visible — and useless — with scripting off. */
+#theme[hidden] {
+	display: none;
+}
+#theme:hover {
+	color: var(--accent-text);
+}
+#theme .icon {
+	width: 1.1rem;
+	height: 1.1rem;
+}
+
+/* ── Narrow screens ────────────────────────────────────────────────────── */
+
+@media (max-width: 40rem) {
+	body {
+		font-size: 16px;
+	}
+	main {
+		padding: 2.5rem 1.4rem 5rem;
+	}
+	.row {
+		grid-template-columns: 1fr;
+		gap: 0.35rem;
+	}
+	.side {
+		margin: 0;
+		order: -1;
+	}
+}
+
+/* ── Print ─────────────────────────────────────────────────────────────── */
+
+/*
+ * The same document on paper, and the source of the downloadable PDF — see
+ * scripts/pdf.mjs. Ink on white regardless of the theme in force: a dark PDF
+ * is not a thing anyone wants to print, and the accent is the only colour that
+ * survives.
+ */
+@media print {
+	:root,
+	:root[data-theme='dark'],
+	:root[data-theme='light'] {
+		--paper: #fff;
+		--ink: #16151a;
+		--muted: #55504a;
+		--faint: #77716a;
+		--hair: #d0cac0;
+		--accent-text: var(--accent);
+	}
+
+	@page {
+		size: A4;
+		margin: 14mm 15mm 16mm;
+	}
+
+	body {
+		font-size: 10.5pt;
+		line-height: 1.5;
+	}
+
+	main {
+		max-width: none;
+		padding: 0;
+	}
+
+	/* Nothing to click on paper. */
+	.download,
+	#theme {
+		display: none;
+	}
+
+	a {
+		text-decoration: none;
+	}
+
+	.head h1 {
+		font-size: 24pt;
+	}
+	.head .label {
+		font-size: 11pt;
+	}
+	.summary {
+		margin-top: 1.4rem;
+		font-size: 10.5pt;
+	}
+
+	section {
+		margin-top: 1.6rem;
+	}
+	h2 {
+		margin-bottom: 0.9rem;
+		/* A section heading at the foot of a page with its first entry
+		   overleaf is the classic way a printed CV looks broken. */
+		break-after: avoid;
+	}
+
+	/*
+	 * The gutter is a float here rather than a grid column. Chromium will not
+	 * fragment a grid container across pages: a long entry would be moved to
+	 * the next sheet whole, leaving a quarter of the previous one white. A
+	 * floated block splits where it has to, and the date stays with the first
+	 * half — which is where it belongs anyway.
+	 */
+	.row {
+		display: block;
+		margin-bottom: 1rem;
+	}
+	.row::after {
+		content: '';
+		display: table;
+		clear: both;
+	}
+	.side {
+		float: left;
+		width: var(--gutter);
+		margin: 0.25rem 0 0;
+	}
+	.body {
+		margin-left: calc(var(--gutter) + 1.6rem);
+	}
+	.row.brief {
+		margin-bottom: 0.5rem;
+		break-inside: avoid;
+	}
+	/*
+	 * Only the heading is held to what follows it. Chaining this onto the
+	 * company line and the dates line as well reads sensibly and behaves
+	 * terribly: Chromium treats a run of avoids as one unbreakable lump and
+	 * pushes the entire entry to the next sheet.
+	 */
+	.body h3 {
+		break-after: avoid;
+	}
+	.highlights li {
+		break-inside: avoid;
+	}
+	p {
+		orphans: 2;
+		widows: 2;
+	}
+
+	.body h3 {
+		font-size: 11pt;
+	}
+	.body p,
+	.highlights {
+		font-size: 9.8pt;
+	}
+	.side,
+	.body .org {
+		font-size: 8.2pt;
+	}
+	.tech {
+		font-size: 8pt;
+		line-height: 1.7;
+	}
+}
