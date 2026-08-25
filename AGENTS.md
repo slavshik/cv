@@ -50,6 +50,13 @@ PDF are never committed.
   for `make e2e-update`.
 - **Prettier does not touch HTML** (`.prettierignore`). The markup is aligned by
   hand and its comments sit next to what they explain.
+- **The marks are a small syntax, not markdown.** `**action**`, `__architecture__`
+  and `==scale==` in the prose of `content/resume.json` become `<strong>`,
+  `<span class="term">` and `<mark>`. Only prose is parsed — summaries,
+  highlights, project descriptions — and escaping happens first. They are
+  stripped in print on purpose: the PDF must stay a plain document. Keep roughly
+  a sixth of an entry marked; past that they stop meaning anything. See
+  `docs/adr/0004`.
 - **Keep the page free of JavaScript.** The CV must be entirely readable with
   scripting off — an e2e test enforces it. `src/main.ts` may grow only for
   things that are genuinely decoration.

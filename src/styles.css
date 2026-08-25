@@ -38,6 +38,11 @@ body {
 	   against #101014. Lifted for dark themes only, below. */
 	--accent-text: var(--accent);
 
+	/* The highlighter. Warm and low enough not to shout on paper stock; on a
+	   dark ground a solid yellow would be a slab, so it goes translucent and
+	   the text keeps its own colour. */
+	--mark: #f3e099;
+
 	/*
 	 * The Linux names at the end of both stacks are not decoration: the PDF is
 	 * rendered by Chromium inside the Playwright container, which has none of
@@ -63,6 +68,7 @@ body {
 		--faint: #5d574f;
 		--hair: #2a2830;
 		--accent-text: color-mix(in oklab, var(--accent), #fff 42%);
+		--mark: rgba(214, 173, 60, 0.26);
 	}
 }
 
@@ -75,6 +81,7 @@ body {
 	--faint: #5d574f;
 	--hair: #2a2830;
 	--accent-text: color-mix(in oklab, var(--accent), #fff 42%);
+	--mark: rgba(214, 173, 60, 0.26);
 }
 
 body {
@@ -269,6 +276,37 @@ h2 {
 	margin-left: -1.2rem;
 }
 
+/* ── Marks ─────────────────────────────────────────────────────────────── */
+
+/*
+ * Progressive summarisation: three levels of meaning laid over the prose, so
+ * the page can be read at a glance or in full. Bold is what was done and
+ * owned, the underline is the technical substance, the mark is the size of it.
+ * Order of loudness matches order of priority, and none of them appear in
+ * print — see the print rules at the foot of this file.
+ */
+.body strong {
+	font-weight: 700;
+}
+
+.term {
+	text-decoration: underline;
+	text-decoration-color: var(--faint);
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.18em;
+}
+
+mark {
+	background: var(--mark);
+	color: inherit;
+	padding: 0.08em 0.18em;
+	margin: 0 -0.06em;
+	border-radius: 2px;
+	/* The highlighter is decoration over the words, not a change of voice. */
+	box-decoration-break: clone;
+	-webkit-box-decoration-break: clone;
+}
+
 .tech {
 	font-family: var(--mono);
 	font-size: 0.7rem;
@@ -367,6 +405,24 @@ h2 {
 	.download,
 	#theme {
 		display: none;
+	}
+
+	/*
+	 * The marks are for reading on screen. On paper they turn a CV into a
+	 * marked-up study copy, which is not what anyone wants to receive — so all
+	 * three come off, and the PDF is the plain document it was before them.
+	 */
+	.body strong {
+		font-weight: inherit;
+	}
+	.term {
+		text-decoration: none;
+	}
+	mark {
+		background: none;
+		color: inherit;
+		padding: 0;
+		margin: 0;
 	}
 
 	a {

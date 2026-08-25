@@ -19,6 +19,20 @@ test('no phone number reaches the web page', async ({ page }) => {
 	expect(await page.content()).not.toMatch(/\+?48\s?\d{3}\s?\d{3}\s?\d{3}/);
 });
 
+/*
+ * The marks are a reading aid for the screen. The PDF is rendered from this
+ * same page under `@media print`, so the only thing keeping them out of a CV
+ * somebody receives is the print stylesheet.
+ */
+test('the marks come off in print', async ({ page }) => {
+	await page.goto('/cv/?aqa=1');
+	await page.emulateMedia({ media: 'print' });
+
+	await expect(page.locator('mark').first()).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
+	await expect(page.locator('.term').first()).toHaveCSS('text-decoration-line', 'none');
+	await expect(page.locator('.body strong').first()).toHaveCSS('font-weight', '400');
+});
+
 test.describe('without javascript', () => {
 	test.use({ javaScriptEnabled: false });
 

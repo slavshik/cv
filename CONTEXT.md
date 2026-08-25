@@ -30,6 +30,12 @@ line each with no description. Eighteen years of history is worth showing;
 eighteen years of descriptions is not.
 _Avoid_: older jobs, archive, history
 
+**Mark**:
+One of the three levels of emphasis laid over the prose: what was done and
+owned, the technical substance, the size of it. A reading aid for the screen —
+Marks never appear in print.
+_Avoid_: highlight, emphasis, formatting
+
 **Accent**:
 The single colour that varies with the visitor's local clock through four
 phases: dawn, day, sunset, night. Taken from slavshik.me unchanged.

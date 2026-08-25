@@ -38,14 +38,14 @@
 			"location": "Warsaw, Poland",
 			"startDate": "2023-02",
 			"endDate": "2026-05",
-			"summary": "Building real-money live casino and game-show titles for a global iGaming platform. Took multiple game clients from empty repository to production and maintained a portfolio of live titles played by users worldwide.",
+			"summary": "Building real-money live casino and game-show titles for a global iGaming platform. Took multiple game clients **from empty repository to production** and maintained a portfolio of live titles played by users worldwide.",
 			"highlights": [
-				"Built new game clients end-to-end — project scaffolding, MobX stores, WebSocket transport and message handlers, betting grid, drag-and-drop chips, flying-chip animations, statistics and help screens.",
-				"Engineered complex interactive betting UX: drag-and-drop chip placement with distance/scaling math, bet and table-limit validation, real-time bet statistics and winner lists.",
+				"**Built new game clients end-to-end** — project scaffolding, MobX stores, WebSocket transport and message handlers, betting grid, drag-and-drop chips, flying-chip animations, statistics and help screens.",
+				"**Engineered complex interactive betting UX**: drag-and-drop chip placement with distance/scaling math, bet and table-limit validation, real-time bet statistics and winner lists.",
 				"Delivered responsive, multi-orientation layouts across desktop, tablet and mobile.",
-				"Integrated Rive real-time animations behind feature flags and built audio / voice-over systems with regulatory variants.",
+				"Integrated __Rive real-time animations__ behind feature flags and built audio / voice-over systems with regulatory variants.",
 				"Implemented regulatory and compliance features and operator-specific branding for multiple game skins.",
-				"Drove code quality and testing: led migration from Enzyme to React Testing Library, set up Jest/SWC, and maintained GitLab CI visual-regression (WDIO) coverage."
+				"Drove code quality and testing: **led migration** from Enzyme to React Testing Library, set up Jest/SWC, and maintained GitLab CI visual-regression (WDIO) coverage."
 			],
 			"keywords": [
 				"TypeScript",
@@ -68,11 +68,11 @@
 			"location": "Minsk, Belarus",
 			"startDate": "2020-03",
 			"endDate": "2023-02",
-			"summary": "Built and owned the core technology for Diesel Puppet, a casual HTML5 instant-games studio, across roughly five years. Designed and maintained a shared TypeScript/PixiJS/Preact game engine (dp-instant) and its NestJS/Firebase backend, used to ship the same game codebase to seven-plus platforms including Facebook Instant Games, VK, OK.ru, Yandex Games, GameDistribution and YouTube Playables.",
+			"summary": "**Built and owned the core technology** for Diesel Puppet, a casual HTML5 instant-games studio, across roughly five years. Designed and maintained a shared __TypeScript/PixiJS/Preact game engine__ (dp-instant) and its __NestJS/Firebase backend__, used to ship the same game codebase to ==seven-plus platforms== including Facebook Instant Games, VK, OK.ru, Yandex Games, GameDistribution and YouTube Playables.",
 			"highlights": [
-				"Built several titles end to end on that platform: a 3D physics puzzle game (Babylon.js/cannon.js), a block-fit puzzle game, an asynchronous multiplayer word game that shipped 45-plus versioned releases over a year of near-daily development, a hidden-object puzzle game, and the core simulation engine for a territory-conquest strategy game built with an entity-component-system architecture.",
-				"Built the backend systems behind these games: a Firebase-backed Messenger bot service, and its successor, a multi-tenant NestJS backend serving eight-plus titles with shared auth, scoring, leaderboards, in-game payments and an asynchronous challenge/matchmaking system.",
-				"Set up and iterated on the studio's CI/CD release pipeline, including a migration from Bitbucket Pipelines to GitHub Actions."
+				"**Built several titles end to end** on that platform: a 3D physics puzzle game (Babylon.js/cannon.js), a block-fit puzzle game, an asynchronous multiplayer word game that shipped ==45-plus versioned releases== over a year of near-daily development, a hidden-object puzzle game, and the core simulation engine for a territory-conquest strategy game built with an __entity-component-system architecture__.",
+				"Built the backend systems behind these games: a Firebase-backed Messenger bot service, and its successor, a __multi-tenant NestJS backend__ serving ==eight-plus titles== with shared auth, scoring, leaderboards, in-game payments and an asynchronous challenge/matchmaking system.",
+				"Set up and iterated on the studio's __CI/CD release pipeline__, including a migration from Bitbucket Pipelines to GitHub Actions."
 			],
 			"keywords": [
 				"TypeScript",
@@ -91,11 +91,11 @@
 			"location": "Malta",
 			"startDate": "2019-07",
 			"endDate": "2020-03",
-			"summary": "Built gameplay features and live-ops systems in JavaScript on a custom PixiJS-based engine, with deep Facebook Instant Games SDK integration (cloud saves, leaderboards, social contexts, rewarded video).",
+			"summary": "**Built gameplay features and live-ops systems** in JavaScript on __a custom PixiJS-based engine__, with deep Facebook Instant Games SDK integration (cloud saves, leaderboards, social contexts, rewarded video).",
 			"highlights": [
-				"Owned the long-term goals and progression system for Basketball FRVR end-to-end — data model, animated UI, reward economy and cross-session cloud sync — shipped behind A/B tests.",
-				"Drove engine 2.0 migration, low-end device performance work and ad-monetization integrations (LifeStreet, AdMob, Facebook Audience Network).",
-				"Ran 436 releases of 10 titles across web and Facebook Instant, localized into 29 languages."
+				"**Owned the long-term goals and progression system** for Basketball FRVR end-to-end — data model, animated UI, reward economy and cross-session cloud sync — shipped behind A/B tests.",
+				"**Drove engine 2.0 migration**, low-end device performance work and ad-monetization integrations (LifeStreet, AdMob, Facebook Audience Network).",
+				"Ran ==436 releases of 10 titles== across web and Facebook Instant, localized into ==29 languages==."
 			],
 			"keywords": [
 				"JavaScript",
@@ -134,7 +134,7 @@
 			"location": "Minsk, Belarus",
 			"startDate": "2016-01",
 			"endDate": "2017-04",
-			"summary": "Worked on a video player supporting HQ video streaming, live streaming and video-on-demand playback, plus an ad experience and other features across different vendors and platforms. Led the transition from a legacy Flash solution to HTML/JS.",
+			"summary": "Worked on a video player supporting HQ video streaming, live streaming and video-on-demand playback, plus an ad experience and other features across different vendors and platforms. **Led the transition from a legacy Flash solution to HTML/JS**.",
 			"keywords": ["Vanilla JS", "Flash", "Scrum", "Jira", "Confluence"]
 		},
 		{

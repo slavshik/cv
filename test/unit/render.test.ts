@@ -50,6 +50,54 @@ describe('renderResume', () => {
 		expect(html).not.toContain('Team of 16–20 developers');
 	});
 
+	/* Progressive summarisation: three levels of meaning over the prose. */
+	describe('marks', () => {
+		const withProse = (summary: string): string =>
+			renderResume({
+				...resume,
+				work: [{ name: 'Somewhere', position: 'Engineer', startDate: '2026-01', summary }],
+			});
+
+		it('turns the three markers into their elements', () => {
+			expect(withProse('**owned it**')).toContain('<strong>owned it</strong>');
+			expect(withProse('__a NestJS backend__')).toContain(
+				'<span class="term">a NestJS backend</span>',
+			);
+			expect(withProse('==436 releases==')).toContain('<mark>436 releases</mark>');
+		});
+
+		it('marks highlights as well as summaries', () => {
+			const out = renderResume({
+				...resume,
+				work: [
+					{
+						name: 'Somewhere',
+						position: 'Engineer',
+						startDate: '2026-01',
+						highlights: ['**Built** it'],
+					},
+				],
+			});
+			expect(out).toContain('<li><strong>Built</strong> it</li>');
+		});
+
+		it('escapes before it marks, so the data file cannot open a tag', () => {
+			const out = withProse('**<img src=x onerror=1>**');
+			expect(out).toContain('<strong>&lt;img src=x onerror=1&gt;</strong>');
+			expect(out).not.toContain('<img');
+		});
+
+		it('leaves a lone marker alone', () => {
+			expect(withProse('2 ** 8 is 256')).toContain('2 ** 8 is 256');
+		});
+
+		/* The labels above the fold are not prose and must not be parsed. */
+		it('does not mark headings or dates', () => {
+			expect(html).not.toContain('<h3><strong>');
+			expect(html).not.toContain('<p class="side"><strong>');
+		});
+	});
+
 	it('escapes text that would otherwise be markup', () => {
 		const nasty: Resume = {
 			...resume,

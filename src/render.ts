@@ -22,13 +22,34 @@ const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
    Intl.DisplayNames for one string. */
 const COUNTRIES: Record<string, string> = { PL: 'Poland' };
 
-const esc = (s: string): string =>
+const escape = (s: string): string =>
 	s
 		.replace(/&/g, '&amp;')
 		.replace(/</g, '&lt;')
 		.replace(/>/g, '&gt;')
 		.replace(/"/g, '&quot;')
 		.replace(/'/g, '&#39;');
+
+/*
+ * Prose, with the three marks of progressive summarisation — the layer you read
+ * when you are not going to read the whole thing.
+ *
+ *   **…**  what was done and owned      → strong
+ *   __…__  the technical substance      → underlined
+ *   ==…==  how much of it there was     → marked
+ *
+ * They are levels of meaning, not three ways of shouting: bold is the action,
+ * the underline is the architecture, the mark is the number. On paper all three
+ * are switched off — see the print rules in src/styles.css.
+ *
+ * Escaping runs first and the markers survive it untouched, so no text in the
+ * data file can open a tag of its own.
+ */
+const prose = (text: string): string =>
+	escape(text)
+		.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+		.replace(/__(.+?)__/g, '<span class="term">$1</span>')
+		.replace(/==(.+?)==/g, '<mark>$1</mark>');
 
 /** `2025-09` → `Sep 2025`; `2012` → `2012`. */
 const monthYear = (d: string): string => {
@@ -61,18 +82,18 @@ const row = (side: string, body: string, cls = ''): string =>
 	`</div>`;
 
 const section = (title: string, body: string): string =>
-	`<section><h2>${esc(title)}</h2>${body}</section>`;
+	`<section><h2>${escape(title)}</h2>${body}</section>`;
 
-const paragraph = (text: string | undefined): string => (text ? `<p>${esc(text)}</p>` : '');
+const paragraph = (text: string | undefined): string => (text ? `<p>${prose(text)}</p>` : '');
 
 const highlights = (items: string[] | undefined): string =>
 	items && items.length > 0
-		? `<ul class="highlights">${items.map((h) => `<li>${esc(h)}</li>`).join('')}</ul>`
+		? `<ul class="highlights">${items.map((h) => `<li>${prose(h)}</li>`).join('')}</ul>`
 		: '';
 
 const tech = (keywords: string[] | undefined): string =>
 	keywords && keywords.length > 0
-		? `<p class="tech">${keywords.map(esc).join(' <span aria-hidden="true">·</span> ')}</p>`
+		? `<p class="tech">${keywords.map(escape).join(' <span aria-hidden="true">·</span> ')}</p>`
 		: '';
 
 const detail = (job: Work): string =>
@@ -80,72 +101,72 @@ const detail = (job: Work): string =>
 
 const jobRow = (job: Work): string =>
 	row(
-		esc(span(job.startDate, job.endDate, monthYear)),
-		`<h3>${esc(job.position)}</h3>` +
-			`<p class="org">${esc(joined([job.name, job.location]))}</p>` +
+		escape(span(job.startDate, job.endDate, monthYear)),
+		`<h3>${escape(job.position)}</h3>` +
+			`<p class="org">${escape(joined([job.name, job.location]))}</p>` +
 			detail(job),
 		'entry',
 	);
 
 const briefRow = (job: Work): string =>
 	row(
-		esc(yearSpan(job.startDate, job.endDate)),
-		`<h3>${esc(job.position)}</h3><p class="org">${esc(joined([job.name, job.location]))}</p>`,
+		escape(yearSpan(job.startDate, job.endDate)),
+		`<h3>${escape(job.position)}</h3><p class="org">${escape(joined([job.name, job.location]))}</p>`,
 		'brief',
 	);
 
 const skillRow = (skill: Skill): string =>
-	row(esc(skill.name), `<p>${skill.keywords.map(esc).join(', ')}</p>`);
+	row(escape(skill.name), `<p>${skill.keywords.map(escape).join(', ')}</p>`);
 
 const projectRow = (project: Project): string =>
 	row(
-		esc(yearSpan(project.startDate, project.endDate)),
-		`<h3>${esc(project.name)}</h3>${paragraph(project.description)}`,
+		escape(yearSpan(project.startDate, project.endDate)),
+		`<h3>${escape(project.name)}</h3>${paragraph(project.description)}`,
 		'brief',
 	);
 
 const educationRow = (school: Education): string =>
 	row(
-		esc(yearSpan(school.startDate, school.endDate)),
-		`<h3>${esc(school.institution)}</h3>` +
-			`<p class="org">${esc(joined([school.studyType, school.area]))}</p>` +
+		escape(yearSpan(school.startDate, school.endDate)),
+		`<h3>${escape(school.institution)}</h3>` +
+			`<p class="org">${escape(joined([school.studyType, school.area]))}</p>` +
 			paragraph(school.note),
 		'brief',
 	);
 
 const certificateRow = (certificate: Certificate): string =>
 	row(
-		esc(monthYear(certificate.date)),
-		`<h3>${esc(certificate.name)}</h3><p class="org">${esc(certificate.issuer)}</p>`,
+		escape(monthYear(certificate.date)),
+		`<h3>${escape(certificate.name)}</h3><p class="org">${escape(certificate.issuer)}</p>`,
 		'brief',
 	);
 
 const languageRow = (language: Language): string =>
-	row(esc(language.language), `<p>${esc(language.fluency)}</p>`);
+	row(escape(language.language), `<p>${escape(language.fluency)}</p>`);
 
 const head = (resume: Resume, pdfVersion: string): string => {
 	const { basics, meta } = resume;
 	const place = joined([basics.location.city, COUNTRIES[basics.location.countryCode]]);
 	const contacts = [
-		`<li>${esc(place)}</li>`,
+		`<li>${escape(place)}</li>`,
 		// Filled in only while rendering the PDF — see scripts/pdf.mjs. Empty on
 		// the web page, where `:empty` keeps it out of the layout. It sits here
 		// rather than last so that the separators land correctly either way.
 		`<li class="phone"></li>`,
-		`<li><a href="mailto:${esc(basics.email)}">${esc(basics.email)}</a></li>`,
+		`<li><a href="mailto:${escape(basics.email)}">${escape(basics.email)}</a></li>`,
 		...basics.profiles.map(
 			(p) =>
-				`<li><a href="${esc(p.url)}" rel="me">${esc(p.url.replace(/^https?:\/\/(www\.)?/, ''))}</a></li>`,
+				`<li><a href="${escape(p.url)}" rel="me">${escape(p.url.replace(/^https?:\/\/(www\.)?/, ''))}</a></li>`,
 		),
 	].join('');
 
 	return (
 		`<header class="head">` +
-		`<h1>${esc(basics.name)}</h1>` +
-		`<p class="label">${esc(basics.label)}</p>` +
+		`<h1>${escape(basics.name)}</h1>` +
+		`<p class="label">${escape(basics.label)}</p>` +
 		(meta?.openToWork ? `<p class="status">Open to work</p>` : '') +
 		`<ul class="contacts">${contacts}</ul>` +
-		`<a class="download" href="${esc(pdfHref(resume, pdfVersion))}" download>Download PDF</a>` +
+		`<a class="download" href="${escape(pdfHref(resume, pdfVersion))}" download>Download PDF</a>` +
 		`</header>`
 	);
 };
@@ -185,7 +206,7 @@ export function renderResume(resume: Resume, options: RenderOptions = {}): strin
 	return (
 		`<main>` +
 		head(resume, options.pdfVersion ?? '') +
-		`<p class="summary">${esc(resume.basics.summary)}</p>` +
+		`<p class="summary">${prose(resume.basics.summary)}</p>` +
 		section('Experience', detailed.map(jobRow).join('')) +
 		(earlier.length > 0 ? section('Earlier', earlier.map(briefRow).join('')) : '') +
 		(resume.projects.length > 0
