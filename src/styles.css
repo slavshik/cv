@@ -380,6 +380,30 @@ mark {
 	height: 1.1rem;
 }
 
+/*
+ * The closing line. A hairline the full width of the page and the address
+ * under it — the same quiet the contact line at the top is set in, so the page
+ * ends the way it opened rather than announcing a footer.
+ */
+.tail {
+	margin-top: 3.4rem;
+	padding-top: 1.3rem;
+	border-top: 1px solid var(--hair);
+	font-family: var(--mono);
+	font-size: 0.76rem;
+	color: var(--muted);
+}
+.tail .row {
+	margin-bottom: 0;
+}
+.tail a {
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+.tail a:hover {
+	color: var(--accent-text);
+}
+
 /* ── Narrow screens ────────────────────────────────────────────────────── */
 
 @media (max-width: 40rem) {

@@ -72,6 +72,11 @@ const yearSpan = (start: string, end: string | undefined): string => {
 const span = (start: string, end: string | undefined, format: (d: string) => string): string =>
 	`${format(start)} — ${end ? format(end) : 'Present'}`;
 
+/** A URL as it should be read rather than clicked: no scheme, no www, no
+    trailing slash. The contact line and the closing line both want this. */
+const bareHost = (url: string): string =>
+	url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+
 const joined = (parts: (string | undefined)[]): string =>
 	parts.filter((p): p is string => !!p).join(' · ');
 
@@ -178,7 +183,7 @@ const head = (resume: Resume, pdfVersion: string): string => {
 		`<li><a href="mailto:${escape(basics.email)}">${icon('mail')}${escape(basics.email)}</a></li>`,
 		...basics.profiles.map(
 			(p) =>
-				`<li><a href="${escape(p.url)}" rel="me">${icon(p.network)}${escape(p.url.replace(/^https?:\/\/(www\.)?/, ''))}</a></li>`,
+				`<li><a href="${escape(p.url)}" rel="me">${icon(p.network)}${escape(bareHost(p.url))}</a></li>`,
 		),
 	].join('');
 
@@ -237,9 +242,24 @@ export function renderResume(resume: Resume, options: RenderOptions = {}): strin
 		section('Skills', resume.skills.map(skillRow).join('')) +
 		section('Education', resume.education.map(educationRow).join('')) +
 		section('Languages', resume.languages.map(languageRow).join('')) +
+		tail(resume.basics.url) +
 		`</main>`
 	);
 }
+
+/*
+ * The closing line, and the only way off this page. `basics.url` is otherwise
+ * unused: the contact line carries the profiles, not the site those profiles
+ * are also listed on. It goes through `row()` like everything else so it lines
+ * up with the body column and collapses with it on a narrow screen.
+ *
+ * It stays on paper. A printed CV with the address of the site on it costs one
+ * muted line and saves somebody typing a name into a search box.
+ */
+const tail = (url: string): string =>
+	`<footer class="tail">` +
+	row('', `<a href="${escape(url)}">${escape(bareHost(url))}</a>`) +
+	`</footer>`;
 
 /** Machine-readable business card. Claims nothing the page does not say. */
 export function renderJsonLd(resume: Resume): string {
