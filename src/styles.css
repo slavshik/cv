@@ -248,6 +248,13 @@ h2 {
 .row.brief {
 	margin-bottom: 1.1rem;
 }
+/* Earlier is the part you skim. One line each, a step down from the prose
+   above it — same size and it stops being a summary and starts competing. */
+.row.brief .body p:not(.org) {
+	margin: 0.3rem 0 0;
+	font-size: 0.92rem;
+	color: var(--muted);
+}
 
 .side {
 	font-family: var(--mono);

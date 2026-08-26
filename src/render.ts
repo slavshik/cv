@@ -108,10 +108,18 @@ const jobRow = (job: Work): string =>
 		'entry',
 	);
 
+/*
+ * Earlier work: years rather than months, and one line of what it was. The
+ * line used to be dropped on the floor — every one of these entries carried a
+ * summary in the data that the page never rendered, which is also why a mark
+ * left in one of them showed up in no diff and on no screen.
+ */
 const briefRow = (job: Work): string =>
 	row(
 		escape(yearSpan(job.startDate, job.endDate)),
-		`<h3>${escape(job.position)}</h3><p class="org">${escape(joined([job.name, job.location]))}</p>`,
+		`<h3>${escape(job.position)}</h3>` +
+			`<p class="org">${escape(joined([job.name, job.location]))}</p>` +
+			paragraph(job.summary),
 		'brief',
 	);
 

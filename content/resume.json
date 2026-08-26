@@ -31,7 +31,8 @@
 			"location": "Valencia, Spain",
 			"startDate": "2025-09",
 			"endDate": "2026-07",
-			"keywords": ["Cocos Creator"]
+			"keywords": ["TypeScript", "Cocos Creator 2", "Spine"],
+			"summary": "**Built slot games with rich graphics** on __Cocos Creator 2__."
 		},
 		{
 			"name": "Evolution",
@@ -94,9 +95,9 @@
 			"endDate": "2020-03",
 			"summary": "**Built gameplay features and live-ops systems** in JavaScript on __a custom PixiJS-based engine__, with deep Facebook Instant Games SDK integration (cloud saves, leaderboards, social contexts, rewarded video).",
 			"highlights": [
-				"**Owned the long-term goals and progression system** for Basketball FRVR end-to-end — data model, animated UI, reward economy and cross-session cloud sync — shipped behind A/B tests.",
+				"**Owned the long-term goals and progression system** for __Basketball FRVR__, the studio’s flagship title — data model, animated UI, reward economy and cross-session cloud sync. The feature drove ==a step change in engagement KPIs==.",
 				"**Drove engine 2.0 migration**, low-end device performance work and ad-monetization integrations (LifeStreet, AdMob, Facebook Audience Network).",
-				"Ran ==436 releases of 10 titles== across web and Facebook Instant, localized into ==29 languages==."
+				"Shipped daily across web and Facebook Instant to ==an audience in the millions== — A/B tests, canary builds and same-day fixes — localized into 29 languages."
 			],
 			"keywords": [
 				"JavaScript",
@@ -149,7 +150,7 @@
 			"location": "Minsk, Belarus",
 			"startDate": "2014-03",
 			"endDate": "2015-06",
-			"summary": "**Built the Android client** for a popular slot-game application, in a group of ActionScript developers. ==A team of 16–20 developers== plus QA and artists.",
+			"summary": "Built the Android client for a popular slot-game application, in a group of ActionScript developers. A team of 16–20 developers plus QA and artists.",
 			"keywords": ["ActionScript", "Java (Adobe Native Extensions)", "Apache Ant", "Groovy"]
 		},
 		{
@@ -183,7 +184,7 @@
 			"location": "Minsk, Belarus",
 			"startDate": "2007-07",
 			"endDate": "2010-02",
-			"summary": "Worked on flamap.de, a visual social network."
+			"summary": "flamap.de — a pre-metaverse social network startup."
 		},
 		{
 			"name": "Intetics",
