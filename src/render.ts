@@ -166,6 +166,7 @@ const ICONS: Record<string, string> = {
 		'<svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5.34 3C4.05 3 3 4.02 3 5.28c0 1.25 1.05 2.27 2.34 2.27 1.3 0 2.35-1.02 2.35-2.27C7.69 4.02 6.64 3 5.34 3ZM3.28 9.15h4.12V21H3.28V9.15Zm6.98 0h3.95v1.62h.06c.55-1.02 1.9-2.1 3.9-2.1 4.17 0 4.94 2.66 4.94 6.12V21h-4.11v-5.42c0-1.29-.03-2.96-1.85-2.96-1.85 0-2.13 1.42-2.13 2.87V21h-4.1V9.15Z"/></svg>',
 	download:
 		'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v12"/><path d="m7.5 10.5 4.5 4.5 4.5-4.5"/><path d="M4 19h16"/></svg>',
+	back: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M19 12H5"/><path d="m11 6-6 6 6 6"/></svg>',
 };
 
 /** An unknown network simply gets no icon — the text still says what it is. */
@@ -248,17 +249,20 @@ export function renderResume(resume: Resume, options: RenderOptions = {}): strin
 }
 
 /*
- * The closing line, and the only way off this page. `basics.url` is otherwise
- * unused: the contact line carries the profiles, not the site those profiles
- * are also listed on. It goes through `row()` like everything else so it lines
- * up with the body column and collapses with it on a narrow screen.
+ * The way off this page, and the only one. `basics.url` is otherwise unused:
+ * the contact line carries the profiles, not the site those profiles are also
+ * listed on — and the site is where they actually live.
+ *
+ * Centred and clear of the body column, so it reads as leaving the document
+ * rather than as one more row in it. Same pill as the two fixed controls, which
+ * is what makes it look like a control and not a footnote.
  *
  * It stays on paper. A printed CV with the address of the site on it costs one
  * muted line and saves somebody typing a name into a search box.
  */
 const tail = (url: string): string =>
 	`<footer class="tail">` +
-	row('', `<a href="${escape(url)}">${escape(bareHost(url))}</a>`) +
+	`<a href="${escape(url)}">${icon('back')}${escape(bareHost(url))}</a>` +
 	`</footer>`;
 
 /** Machine-readable business card. Claims nothing the page does not say. */

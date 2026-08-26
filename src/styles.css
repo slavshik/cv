@@ -381,27 +381,41 @@ mark {
 }
 
 /*
- * The closing line. A hairline the full width of the page and the address
- * under it — the same quiet the contact line at the top is set in, so the page
- * ends the way it opened rather than announcing a footer.
+ * The way out. No rule above it — the distance does that job, and a line here
+ * would read as one more section divider after the last section. Centred and
+ * off the body column so it belongs to the page rather than to the CV, and cut
+ * from the same pill as the two fixed controls so it reads as a control.
  */
 .tail {
-	margin-top: 3.4rem;
-	padding-top: 1.3rem;
-	border-top: 1px solid var(--hair);
-	font-family: var(--mono);
-	font-size: 0.76rem;
-	color: var(--muted);
-}
-.tail .row {
-	margin-bottom: 0;
+	margin-top: 7rem;
+	text-align: center;
 }
 .tail a {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5em;
+	padding: 0.5rem 0.95rem;
+	border: 1px solid var(--hair);
+	border-radius: 999px;
+	font-family: var(--mono);
+	font-size: 0.7rem;
+	letter-spacing: 0.1em;
 	text-decoration: none;
-	transition: color 0.2s ease;
+	color: var(--muted);
+	transition:
+		color 0.2s ease,
+		border-color 0.2s ease;
 }
 .tail a:hover {
 	color: var(--accent-text);
+	border-color: var(--accent-text);
+}
+/* The arrow leads, so it travels on hover the way a back arrow should. */
+.tail a .icon {
+	transition: transform 0.2s ease;
+}
+.tail a:hover .icon {
+	transform: translateX(-0.15em);
 }
 
 /* ── Narrow screens ────────────────────────────────────────────────────── */
@@ -478,6 +492,18 @@ mark {
 	.download,
 	#theme {
 		display: none;
+	}
+
+	/* The address survives — it is the one thing on this page worth having on
+	   a printout. The pill does not: a bordered control and a back arrow both
+	   promise something to press. The arrow goes with the other icons above. */
+	.tail {
+		margin-top: 2rem;
+	}
+	.tail a {
+		border: 0;
+		padding: 0;
+		letter-spacing: 0;
 	}
 
 	/*
