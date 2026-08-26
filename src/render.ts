@@ -5,11 +5,11 @@
  *
  * Every section is the same two-column row: a narrow gutter on the left (dates,
  * or a label) and the body on the right. One shape for experience, skills,
- * education, languages and certificates keeps the page quiet and makes the
+ * education and languages keeps the page quiet and makes the
  * print stylesheet a handful of lines instead of a per-section special case.
  */
 
-import type { Certificate, Education, Language, Project, Resume, Skill, Work } from './resume.ts';
+import type { Education, Language, Project, Resume, Skill, Work } from './resume.ts';
 
 /* Positions that started before this are listed as one line each, under
    "Earlier". Eighteen years of history is worth showing; eighteen years of
@@ -142,13 +142,6 @@ const educationRow = (school: Education): string =>
 		'brief',
 	);
 
-const certificateRow = (certificate: Certificate): string =>
-	row(
-		escape(monthYear(certificate.date)),
-		`<h3>${escape(certificate.name)}</h3><p class="org">${escape(certificate.issuer)}</p>`,
-		'brief',
-	);
-
 const languageRow = (language: Language): string =>
 	row(escape(language.language), `<p>${escape(language.fluency)}</p>`);
 
@@ -244,9 +237,6 @@ export function renderResume(resume: Resume, options: RenderOptions = {}): strin
 		section('Skills', resume.skills.map(skillRow).join('')) +
 		section('Education', resume.education.map(educationRow).join('')) +
 		section('Languages', resume.languages.map(languageRow).join('')) +
-		(resume.certificates.length > 0
-			? section('Certificates', resume.certificates.map(certificateRow).join(''))
-			: '') +
 		`</main>`
 	);
 }

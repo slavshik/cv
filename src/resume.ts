@@ -61,12 +61,6 @@ export interface Education {
 	note?: string;
 }
 
-export interface Certificate {
-	name: string;
-	issuer: string;
-	date: string;
-}
-
 export interface Language {
 	language: string;
 	fluency: string;
@@ -78,7 +72,6 @@ export interface Resume {
 	projects: Project[];
 	skills: Skill[];
 	education: Education[];
-	certificates: Certificate[];
 	languages: Language[];
 	meta?: { canonical?: string; version?: string; openToWork?: boolean };
 }
@@ -184,12 +177,6 @@ function assertResume(raw: unknown): asserts raw is Resume {
 		optStr(e['note'], `${at}.note`);
 		date(e['startDate'], `${at}.startDate`);
 		date(e['endDate'], `${at}.endDate`);
-	});
-
-	each(raw['certificates'], 'certificates', (c, at) => {
-		str(c['name'], `${at}.name`);
-		str(c['issuer'], `${at}.issuer`);
-		date(c['date'], `${at}.date`);
 	});
 
 	each(raw['languages'], 'languages', (l, at) => {

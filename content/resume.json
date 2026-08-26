@@ -275,18 +275,6 @@
 			"endDate": "2007"
 		}
 	],
-	"certificates": [
-		{
-			"name": "CSS for JavaScript Developers",
-			"issuer": "Josh Comeau",
-			"date": "2024-03"
-		},
-		{
-			"name": "NestJS Zero to Hero — Modern TypeScript Back-end Development",
-			"issuer": "Udemy",
-			"date": "2024-03"
-		}
-	],
 	"languages": [
 		{
 			"language": "English",

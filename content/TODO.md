@@ -27,6 +27,57 @@ gap: a gap is left as a gap.
   those lines have to be written, not imported.
 - **Gap 2015-06 → 2016-01** between Playtika and Exadel.
 
+## Settled by decision
+
+- **Certificates are off the page on purpose.** They live on LinkedIn and
+  nowhere else. The section, the `Certificate` type and the row renderer are all
+  gone — do not add them back from the LinkedIn data.
+
+## From the 2021 CV (`Dieselpuppet_Alexander_Slavschik_CV.pdf`)
+
+Alexander's own hand-written CV, dated 2021-02-04. Checked for links and for
+facts this file does not have.
+
+**Every link in it is dead. Checked 2026-08-26; do not re-add them.**
+
+| Link                                                          | What happens now                            |
+| ------------------------------------------------------------- | ------------------------------------------- |
+| `fb.gg/play/chain-cube`                                       | Facebook login wall                         |
+| `fb.gg/play/hidden_brainteaser`                               | Facebook login wall                         |
+| `fb.gg/play/blockpuzz`                                        | redirects to a generic `/gaming/play/`      |
+| `facebook.com/instantgames/play/240904760151482/` (Color.io)  | same generic page                           |
+| `facebook.com/instantgames/play/187363445262289/` (Fireballs) | same generic page                           |
+| `gc.gaming.skywindgroup.com/blackjack/130/`                   | page loads, game does not                   |
+| `gc.gaming.skywindgroup.com/legendarydragons/latest/`         | page loads, `wrapper/games/sw_ld.json` 404s |
+
+The two Skywind ones are also a former employer's own game-client host, not a
+portfolio of Alexander's to link from a personal page.
+
+**Facts in that CV that this file does not carry.** All are Alexander's own
+words from 2021; none are on the page yet because they are his call:
+
+- **Melesta** — "port of the most popular game (Farm Frenzy) onto social
+  platforms". The current entry says only "Flash games for social networks".
+- **Exadel** — the video player was for "a few famous vendors of Shows and
+  Movies broadcasting (ABC, Disney, etc)", and he was "handling all the process
+  of transition from Flash to HTML experience". The page currently says "part of
+  the move off legacy Flash", which was hedged for lack of a source. This is the
+  source.
+- **Skywind** — "at least 4 successfully finished games: 3 slots + blackjack",
+  localized into "12 languages at least, support of Chinese browsers and
+  devices".
+- **Diesel Puppet 2013** — collaboration with a server-side developer on Erlang.
+- **Diesel Puppet 2020** — a "Nine blocks" (blockpuzz) title, not in `projects`.
+- **Gismart** — the game listed here as "Color Galaxy" was "Color.io" there.
+
+**Two dates disagree and only Alexander can settle them:**
+
+- **BSUIR.** The 2021 CV says "2008-2009 (not finished)"; LinkedIn says
+  2008–2012, and the page follows LinkedIn.
+- **Flamap.** The 2021 CV has it under "Self-employed (freelance), 2005–2008";
+  LinkedIn has it as employment 2007-07 to 2010-02, and the page follows
+  LinkedIn.
+
 ## Settled
 
 - **Skills are grouped from the job descriptions, and that is the best source
