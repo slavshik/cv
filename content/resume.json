@@ -30,7 +30,8 @@
 			"position": "Senior Game Developer",
 			"location": "Valencia, Spain",
 			"startDate": "2025-09",
-			"endDate": "2026-07"
+			"endDate": "2026-07",
+			"keywords": ["Cocos Creator"]
 		},
 		{
 			"name": "Evolution",
@@ -117,7 +118,8 @@
 			"location": "Minsk, Belarus",
 			"startDate": "2018-07",
 			"endDate": "2019-06",
-			"summary": "Music games and apps for the Facebook Instant platform. A company of 150 people, a team of 12, collaborating with developers, QA, artists, game designers and product owners. Developed a range of 2D games in a team of two developers, plus two 3D games for the Facebook Instant platform."
+			"summary": "Music games and apps for the Facebook Instant platform. A company of 150 people, a team of 12, collaborating with developers, QA, artists, game designers and product owners. Developed a range of 2D games in a team of two developers, plus two 3D games for the Facebook Instant platform.",
+			"keywords": ["TypeScript", "Babylon.js"]
 		},
 		{
 			"name": "Skywind Group",
@@ -257,7 +259,8 @@
 			"institution": "Belarusian State University of Informatics and Radioelectronics",
 			"area": "Computer Science",
 			"startDate": "2008",
-			"endDate": "2012"
+			"endDate": "2012",
+			"note": "Dropped and started to work in a startup."
 		},
 		{
 			"institution": "College of Business and Law",
