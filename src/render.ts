@@ -144,19 +144,40 @@ const certificateRow = (certificate: Certificate): string =>
 const languageRow = (language: Language): string =>
 	row(escape(language.language), `<p>${escape(language.fluency)}</p>`);
 
+/*
+ * Inline, like everything else the page draws: the CV makes no network request
+ * of its own, and an icon font or a sprite from a CDN would be the first.
+ *
+ * They mark the contact line on screen only. On paper the print rules take them
+ * off and the dot separators come back — a printed CV wants plain text, and the
+ * phone number injected at print time (scripts/pdf.mjs) has no icon to match.
+ */
+const ICONS: Record<string, string> = {
+	place: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>',
+	mail: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M3.5 6.5 12 13l8.5-6.5"/></svg>',
+	github: '<svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.73.5.75 5.48.75 11.75c0 5.02 3.26 9.28 7.78 10.78.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.17.69-3.83-1.34-3.83-1.34-.52-1.31-1.26-1.66-1.26-1.66-1.03-.7.08-.69.08-.69 1.14.08 1.74 1.17 1.74 1.17 1.01 1.73 2.65 1.23 3.3.94.1-.73.4-1.23.72-1.51-2.53-.29-5.19-1.27-5.19-5.63 0-1.24.44-2.26 1.17-3.06-.12-.29-.51-1.45.11-3.02 0 0 .96-.31 3.14 1.17.91-.25 1.89-.38 2.86-.39.97.01 1.95.14 2.86.39 2.18-1.48 3.14-1.17 3.14-1.17.62 1.57.23 2.73.11 3.02.73.8 1.17 1.82 1.17 3.06 0 4.37-2.66 5.34-5.2 5.62.41.36.77 1.06.77 2.14 0 1.55-.01 2.79-.01 3.17 0 .3.2.66.79.55A11.26 11.26 0 0 0 23.25 11.75C23.25 5.48 18.27.5 12 .5Z"/></svg>',
+	linkedin:
+		'<svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5.34 3C4.05 3 3 4.02 3 5.28c0 1.25 1.05 2.27 2.34 2.27 1.3 0 2.35-1.02 2.35-2.27C7.69 4.02 6.64 3 5.34 3ZM3.28 9.15h4.12V21H3.28V9.15Zm6.98 0h3.95v1.62h.06c.55-1.02 1.9-2.1 3.9-2.1 4.17 0 4.94 2.66 4.94 6.12V21h-4.11v-5.42c0-1.29-.03-2.96-1.85-2.96-1.85 0-2.13 1.42-2.13 2.87V21h-4.1V9.15Z"/></svg>',
+	download:
+		'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v12"/><path d="m7.5 10.5 4.5 4.5 4.5-4.5"/><path d="M4 19h16"/></svg>',
+};
+
+/** An unknown network simply gets no icon — the text still says what it is. */
+const icon = (name: string): string => ICONS[name.toLowerCase()] ?? '';
+
 const head = (resume: Resume, pdfVersion: string): string => {
 	const { basics, meta } = resume;
 	const place = joined([basics.location.city, COUNTRIES[basics.location.countryCode]]);
 	const contacts = [
-		`<li>${escape(place)}</li>`,
+		`<li>${icon('place')}${escape(place)}</li>`,
 		// Filled in only while rendering the PDF — see scripts/pdf.mjs. Empty on
 		// the web page, where `:empty` keeps it out of the layout. It sits here
 		// rather than last so that the separators land correctly either way.
 		`<li class="phone"></li>`,
-		`<li><a href="mailto:${escape(basics.email)}">${escape(basics.email)}</a></li>`,
+		`<li><a href="mailto:${escape(basics.email)}">${icon('mail')}${escape(basics.email)}</a></li>`,
 		...basics.profiles.map(
 			(p) =>
-				`<li><a href="${escape(p.url)}" rel="me">${escape(p.url.replace(/^https?:\/\/(www\.)?/, ''))}</a></li>`,
+				`<li><a href="${escape(p.url)}" rel="me">${icon(p.network)}${escape(p.url.replace(/^https?:\/\/(www\.)?/, ''))}</a></li>`,
 		),
 	].join('');
 
@@ -166,7 +187,7 @@ const head = (resume: Resume, pdfVersion: string): string => {
 		`<p class="label">${escape(basics.label)}</p>` +
 		(meta?.openToWork ? `<p class="status">Open to work</p>` : '') +
 		`<ul class="contacts">${contacts}</ul>` +
-		`<a class="download" href="${escape(pdfHref(resume, pdfVersion))}" download>Download PDF</a>` +
+		`<a class="download" href="${escape(pdfHref(resume, pdfVersion))}" download aria-label="Download PDF">${icon('download')}<span>Download PDF</span></a>` +
 		`</header>`
 	);
 };

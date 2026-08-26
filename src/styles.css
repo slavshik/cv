@@ -164,21 +164,40 @@ a:hover {
 .contacts .phone:empty {
 	display: none;
 }
-/* The separator belongs to the item before it, not the one after: put it on
-   ::before and a wrapped line opens with a stray dot. */
-.contacts li:not(:empty):not(:last-child)::after {
-	content: ' ·';
+.contacts li,
+.contacts a {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.45em;
+}
+.contacts a {
+	text-decoration: none;
+}
+.icon {
+	width: 1.05em;
+	height: 1.05em;
+	flex: none;
 	color: var(--faint);
+	transition: color 0.2s ease;
+}
+.contacts a:hover .icon {
+	color: currentColor;
 }
 
 .download {
-	display: inline-block;
-	margin-top: 1.8rem;
-	padding: 0.55rem 1rem;
+	position: fixed;
+	top: 1.2rem;
+	right: 1.2rem;
+	z-index: 2;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5em;
+	padding: 0.5rem 0.9rem;
+	background: var(--paper);
 	border: 1px solid var(--hair);
-	border-radius: 2px;
+	border-radius: 999px;
 	font-family: var(--mono);
-	font-size: 0.72rem;
+	font-size: 0.7rem;
 	letter-spacing: 0.1em;
 	text-transform: uppercase;
 	text-decoration: none;
@@ -190,6 +209,9 @@ a:hover {
 .download:hover {
 	color: var(--accent-text);
 	border-color: var(--accent-text);
+}
+.download:hover .icon {
+	color: currentColor;
 }
 
 .summary {
@@ -364,6 +386,22 @@ mark {
 		margin: 0;
 		order: -1;
 	}
+	/*
+	 * The name reaches the right-hand edge here, and the button is pinned over
+	 * it. Down to a circle, the same one the theme toggle is: the arrow says
+	 * what it does, and aria-label carries the words it drops.
+	 */
+	.download {
+		width: 2.4rem;
+		height: 2.4rem;
+		padding: 0;
+		gap: 0;
+		justify-content: center;
+		border-radius: 50%;
+	}
+	.download span {
+		display: none;
+	}
 }
 
 /* ── Print ─────────────────────────────────────────────────────────────── */
@@ -405,6 +443,26 @@ mark {
 	.download,
 	#theme {
 		display: none;
+	}
+
+	/*
+	 * The icons are a screen affordance. On paper they buy nothing, and the
+	 * phone number injected at print time (scripts/pdf.mjs) replaces its whole
+	 * item, so it could never carry one — the line would be icons and one
+	 * bare number. Plain text and the dot separators instead.
+	 */
+	.icon {
+		display: none;
+	}
+	.contacts li,
+	.contacts a {
+		display: inline;
+	}
+	/* The separator belongs to the item before it, not the one after: put it on
+	   ::before and a wrapped line opens with a stray dot. */
+	.contacts li:not(:empty):not(:last-child)::after {
+		content: ' ·';
+		color: var(--faint);
 	}
 
 	/*
