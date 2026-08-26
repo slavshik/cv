@@ -5,7 +5,7 @@
 		"label": "Senior Frontend Engineer · Game Developer",
 		"email": "slavshik@me.com",
 		"url": "https://slavshik.me",
-		"summary": "As a software engineer, I specialize in web and game development. My passion and dedication to programming are not limited to any specific language. I am constantly searching for ways to enhance efficiency and performance in my work. Learning and growing are important to me, and I am eager to make meaningful contributions to my clients' success.",
+		"summary": "I have been building for the browser since 2007, most of it games. **Real-money live casino clients** at Evolution, **HTML5 instant games** shipped to ==seven-plus platforms== at Diesel Puppet, and the engine, backend and release pipeline underneath them. The work I like is the awkward kind — interactive UX with real physics in it, rendering that has to survive a cheap phone, and a pipeline that lets a small team ship often. TypeScript throughout; the engine changes with the job.",
 		"location": {
 			"city": "Warsaw",
 			"region": "Mazowieckie",
@@ -118,8 +118,12 @@
 			"location": "Minsk, Belarus",
 			"startDate": "2018-07",
 			"endDate": "2019-06",
-			"summary": "Music games and apps for the Facebook Instant platform. A company of 150 people, a team of 12, collaborating with developers, QA, artists, game designers and product owners. Developed a range of 2D games in a team of two developers, plus two 3D games for the Facebook Instant platform.",
-			"keywords": ["TypeScript", "Babylon.js"]
+			"summary": "**Music games and apps** for the Facebook Instant platform.",
+			"keywords": ["TypeScript", "Babylon.js"],
+			"highlights": [
+				"Developed a range of 2D games in a team of two developers, plus __two 3D games__ for the Facebook Instant platform.",
+				"Worked in ==a team of 12 inside a company of 150==, alongside QA, artists, game designers and product owners."
+			]
 		},
 		{
 			"name": "Skywind Group",
@@ -127,8 +131,8 @@
 			"location": "Minsk, Belarus",
 			"startDate": "2017-04",
 			"endDate": "2018-07",
-			"summary": "Worked in a group of front-end developers on casino games — the vast majority slot games, also card games. Participated in the core team.",
-			"keywords": ["Scrum", "Jira", "Confluence"]
+			"summary": "**Built casino game clients** in a group of front-end developers — the vast majority slot games, also card games. Part of the __core team__.",
+			"keywords": ["TypeScript", "Webpack"]
 		},
 		{
 			"name": "Exadel",
@@ -136,8 +140,8 @@
 			"location": "Minsk, Belarus",
 			"startDate": "2016-01",
 			"endDate": "2017-04",
-			"summary": "Worked on a video player supporting HQ video streaming, live streaming and video-on-demand playback, plus an ad experience and other features across different vendors and platforms. **Led the transition from a legacy Flash solution to HTML/JS**.",
-			"keywords": ["Vanilla JS", "Flash", "Scrum", "Jira", "Confluence"]
+			"summary": "**Built a video player** supporting HQ video streaming, live streaming and video-on-demand playback, plus an ad experience and other features across different vendors and platforms. Part of the __move off legacy Flash to HTML/JS__.",
+			"keywords": ["Vanilla JS", "Flash", "HLS"]
 		},
 		{
 			"name": "Playtika",
@@ -145,8 +149,8 @@
 			"location": "Minsk, Belarus",
 			"startDate": "2014-03",
 			"endDate": "2015-06",
-			"summary": "Worked with a group of ActionScript developers on the Android client for a popular slot-game application. Team of 16–20 developers plus QA and artists.",
-			"keywords": ["ActionScript", "Java (Adobe Native Extensions)", "ant", "groovy"]
+			"summary": "**Built the Android client** for a popular slot-game application, in a group of ActionScript developers. ==A team of 16–20 developers== plus QA and artists.",
+			"keywords": ["ActionScript", "Java (Adobe Native Extensions)", "Apache Ant", "Groovy"]
 		},
 		{
 			"name": "Diesel Puppet",
@@ -260,7 +264,7 @@
 			"area": "Computer Science",
 			"startDate": "2008",
 			"endDate": "2012",
-			"note": "Dropped and started to work in a startup."
+			"note": "Left before graduating to work at a startup."
 		},
 		{
 			"institution": "College of Business and Law",

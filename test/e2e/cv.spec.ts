@@ -28,9 +28,25 @@ test('the marks come off in print', async ({ page }) => {
 	await page.goto('/cv/?aqa=1');
 	await page.emulateMedia({ media: 'print' });
 
-	await expect(page.locator('mark').first()).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
-	await expect(page.locator('.term').first()).toHaveCSS('text-decoration-line', 'none');
-	await expect(page.locator('.body strong').first()).toHaveCSS('font-weight', '400');
+	// Every one of them, not the first. The rules that undo the marks are scoped
+	// to the containers the prose was in when they were written, and a new
+	// container is exactly how one gets missed: a marked summary printed in bold
+	// for a while because the rule said `.body strong` and the summary is not
+	// inside `.body`.
+	const computed = async (selector: string, property: string): Promise<string[]> => {
+		const values = await page
+			.locator(selector)
+			.evaluateAll(
+				(nodes, prop) => nodes.map((n) => getComputedStyle(n).getPropertyValue(prop)),
+				property,
+			);
+		expect(values.length, `nothing matched ${selector}`).toBeGreaterThan(0);
+		return [...new Set(values)];
+	};
+
+	expect(await computed('strong', 'font-weight')).toEqual(['400']);
+	expect(await computed('.term', 'text-decoration-line')).toEqual(['none']);
+	expect(await computed('mark', 'background-color')).toEqual(['rgba(0, 0, 0, 0)']);
 });
 
 test.describe('without javascript', () => {

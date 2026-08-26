@@ -311,11 +311,15 @@ h2 {
 	font-weight: 700;
 }
 
+/* Dotted, and in the accent rather than the hairline colour. A solid
+   underline here is the same gesture links make on this page — "multi-tenant
+   NestJS backend" read as something you could click, and it is not. Dashed
+   rather than dotted: at 1px the dots close up and look solid again. */
 .term {
-	text-decoration: underline;
-	text-decoration-color: var(--faint);
+	text-decoration: underline dashed;
+	text-decoration-color: var(--accent-text);
 	text-decoration-thickness: 1px;
-	text-underline-offset: 0.18em;
+	text-underline-offset: 0.2em;
 }
 
 mark {
@@ -469,8 +473,14 @@ mark {
 	 * The marks are for reading on screen. On paper they turn a CV into a
 	 * marked-up study copy, which is not what anyone wants to receive — so all
 	 * three come off, and the PDF is the plain document it was before them.
+	 *
+	 * Both selectors, and both at the specificity of the screen rule they undo.
+	 * `.body strong` alone let a marked summary print in bold, because the
+	 * summary is not inside `.body`; a bare `strong` loses to `.body strong`
+	 * and lets the highlights print in bold instead.
 	 */
-	.body strong {
+	.body strong,
+	.summary strong {
 		font-weight: inherit;
 	}
 	.term {
