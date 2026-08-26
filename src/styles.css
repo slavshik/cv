@@ -383,8 +383,8 @@ mark {
 /*
  * The way out. No rule above it — the distance does that job, and a line here
  * would read as one more section divider after the last section. Centred and
- * off the body column so it belongs to the page rather than to the CV, and cut
- * from the same pill as the two fixed controls so it reads as a control.
+ * off the body column so it belongs to the page rather than to the CV. Nothing
+ * drawn around it: an arrow and a domain already say where they go.
  */
 .tail {
 	margin-top: 7rem;
@@ -394,21 +394,21 @@ mark {
 	display: inline-flex;
 	align-items: center;
 	gap: 0.5em;
-	padding: 0.5rem 0.95rem;
-	border: 1px solid var(--hair);
-	border-radius: 999px;
 	font-family: var(--mono);
 	font-size: 0.7rem;
 	letter-spacing: 0.1em;
 	text-decoration: none;
 	color: var(--muted);
-	transition:
-		color 0.2s ease,
-		border-color 0.2s ease;
+	transition: color 0.2s ease;
 }
 .tail a:hover {
 	color: var(--accent-text);
-	border-color: var(--accent-text);
+}
+/* The underline is the words', not the arrow's. */
+.tail a:hover span {
+	text-decoration: underline;
+	text-decoration-color: currentColor;
+	text-underline-offset: 0.35em;
 }
 /* The arrow leads, so it travels on hover the way a back arrow should. */
 .tail a .icon {
@@ -495,14 +495,12 @@ mark {
 	}
 
 	/* The address survives — it is the one thing on this page worth having on
-	   a printout. The pill does not: a bordered control and a back arrow both
-	   promise something to press. The arrow goes with the other icons above. */
+	   a printout. The arrow does not; it goes with the other icons above,
+	   because "back" means nothing on paper. */
 	.tail {
 		margin-top: 2rem;
 	}
 	.tail a {
-		border: 0;
-		padding: 0;
 		letter-spacing: 0;
 	}
 

@@ -254,15 +254,16 @@ export function renderResume(resume: Resume, options: RenderOptions = {}): strin
  * listed on — and the site is where they actually live.
  *
  * Centred and clear of the body column, so it reads as leaving the document
- * rather than as one more row in it. Same pill as the two fixed controls, which
- * is what makes it look like a control and not a footnote.
+ * rather than as one more row in it. The label is its own span because the
+ * underline on hover belongs to the words — run it on the anchor and it goes
+ * under the arrow too.
  *
  * It stays on paper. A printed CV with the address of the site on it costs one
  * muted line and saves somebody typing a name into a search box.
  */
 const tail = (url: string): string =>
 	`<footer class="tail">` +
-	`<a href="${escape(url)}">${icon('back')}${escape(bareHost(url))}</a>` +
+	`<a href="${escape(url)}">${icon('back')}<span>${escape(bareHost(url))}</span></a>` +
 	`</footer>`;
 
 /** Machine-readable business card. Claims nothing the page does not say. */
