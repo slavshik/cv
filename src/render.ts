@@ -234,7 +234,7 @@ export function renderResume(resume: Resume, options: RenderOptions = {}): strin
 	return (
 		`<main>` +
 		head(resume, options.pdfVersion ?? '') +
-		`<p class="summary">${prose(resume.basics.summary)}</p>` +
+		summary(resume.basics.summary) +
 		section('Experience', detailed.map(jobRow).join('')) +
 		(earlier.length > 0 ? section('Earlier', earlier.map(briefRow).join('')) : '') +
 		(resume.projects.length > 0
@@ -261,6 +261,17 @@ export function renderResume(resume: Resume, options: RenderOptions = {}): strin
  * It stays on paper. A printed CV with the address of the site on it costs one
  * muted line and saves somebody typing a name into a search box.
  */
+/*
+ * The one field on the page allowed more than one paragraph. A blank line in
+ * the data splits it, because the summary covers two things — the work behind
+ * and the work now — and ten unbroken lines at the top of a CV is a wall.
+ */
+const summary = (text: string): string =>
+	text
+		.split(/\n{2,}/)
+		.map((part) => `<p class="summary">${prose(part.trim())}</p>`)
+		.join('');
+
 const tail = (url: string): string =>
 	`<footer class="tail">` +
 	`<a href="${escape(url)}">${icon('back')}<span>${escape(bareHost(url))}</span></a>` +

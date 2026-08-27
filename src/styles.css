@@ -214,6 +214,9 @@ a:hover {
 	color: currentColor;
 }
 
+.summary + .summary {
+	margin-top: 0.9rem;
+}
 .summary {
 	max-width: 40rem;
 	margin: 2.6rem 0 0;
