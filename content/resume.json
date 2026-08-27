@@ -72,7 +72,7 @@
 			"endDate": "2023-02",
 			"summary": "**Built and owned the core technology** for Diesel Puppet, a casual HTML5 instant-games studio, across roughly five years. Designed and maintained a shared __TypeScript/PixiJS/Preact game engine__ (dp-instant) and its __NestJS/Firebase backend__, used to ship the same game codebase to ==7+ web platforms== including Facebook Instant Games, VK, OK.ru, Yandex Games, GameDistribution and YouTube Playables.",
 			"highlights": [
-				"**Built several titles end to end** on that platform: a 3D physics puzzle game (Babylon.js/cannon.js), a block-fit puzzle game, an asynchronous multiplayer word game that shipped ==45+ versioned releases== over a year of near-daily development, a hidden-object puzzle game, and the core simulation engine for a territory-conquest strategy game built with an __entity-component-system architecture__.",
+				"**Built several titles end to end** on that platform: a 3D physics puzzle game (Babylon.js/cannon.js), a block-fit puzzle game, an asynchronous multiplayer word game, a hidden-object puzzle game, and the core simulation engine for a territory-conquest strategy game built with an __entity-component-system architecture__.",
 				"Built the backend systems behind these games: a Firebase-backed Messenger bot service, and its successor, a __multi-tenant NestJS backend__ serving ==8+ titles== with shared auth, scoring, leaderboards, in-game payments and an asynchronous challenge/matchmaking system.",
 				"Set up and iterated on the studio's __CI/CD release pipeline__, including a migration from Bitbucket Pipelines to GitHub Actions."
 			],
@@ -123,8 +123,7 @@
 			"keywords": ["TypeScript", "Babylon.js", "Preact"],
 			"highlights": [
 				"**Built the core gameplay** for __Color Galaxy__, a 3D io game in the vein of paper.io, and took it to release on Facebook Instant. It was later reworked as Galaxy.io and shipped on Snapchat Games, after I had left.",
-				"Developed a range of 2D games in a team of two developers, plus __two 3D games__ for Facebook Instant.",
-				"Worked in ==a team of 12 inside a company of 150==, alongside QA, artists, game designers and product owners."
+				"Developed a range of 2D games in a team of two developers, plus __two 3D games__ for Facebook Instant."
 			]
 		},
 		{

@@ -121,6 +121,15 @@ there.
 - **Numbers are numerals.** `7+ web platforms`, not `seven-plus platforms`. A
   digit is what the eye stops on in a page of prose, and stopping the eye is
   the entire job of this mark. Spelling it out throws that away.
+- **Do not mark a number that points somewhere Alexander would rather not be
+  asked about.** "45+ versioned releases over a year of near-daily development"
+  was true, and it was attached to the one title of that era that did not work.
+  A highlighted figure is an invitation to ask about the thing it sits next to.
+- **Team and company headcount are not achievements.** "A team of 12 inside a
+  company of 150" describes the employer, not the person, and marking it spends
+  the entry's one highlight on its least informative fact. Cut, unless the size
+  is the point — a team of two shipping a range of titles says something; a
+  company of 150 does not.
 - A `==…==` with no digit in it is a weak mark — `an audience in the millions`
   and `a step change in engagement KPIs` are the two on this page, and both are
   standing in for a real figure Alexander has chosen not to print. Fine as a
