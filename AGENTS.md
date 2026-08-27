@@ -57,6 +57,11 @@ PDF are never committed.
   stripped in print on purpose: the PDF must stay a plain document. Keep roughly
   a sixth of an entry marked; past that they stop meaning anything. See
   `docs/adr/0004`.
+- **Writing or revising the prose is its own job.** What may be claimed, how a
+  line is phrased, what to cut, and which prose the renderer throws away are in
+  the `cv-prose` skill (`.claude/skills/cv-prose/SKILL.md`). Read it before
+  touching `content/resume.json`, and before acting on anybody's suggestions
+  about the wording.
 - **Keep the page free of JavaScript.** The CV must be entirely readable with
   scripting off — an e2e test enforces it. `src/main.ts` may grow only for
   things that are genuinely decoration.
