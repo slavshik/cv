@@ -26,6 +26,17 @@ gap: a gap is left as a gap.
   Fireballs and Friends and Blackjack Card Game all deserve a line each, and
   those lines have to be written, not imported.
 - **Gap 2015-06 → 2016-01** between Playtika and Exadel.
+- **One game, three names.** The Gismart title is "Color Galaxy" in LinkedIn's
+  projects, "Color.io" in the 2021 CV (with a Facebook Instant link), and
+  "Galaxy.io" as Alexander describes it — the 3D io game he built the core
+  gameplay for, ported from Facebook to Snapchat. The dates, Babylon.js and
+  Preact all line up, so it is almost certainly one game. The Experience entry
+  now says "Galaxy.io"; `projects` still says "Color Galaxy". Pick one, or say
+  which name belongs to which platform, and the two will agree.
+- **Snapchat needs a number.** "One of the platform's hits" is Alexander's own
+  assessment and reads as an unbacked adjective next to the marked figures
+  elsewhere on the page. Installs, DAU, a chart position — any one of them
+  would turn the strongest story in this CV into its strongest line.
 
 ## Settled by decision
 
