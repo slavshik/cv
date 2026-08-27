@@ -5,7 +5,7 @@
 		"label": "Senior Frontend Engineer · Game Developer",
 		"email": "slavshik@me.com",
 		"url": "https://slavshik.me",
-		"summary": "I have been building for the browser since 2007, most of it games. **Real-money live casino clients** at Evolution, **HTML5 instant games** shipped to ==seven-plus platforms== at Diesel Puppet, and the engine, backend and release pipeline underneath them. The work I like is the awkward kind — interactive UX with real physics in it, rendering that has to survive a cheap phone, and a pipeline that lets a small team ship often. TypeScript throughout; the engine changes with the job.\n\nLately my own time goes into **LLM agents and self-hosted infrastructure**: a home cloud of six Docker stacks with an __OpenClaw__ agent on Telegram in front of it, taking a request in text or a voice note, calling out across half a dozen services and filing the result away. Go and Python rather than TypeScript, run for real rather than demonstrated.",
+		"summary": "I have been building for the browser since 2007, most of it games. **Real-money live casino clients** at Evolution, **HTML5 instant games** shipped to ==7+ web platforms== at Diesel Puppet, and the engine, backend and release pipeline underneath them. The work I like is the awkward kind — interactive UX with real physics in it, rendering that has to survive a cheap phone, and a pipeline that lets a small team ship often. TypeScript throughout; the engine changes with the job.\n\nLately my own time goes into **LLM agents and self-hosted infrastructure**: a home cloud of six Docker stacks with an __OpenClaw__ agent on Telegram in front of it, taking a request in text or a voice note, calling out across half a dozen services and filing the result away. Go and Python rather than TypeScript, run for real rather than demonstrated.",
 		"location": {
 			"city": "Warsaw",
 			"region": "Mazowieckie",
@@ -70,10 +70,10 @@
 			"location": "Minsk, Belarus",
 			"startDate": "2020-03",
 			"endDate": "2023-02",
-			"summary": "**Built and owned the core technology** for Diesel Puppet, a casual HTML5 instant-games studio, across roughly five years. Designed and maintained a shared __TypeScript/PixiJS/Preact game engine__ (dp-instant) and its __NestJS/Firebase backend__, used to ship the same game codebase to ==seven-plus platforms== including Facebook Instant Games, VK, OK.ru, Yandex Games, GameDistribution and YouTube Playables.",
+			"summary": "**Built and owned the core technology** for Diesel Puppet, a casual HTML5 instant-games studio, across roughly five years. Designed and maintained a shared __TypeScript/PixiJS/Preact game engine__ (dp-instant) and its __NestJS/Firebase backend__, used to ship the same game codebase to ==7+ web platforms== including Facebook Instant Games, VK, OK.ru, Yandex Games, GameDistribution and YouTube Playables.",
 			"highlights": [
-				"**Built several titles end to end** on that platform: a 3D physics puzzle game (Babylon.js/cannon.js), a block-fit puzzle game, an asynchronous multiplayer word game that shipped ==45-plus versioned releases== over a year of near-daily development, a hidden-object puzzle game, and the core simulation engine for a territory-conquest strategy game built with an __entity-component-system architecture__.",
-				"Built the backend systems behind these games: a Firebase-backed Messenger bot service, and its successor, a __multi-tenant NestJS backend__ serving ==eight-plus titles== with shared auth, scoring, leaderboards, in-game payments and an asynchronous challenge/matchmaking system.",
+				"**Built several titles end to end** on that platform: a 3D physics puzzle game (Babylon.js/cannon.js), a block-fit puzzle game, an asynchronous multiplayer word game that shipped ==45+ versioned releases== over a year of near-daily development, a hidden-object puzzle game, and the core simulation engine for a territory-conquest strategy game built with an __entity-component-system architecture__.",
+				"Built the backend systems behind these games: a Firebase-backed Messenger bot service, and its successor, a __multi-tenant NestJS backend__ serving ==8+ titles== with shared auth, scoring, leaderboards, in-game payments and an asynchronous challenge/matchmaking system.",
 				"Set up and iterated on the studio's __CI/CD release pipeline__, including a migration from Bitbucket Pipelines to GitHub Actions."
 			],
 			"keywords": [

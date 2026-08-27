@@ -118,6 +118,13 @@ there.
   paragraph** — that was the state the marks were in when they read as noise.
 - `==…==` is for quantities. If an entry has a number worth seeing, mark it;
   if it has three, mark the strongest one.
+- **Numbers are numerals.** `7+ web platforms`, not `seven-plus platforms`. A
+  digit is what the eye stops on in a page of prose, and stopping the eye is
+  the entire job of this mark. Spelling it out throws that away.
+- A `==…==` with no digit in it is a weak mark — `an audience in the millions`
+  and `a step change in engagement KPIs` are the two on this page, and both are
+  standing in for a real figure Alexander has chosen not to print. Fine as a
+  decision; just know they are doing less work than the others.
 - One `==…==` per bullet at most. Two yellow blocks on adjacent lines fight.
 - An entry with no marks at all in the middle of marked entries is what makes
   the page look half-finished. Even a short entry gets its bold lead.
