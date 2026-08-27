@@ -119,10 +119,10 @@
 			"location": "Minsk, Belarus",
 			"startDate": "2018-07",
 			"endDate": "2019-06",
-			"summary": "**Music games and apps** for Facebook Instant and Snapchat.",
+			"summary": "**Music games and apps** for the Facebook Instant platform.",
 			"keywords": ["TypeScript", "Babylon.js", "Preact"],
 			"highlights": [
-				"**Built the core gameplay** for __Galaxy.io__, a 3D io game in the vein of paper.io — shipped on Facebook Instant, then ported to Snapchat, where it became one of the platform’s hits.",
+				"**Built the core gameplay** for __Color Galaxy__, a 3D io game in the vein of paper.io, and took it to release on Facebook Instant. It was later reworked as Galaxy.io and shipped on Snapchat Games, after I had left.",
 				"Developed a range of 2D games in a team of two developers, plus __two 3D games__ for Facebook Instant.",
 				"Worked in ==a team of 12 inside a company of 150==, alongside QA, artists, game designers and product owners."
 			]
