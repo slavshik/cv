@@ -214,8 +214,16 @@ a:hover {
 	color: currentColor;
 }
 
+/*
+ * Everything after the first paragraph is the aside: what the spare time goes
+ * into, not what anyone paid for. A step down in size and into the muted ink
+ * says so without a heading and without an apology — the same move the Earlier
+ * rows make further down the page.
+ */
 .summary + .summary {
 	margin-top: 0.9rem;
+	font-size: 0.95rem;
+	color: var(--muted);
 }
 .summary {
 	max-width: 40rem;
@@ -564,6 +572,9 @@ mark {
 	.summary {
 		margin-top: 1.4rem;
 		font-size: 10.5pt;
+	}
+	.summary + .summary {
+		font-size: 9.5pt;
 	}
 
 	section {
