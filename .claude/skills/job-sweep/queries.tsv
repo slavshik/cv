@@ -1,0 +1,17 @@
+# One search per line: keywords <TAB> location <TAB> extra query params
+# Extra params: &f_WT=2 = remote only, &f_WT=3 = hybrid. Time window is set by sweep.sh.
+# Edit freely — this file is the whole search strategy. Keep it under ~15 lines
+# or a run takes longer than it is worth.
+Senior Frontend Engineer	Warsaw, Mazowieckie, Poland
+Frontend Developer	Warsaw, Mazowieckie, Poland
+Game Developer	Poland
+HTML5 Game Developer	Poland
+TypeScript Engineer	Warsaw, Mazowieckie, Poland
+React Developer	Warsaw, Mazowieckie, Poland
+iGaming Frontend Developer	Poland
+Casino Game Developer	Poland
+WebGL Developer	Poland
+PixiJS Developer	European Union
+Frontend Engineer	European Union	&f_WT=2
+Game Developer TypeScript	European Union	&f_WT=2
+Senior Frontend Engineer	Poland	&f_WT=2
