@@ -17,11 +17,15 @@ nice-to-have line is a four-for-four stack match.
 
 ## Before anything else
 
-`agent-browser` must be on PATH:
+Go builds the tool; `agent-browser` loads the pages and must be on PATH:
 
 ```bash
-agent-browser --version || npm install -g agent-browser && agent-browser install
+agent-browser --version || (npm install -g agent-browser && agent-browser install)
+cd .claude/skills/job-sweep && go build -o jobsweep .
 ```
+
+The binary is gitignored — build it, do not commit it. It is stdlib-only, so
+the build needs no network.
 
 Only public guest listings are used — no login, no LinkedIn account, nothing
 behind the auth wall. Keep it that way. Do not connect the tool to Alexander's
@@ -32,24 +36,25 @@ skill needs.
 ## The run
 
 ```bash
-S=.claude/skills/job-sweep
-OUT=$S/runs/$(date +%F)
+cd .claude/skills/job-sweep
 
-$S/scripts/sweep.sh "$OUT"                          # ~7 min, run in background
-python3 $S/scripts/score.py "$OUT" --mark-seen      # dedupe, rank, flag what is new
-# pick the shortlist by hand -> $OUT/shortlist.txt (one URL per line)
-$S/scripts/fetch-descriptions.sh "$OUT"             # ~2 min, run in background
-python3 $S/scripts/summarize.py "$OUT"              # stack signals, not raw text
+./jobsweep sweep                   # ~7 min, run in background
+./jobsweep score -mark-seen        # dedupe, rank, flag what is new
+./jobsweep shortlist               # propose what earns a fetch -> shortlist.txt
+#   read the proposal, trim shortlist.txt
+./jobsweep fetch                   # ~2 min, run in background
+./jobsweep summarize               # stack signals, not raw text
 ```
 
-Both shell scripts are slow and chatty. Run them with `run_in_background`, then
-block on `until ! pgrep -f sweep.sh; do sleep 10; done` rather than polling by
-hand. `runs/` is gitignored; nothing from a run gets committed.
+Everything defaults to `runs/<today>`; pass `-out DIR` to work on another run.
+`sweep` and `fetch` are slow and chatty — start them with `run_in_background`
+and block on `until ! pgrep -f jobsweep; do sleep 10; done` rather than polling
+by hand. `runs/` is gitignored; nothing from a run gets committed.
 
-`--mark-seen` records every URL in `runs/seen.json`, so the next run can flag
+`-mark-seen` records every URL in `runs/seen.json`, so the next run can flag
 what is genuinely new. Pass it on a real weekly run; leave it off when
 experimenting with queries, or the next run will think a backlog is old news.
-`--new-only` prints just the new postings, which is usually what a week-two
+`-new-only` prints just the new postings, which is usually what a week-two
 run wants.
 
 `queries.tsv` is the whole search strategy. Edit it rather than passing
@@ -58,9 +63,12 @@ about fifteen lines; each one costs three page loads.
 
 ## Choosing what to fetch
 
-Score `>= 5` is roughly the fetch threshold, but read the titles before
-committing. Fetch about 30 — enough to cover the real candidates, few enough to
-finish in two minutes. Always drop, without spending a fetch:
+`jobsweep shortlist` applies the rules below and writes a proposal. **It is a
+proposal, not a verdict** — read it, cut what does not belong, then fetch. Score
+`>= 5` is the default threshold and about 30 fetches is the right size: enough
+to cover the real candidates, few enough to finish in two minutes.
+
+The command already drops these, and you should not add them back:
 
 - **AAA studios** — CD PROJEKT RED, Techland, 11 bit, Bloober. "Senior Game
   Programmer" in Warsaw is C++ engine work every time.
@@ -68,13 +76,16 @@ finish in two minutes. Always drop, without spending a fetch:
   word *game*.
 - Titles naming **Angular, Vue, React Native, Unity, .NET** as the primary stack.
 
-Always fetch, whatever the score:
+And it force-includes these whatever the score, because the scorer
+under-weights unusual spellings:
 
-- Anything naming **Pixi, Phaser, Cocos, Babylon, WebGL, Spine, HTML5** — these
-  are the bullseye and the scorer under-weights unusual spellings.
-- Anything at a **known iGaming operator or supplier**, even with a dull title.
+- Anything naming **Pixi, Phaser, Cocos, Babylon, WebGL, Spine, HTML5, Canvas** —
+  the bullseye.
 - Anything mentioning **video player, HLS, streaming** — the Exadel work is the
   one place that history is an asset rather than filler.
+
+Add by hand: anything at a **known iGaming operator or supplier**, even with a
+dull title. Company reputation is not something the regex list can keep current.
 
 ## Tiering what comes back
 
@@ -108,6 +119,36 @@ is a useful line because it is checkable, not because it is flattering.
   roles exist, say that plainly and offer the adjacent cities — Berlin, Malta,
   Cyprus, Barcelona — rather than padding the list to look productive.
 - **Dates matter.** Postings close fast. Show the posting date on every row.
+
+## The code
+
+Go, stdlib only, one package. `go build -o jobsweep .` and `go vet ./...` are
+the whole toolchain; keep it that way — a dependency here would have to be
+worth the `go.sum`.
+
+| | |
+|---|---|
+| `main.go` | Subcommand dispatch, and how the skill directory is located |
+| `job.go` | The `Job` and `Desc` types, NDJSON helpers, rune-safe padding |
+| `browser.go` | The entire agent-browser dependency, three functions wide |
+| `sweep.go` | queries.tsv → guest search URLs → `raw.ndjson` |
+| `score.go` | Weights, dedupe, `seen.json`, the ranked table |
+| `shortlist.go` | The always-drop and always-fetch rules, as code |
+| `fetch.go` | shortlist.txt → `desc.ndjson` |
+| `summarize.go` | Descriptions → stack signals |
+| `js/` | The two in-browser extractors, embedded with `go:embed` |
+
+Two things to know before editing:
+
+- **Go's regexp is RE2 and has no lookaround.** Nothing here needs it —
+  `\bjava\b` already declines to match "javascript", because there is no word
+  boundary between "java" and the "s". Do not reach for a third-party engine.
+- **Truncate by runes, never bytes.** Half the locations in a European job
+  sweep are `Cracow, Małopolskie` or `Wrocław`; `pad` and `trunc` in `job.go`
+  exist for this and the table columns should go through them.
+
+Swapping the fetcher out — for a plain HTTP client, or a different browser
+driver — means rewriting `browser.go` and nothing else.
 
 ## Publishing
 
