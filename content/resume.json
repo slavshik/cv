@@ -5,7 +5,7 @@
 		"label": "Senior Frontend Engineer · Game Developer",
 		"email": "slavshik@me.com",
 		"url": "https://slavshik.me",
-		"summary": "I have been building for the browser since 2007, most of it games. **Real-money live casino clients** at Evolution, **HTML5 instant games** shipped to ==7+ web platforms== at Diesel Puppet, and the engine, backend and release pipeline underneath them. The work I like is the awkward kind — interactive UX with real physics in it, rendering that has to survive a cheap phone, and a pipeline that lets a small team ship often. TypeScript throughout; the engine changes with the job.\n\nLately my own time goes into **LLM agents and self-hosted infrastructure**: a home cloud of six Docker stacks with an __OpenClaw__ agent on Telegram in front of it, taking a request in text or a voice note, calling out across half a dozen services and filing the result away. Go and Python rather than TypeScript, run for real rather than demonstrated.",
+		"summary": "I have been building for the browser since 2007, most of it games. **Real-money live casino clients** at Evolution, **HTML5 instant games** shipped to ==7+ web platforms== at Diesel Puppet, and the engine, backend and release pipeline underneath them. The work I like is the awkward kind — interactive UX with real physics in it, rendering that has to survive a cheap phone, and a pipeline that lets a small team ship often. TypeScript throughout; the engine changes with the job.\n\nLately my own time goes into **LLM agents and self-hosted infrastructure**: a home cloud of six Docker stacks with an __OpenClaw__ agent on Telegram in front of it, taking a request in text or a voice note, calling out across half a dozen services and filing the result away. Go and Python rather than TypeScript, run for real rather than demonstrated. Underneath all of it a dotfiles repo kept since 2022: Neovim in Lua, tmux, and enough glue that Jira, GitLab and commit messages never leave the terminal — lazygit and lf included, forked and patched.",
 		"location": {
 			"city": "Warsaw",
 			"region": "Mazowieckie",
@@ -60,6 +60,7 @@
 				"Storybook",
 				"Jest",
 				"React Testing Library",
+				"monorepo",
 				"GitLab CI",
 				"i18n"
 			]
@@ -82,6 +83,7 @@
 				"Preact",
 				"Babylon.js",
 				"cannon.js",
+				"monorepo (yarn workspaces)",
 				"NestJS",
 				"Firebase",
 				"GitHub Actions"
@@ -254,6 +256,7 @@
 				"Docker",
 				"NestJS",
 				"Firebase",
+				"Monorepo",
 				"GitHub Actions",
 				"GitLab CI",
 				"webpack",
