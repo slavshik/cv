@@ -9,6 +9,7 @@
  * print stylesheet a handful of lines instead of a per-section special case.
  */
 
+import { escape } from './html.ts';
 import type { Education, Language, Project, Resume, Skill, Work } from './resume.ts';
 
 /* Positions that started before this are listed as one line each, under
@@ -21,14 +22,6 @@ const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
 /* Only the countries this CV actually names. A lookup table beats pulling in
    Intl.DisplayNames for one string. */
 const COUNTRIES: Record<string, string> = { PL: 'Poland' };
-
-const escape = (s: string): string =>
-	s
-		.replace(/&/g, '&amp;')
-		.replace(/</g, '&lt;')
-		.replace(/>/g, '&gt;')
-		.replace(/"/g, '&quot;')
-		.replace(/'/g, '&#39;');
 
 /*
  * Prose, with the three marks of progressive summarisation — the layer you read
