@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /cv/jobs/
 
 Sitemap: https://slavshik.me/cv/sitemap.xml

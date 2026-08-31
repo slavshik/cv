@@ -1,0 +1,185 @@
+/*
+ * The jobs list at /cv/jobs/. Same paper, same two type stacks, same
+ * gutter-and-body row as the CV — see src/tokens.css, which both pages import
+ * and neither page may fork.
+ *
+ * What is deliberately different: there is no print stylesheet here. The CV is
+ * a document somebody receives; this is a list I read on a phone over coffee
+ * and it is never printed. If it ever needs to be, that is a new section, not
+ * a reason to make styles.css serve two masters.
+ */
+
+@import './tokens.css';
+
+body {
+	background: var(--paper);
+	color: var(--ink);
+	font-family: var(--serif);
+	font-size: 17px;
+	line-height: 1.6;
+	-webkit-font-smoothing: antialiased;
+}
+
+.jobs {
+	width: 100%;
+	max-width: 44rem;
+	margin: 0 auto;
+	padding: 3rem 1.5rem 5rem;
+}
+
+a {
+	color: inherit;
+	text-decoration-color: var(--hair);
+	text-underline-offset: 0.2em;
+}
+a:hover {
+	color: var(--accent-text);
+	text-decoration-color: currentColor;
+}
+
+/* ── Head ──────────────────────────────────────────────────────────────── */
+
+.head h1 {
+	font-size: clamp(1.9rem, 6vw, 2.4rem);
+	font-weight: 600;
+	letter-spacing: -0.02em;
+	margin: 0;
+}
+
+.head .label {
+	font-size: 0.95rem;
+	color: var(--muted);
+	margin: 0.4rem 0 2.5rem;
+	max-width: 32rem;
+}
+
+h2 {
+	font-size: 0.78rem;
+	font-family: var(--mono);
+	font-weight: 500;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: var(--muted);
+	border-bottom: 1px solid var(--hair);
+	padding-bottom: 0.5rem;
+	margin: 0 0 0.75rem;
+
+	display: flex;
+	justify-content: space-between;
+	gap: 1rem;
+}
+
+h2 .count {
+	color: var(--faint);
+	text-transform: none;
+	letter-spacing: 0.02em;
+}
+
+/* ── The row ───────────────────────────────────────────────────────────── */
+
+.list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.row {
+	display: grid;
+	grid-template-columns: 3.2rem 1fr;
+	gap: 0.9rem;
+	padding: 0.55rem 0;
+	border-bottom: 1px solid color-mix(in oklab, var(--hair), transparent 55%);
+}
+
+/* The gutter carries one of two things and they mean different amounts: a
+   score, which is a guess, or the word new, which is a fact. The fact gets the
+   accent; the guess stays faint enough to skim past. */
+.row .mark {
+	font-family: var(--mono);
+	font-size: 0.72rem;
+	color: var(--faint);
+	text-align: right;
+	padding-top: 0.35rem;
+}
+
+.row.is-new .mark {
+	color: var(--accent-text);
+	letter-spacing: 0.06em;
+}
+
+.row .title {
+	display: block;
+	font-size: 1rem;
+	line-height: 1.35;
+}
+
+.row .meta {
+	display: block;
+	font-size: 0.82rem;
+	color: var(--muted);
+}
+
+/* ── The archive ───────────────────────────────────────────────────────── */
+
+.archive {
+	margin-top: 3rem;
+}
+
+.archive .day {
+	border-bottom: 1px solid color-mix(in oklab, var(--hair), transparent 55%);
+}
+
+.archive summary {
+	cursor: pointer;
+	padding: 0.6rem 0;
+	font-size: 0.9rem;
+	display: flex;
+	gap: 0.9rem;
+}
+
+/* A summary laid out with flex loses the disclosure triangle, and a row that
+   opens has to look like one. The chevron turns rather than swapping glyphs so
+   the line does not reflow on click. */
+.archive summary::-webkit-details-marker {
+	display: none;
+}
+
+.archive summary::before {
+	content: '\203A';
+	display: inline-block;
+	width: 0.7rem;
+	color: var(--faint);
+	transition: transform 0.15s ease;
+}
+
+.archive .day[open] summary::before {
+	transform: rotate(90deg);
+}
+
+.archive summary .when {
+	font-family: var(--mono);
+	font-size: 0.78rem;
+	color: var(--muted);
+	min-width: 4rem;
+}
+
+.archive summary .what {
+	color: var(--faint);
+}
+
+.archive .list {
+	padding: 0 0 0.75rem;
+}
+
+.dropped,
+.empty {
+	font-size: 0.8rem;
+	color: var(--faint);
+	margin: 0.9rem 0 0;
+}
+
+.foot {
+	margin-top: 3.5rem;
+	font-size: 0.9rem;
+	color: var(--muted);
+}
