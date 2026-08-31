@@ -44,12 +44,23 @@ cd .claude/skills/job-sweep
 #   read the proposal, trim shortlist.txt
 ./jobsweep fetch                   # ~2 min, run in background
 ./jobsweep summarize               # stack signals, not raw text
+./jobsweep publish                 # the day's list -> content/jobs/<date>.json
 ```
 
 Everything defaults to `runs/<today>`; pass `-out DIR` to work on another run.
 `sweep` and `fetch` are slow and chatty — start them with `run_in_background`
 and block on `until ! pgrep -f jobsweep; do sleep 10; done` rather than polling
 by hand. `runs/` is gitignored; nothing from a run gets committed.
+
+`publish` is the only command that writes outside `runs/`. `make jobs` in the
+repository root does sweep, score and publish in one go and commits the result;
+the page at `/cv/jobs/` is built from what was committed. Nothing is scheduled —
+see `docs/adr/0006` for why the cron was abandoned.
+
+`publish` applies the same drop rules as `shortlist` and no cap, and it writes
+titles, companies, locations, links and scores — **never** description bodies.
+Those are LinkedIn's text; the page links to a posting rather than reprinting
+it.
 
 `-mark-seen` records every URL in `runs/seen.json`, so the next run can flag
 what is genuinely new. Pass it on a real weekly run; leave it off when
@@ -136,6 +147,7 @@ worth the `go.sum`.
 | `shortlist.go` | The always-drop and always-fetch rules, as code |
 | `fetch.go` | shortlist.txt → `desc.ndjson` |
 | `summarize.go` | Descriptions → stack signals |
+| `publish.go` | scored.json → content/jobs/&lt;date&gt;.json, the page's data |
 | `js/` | The two in-browser extractors, embedded with `go:embed` |
 
 Two things to know before editing:
@@ -152,11 +164,15 @@ driver — means rewriting `browser.go` and nothing else.
 
 ## Publishing
 
-Publish the shortlist as an artifact and hand over the link; a list of twenty
-links is not delivered inside terminal scrollback. Load `artifact-design`
-first. On a repeat run, update the existing artifact by URL rather than
-creating a new one — find it with `action: "list"` if the URL is not to hand,
-so the link Alexander has bookmarked keeps working.
+The ranked sweep publishes itself: `jobsweep publish` writes the day's file and
+`/cv/jobs/` renders it, with what is new since the last run flagged. That is the
+harvest, and it needs nobody.
+
+The **judged** shortlist is the part that does. Publish it as an artifact and
+hand over the link; a list of twenty links is not delivered inside terminal
+scrollback. Load `artifact-design` first. On a repeat run, update the existing
+artifact by URL rather than creating a new one — find it with `action: "list"`
+if the URL is not to hand, so the link Alexander has bookmarked keeps working.
 
 Lead the terminal reply with the top five and the ruled-out summary. Do not
 restate the whole page.

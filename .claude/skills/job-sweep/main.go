@@ -10,6 +10,7 @@
 //	jobsweep shortlist  propose which postings earn a description fetch
 //	jobsweep fetch      pull the full descriptions for that shortlist
 //	jobsweep summarize  condense them to stack signals
+//	jobsweep publish    write the day's list into content/jobs/ for the site
 //
 // Page loads go through agent-browser, which must be on PATH. Only LinkedIn's
 // public guest endpoints are used; nothing here touches a signed-in session.
@@ -33,6 +34,7 @@ Usage:
   jobsweep shortlist  [-out DIR] [-min N] [-limit N]
   jobsweep fetch      [-out DIR] [-root DIR]
   jobsweep summarize  [-out DIR]
+  jobsweep publish    [-out DIR] [-root DIR] [-repo DIR] [-min N]
 
   -out    run directory, default runs/<today>
   -root   skill directory holding queries.tsv and runs/, default: next to the
@@ -57,6 +59,8 @@ func main() {
 		err = cmdFetch(os.Args[2:])
 	case "summarize":
 		err = cmdSummarize(os.Args[2:])
+	case "publish":
+		err = cmdPublish(os.Args[2:])
 	case "-h", "--help", "help":
 		fmt.Print(usage)
 		return
