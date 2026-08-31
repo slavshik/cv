@@ -24,9 +24,10 @@ var alwaysDrop = []struct {
 	{regexp.MustCompile(`(?i)c\+\+|\bunreal\b`), "C++"},
 	{regexp.MustCompile(`(?i)\bangular\b`), "Angular"},
 	{regexp.MustCompile(`(?i)\bvue\b`), "Vue"},
+	{regexp.MustCompile(`(?i)\bunity\b`), "Unity"},
 	{regexp.MustCompile(`(?i)react native|\bandroid\b|\bios\b|flutter`), "mobile native"},
 	{regexp.MustCompile(`(?i)\.net|c#`), ".NET"},
-	{regexp.MustCompile(`(?i)devops|\bsre\b|data (scientist|analyst|engineer)|security`), "off-role"},
+	{regexp.MustCompile(`(?i)devops|\bsre\b|data scien|data (analyst|engineer)|security|monetization`), "off-role"},
 	{regexp.MustCompile(`(?i)intern|junior|graduate|trainee`), "too junior"},
 }
 
