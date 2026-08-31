@@ -115,6 +115,44 @@ a:hover {
 
 /* ── Head ──────────────────────────────────────────────────────────────── */
 
+/*
+ * The portrait is optional, so the two-column header is too. With no image the
+ * header stays the plain stack it has always been and not a pixel moves, which
+ * is what `:has()` is buying here.
+ *
+ * Only the name, the headline and the status share a row with the face. The
+ * contact line spans the full width underneath: it is one line of monospace
+ * that only just fits, and narrowing it by the width of a photograph is what
+ * makes it wrap.
+ */
+.head:has(.portrait) {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	column-gap: 2rem;
+	align-items: start;
+}
+.head:has(.portrait) .portrait {
+	grid-column: 2;
+	grid-row: 1;
+}
+.head:has(.portrait) .contacts {
+	grid-column: 1 / -1;
+}
+.head .who {
+	min-width: 0;
+}
+
+.portrait {
+	flex: none;
+	width: 5.5rem;
+	height: 5.5rem;
+	border-radius: 50%;
+	object-fit: cover;
+	/* The circle is drawn before the file arrives, so the header reads as
+	   finished while the image is still coming and nothing flashes white. */
+	background: var(--hair);
+}
+
 .head h1 {
 	font-size: clamp(2.1rem, 7vw, 2.9rem);
 	font-weight: 600;
@@ -451,6 +489,29 @@ mark {
 	 * it. Down to a circle, the same one the theme toggle is: the arrow says
 	 * what it does, and aria-label carries the words it drops.
 	 */
+	/*
+	 * Beside a name this size there is no room for a face, so it goes above
+	 * instead and the header becomes a single column again.
+	 */
+	.head:has(.portrait) {
+		grid-template-columns: 1fr;
+	}
+	.head:has(.portrait) .portrait {
+		grid-column: 1;
+		grid-row: 1;
+		margin-bottom: 1.1rem;
+	}
+	.head:has(.portrait) .who {
+		grid-row: 2;
+	}
+	.head:has(.portrait) .contacts {
+		grid-row: 3;
+	}
+	.portrait {
+		width: 4.25rem;
+		height: 4.25rem;
+	}
+
 	.download {
 		width: 2.4rem;
 		height: 2.4rem;
@@ -502,6 +563,15 @@ mark {
 	/* Nothing to click on paper. */
 	.download,
 	#theme {
+		display: none;
+	}
+
+	/*
+	 * The portrait is a screen thing, like the marks. What gets forwarded and
+	 * fed to an applicant tracking system stays a plain document — see
+	 * docs/adr/0005.
+	 */
+	.portrait {
 		display: none;
 	}
 

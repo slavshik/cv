@@ -49,6 +49,19 @@ test('the marks come off in print', async ({ page }) => {
 	expect(await computed('mark', 'background-color')).toEqual(['rgba(0, 0, 0, 0)']);
 });
 
+/*
+ * The photograph is a screen affordance. The PDF is the artefact that gets
+ * forwarded and parsed, and it stays a plain document — docs/adr/0005. One CSS
+ * rule stands between the two, so it is worth a test of its own.
+ */
+test('the portrait does not reach print', async ({ page }) => {
+	await page.goto('/cv/?aqa=1');
+	await expect(page.locator('.portrait')).toBeVisible();
+
+	await page.emulateMedia({ media: 'print' });
+	await expect(page.locator('.portrait')).toBeHidden();
+});
+
 test.describe('without javascript', () => {
 	test.use({ javaScriptEnabled: false });
 

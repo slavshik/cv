@@ -25,6 +25,9 @@ export interface Basics {
 	email: string;
 	url: string;
 	summary: string;
+	/* Optional, and relative like every other path on this page. Absent is the
+	   normal state: the header simply has no second column. */
+	image?: string;
 	location: { city: string; region?: string; countryCode: string };
 	profiles: Profile[];
 }
@@ -136,6 +139,7 @@ function assertResume(raw: unknown): asserts raw is Resume {
 	for (const key of ['name', 'label', 'email', 'url', 'summary'] as const) {
 		str(basics[key], `basics.${key}`);
 	}
+	optStr(basics['image'], 'basics.image');
 	const location = basics['location'];
 	if (!isObject(location)) fail('basics.location', 'must be an object');
 	str(location['city'], 'basics.location.city');

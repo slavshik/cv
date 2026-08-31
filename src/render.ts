@@ -172,6 +172,26 @@ const ICONS: Record<string, string> = {
 /** An unknown network simply gets no icon — the text still says what it is. */
 const icon = (name: string): string => ICONS[name.toLowerCase()] ?? '';
 
+/*
+ * The face, if there is one. Optional in the data and deliberately outside the
+ * weight budget — see docs/adr/0005.
+ *
+ * Everything on the tag says the same thing: this is an addition, not part of
+ * the document. `width`/`height` reserve the box so the header cannot jump when
+ * the file arrives, and `fetchpriority="low"` puts it behind every byte of the
+ * CV itself. `loading="lazy"` is honest about the intent but does no work here —
+ * the header is in the first screen, and browsers fetch in-viewport images
+ * whatever it says.
+ *
+ * The alt is empty on purpose. The name is two lines away in the h1; making a
+ * screen reader announce it twice is noise, not access.
+ */
+const portrait = (src: string | undefined): string =>
+	src
+		? `<img class="portrait" src="${escape(src)}" alt="" width="264" height="264" ` +
+			`loading="lazy" decoding="async" fetchpriority="low">`
+		: '';
+
 const head = (resume: Resume, pdfVersion: string): string => {
 	const { basics, meta } = resume;
 	const place = joined([basics.location.city, COUNTRIES[basics.location.countryCode]]);
@@ -188,12 +208,17 @@ const head = (resume: Resume, pdfVersion: string): string => {
 		),
 	].join('');
 
+	/* The written half of the header is wrapped so it can become a column
+	   beside the portrait. Without one it is a plain block and nothing moves. */
 	return (
 		`<header class="head">` +
+		`<div class="who">` +
 		`<h1>${escape(basics.name)}</h1>` +
 		`<p class="label">${escape(basics.label)}</p>` +
 		(meta?.openToWork ? `<p class="status">Open to work</p>` : '') +
+		`</div>` +
 		`<ul class="contacts">${contacts}</ul>` +
+		portrait(basics.image) +
 		`<a class="download" href="${escape(pdfHref(resume, pdfVersion))}" download aria-label="Download PDF">${icon('download')}<span>Download PDF</span></a>` +
 		`</header>`
 	);
@@ -291,6 +316,10 @@ export function renderJsonLd(resume: Resume): string {
 		url: basics.url,
 		email: `mailto:${basics.email}`,
 		jobTitle: basics.label,
+		/* Left relative like the tag it mirrors. JSON-LD resolves a relative
+		   IRI against the page it is embedded in, so this needs no origin —
+		   and the renderer stays ignorant of where the site is deployed. */
+		...(basics.image ? { image: basics.image } : {}),
 		address: {
 			'@type': 'PostalAddress',
 			addressLocality: basics.location.city,

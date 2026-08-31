@@ -6,6 +6,14 @@ import { pdfFileName, renderJsonLd, renderResume } from '../../src/render.ts';
 const resume = parseResume(JSON.parse(readFileSync('content/resume.json', 'utf8')));
 const html = renderResume(resume);
 
+/* `exactOptionalPropertyTypes` is on, so an optional field has to be taken off
+   the object rather than set to undefined. */
+const withoutImage = (r: Resume): Resume => {
+	const basics = { ...r.basics };
+	delete basics.image;
+	return { ...r, basics };
+};
+
 describe('renderResume', () => {
 	it('puts the name and the headline in the head', () => {
 		expect(html).toContain('<h1>Alexander Slavschik</h1>');
@@ -52,9 +60,13 @@ describe('renderResume', () => {
 
 	/* Progressive summarisation: three levels of meaning over the prose. */
 	describe('marks', () => {
+		/* The portrait is dropped here so the escaping test below can keep
+		   asserting that no `<img` survives anywhere in the output — the
+		   strongest form of that check, and the portrait is the only tag that
+		   would otherwise make it pass for the wrong reason. */
 		const withProse = (summary: string): string =>
 			renderResume({
-				...resume,
+				...withoutImage(resume),
 				work: [{ name: 'Somewhere', position: 'Engineer', startDate: '2026-01', summary }],
 			});
 
@@ -112,6 +124,32 @@ describe('renderResume', () => {
 		const out = renderResume(nasty);
 		expect(out).not.toContain('<script>alert(1)</script>');
 		expect(out).toContain('&lt;script&gt;');
+	});
+
+	/* The photograph is an addition to the page, not part of it — docs/adr/0005.
+	   Absent has to stay a working state, and when it is there the tag has to
+	   carry the attributes that keep it out of the way of the text. */
+	describe('the portrait', () => {
+		it('is absent unless the data names one', () => {
+			expect(renderResume(withoutImage(resume))).not.toContain('class="portrait"');
+		});
+
+		it('is there when it does name one', () => {
+			expect(html).toContain('class="portrait"');
+		});
+
+		it('reserves its box and asks to be fetched last', () => {
+			expect(html).toContain('src="portrait.webp"');
+			expect(html).toContain('width="264" height="264"');
+			expect(html).toContain('fetchpriority="low"');
+			expect(html).toContain('decoding="async"');
+		});
+
+		/* The name is in the h1 directly beside it; announcing it twice is
+		   noise, so the image is explicitly nothing to a screen reader. */
+		it('carries an empty alt rather than repeating the name', () => {
+			expect(html).toContain('class="portrait" src="portrait.webp" alt=""');
+		});
 	});
 });
 
