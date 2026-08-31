@@ -20,7 +20,7 @@ DOCKER   := docker run --rm -v "$(CURDIR)":/repo -v /repo/node_modules -w /repo
 FONTS := apt-get update -qq && apt-get install -y -qq fonts-texgyre
 
 .DEFAULT_GOAL := help
-.PHONY: help install dev preview build pdf pdf-ci check test unit e2e e2e-update size format lint
+.PHONY: help install dev preview build pdf pdf-ci check test unit e2e e2e-update size format lint jobs
 
 help: ## Show this list
 	@grep -hE '^[a-z-]+:.*?## ' $(MAKEFILE_LIST) \
@@ -45,6 +45,9 @@ pdf: build ## Build the site and render the downloadable PDF into dist/
 
 preview: pdf ## Serve exactly what goes to Pages, PDF included
 	@npx vite preview --port $(PORT) --strictPort
+
+jobs: ## Sweep LinkedIn and commit today's list into content/jobs/ (~7 min)
+	scripts/sweep.sh
 
 ## ─── checks ──────────────────────────────────────────────────────────────
 

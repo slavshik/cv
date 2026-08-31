@@ -15,9 +15,15 @@ PDF are never committed.
   that fails the build loudly rather than printing `undefined` onto a CV.
 - `src/render.ts` — `resume.json` → HTML. A pure function: no DOM, no clock, no
   I/O. It runs inside `vite.config.ts` at build time.
-- `src/main.ts` — the only script the page loads: the time-of-day accent and
+- `src/main.ts` — the only script the CV loads: the time-of-day accent and
   the theme button. Nothing else.
-- `src/styles.css` — the whole design, screen and print.
+- `content/jobs/<date>.json`, `src/jobs.ts`, `src/jobs.css`, `jobs/index.html`
+  — the second page, at **slavshik.me/cv/jobs**. One file per sweep, written by
+  `jobsweep publish`; the renderer is pure the same way `render.ts` is. Read
+  `docs/adr/0006` before touching it, and note what the page must never carry.
+- `src/styles.css` — the whole design of the CV, screen and print.
+  `src/tokens.css` is the palette, the type stacks and the reset, shared with
+  the jobs page; neither page may fork it.
 - `index.html` — markup and metadata, and nothing else. `<!--resume-->` and
   `<!--jsonld-->` are where the build injects.
 - `scripts/pdf.mjs` — renders the built page to `dist/<Name>-CV.pdf`.
@@ -41,6 +47,19 @@ PDF are never committed.
   time from `CV_PHONE` — a repository secret in CI, `.env.local` here. It must
   never reach `content/resume.json` or the served HTML; there is an e2e test
   that says so.
+- **The jobs page is public, and is written as if it were.** The repository is
+  public, so `/cv/jobs/` and every `content/jobs/*.json` are readable by
+  anybody who has the URL — `noindex` and `robots.txt` are obscurity, not
+  privacy. Rows are titles, companies, locations and links to public postings.
+  Fetched description bodies are somebody else's text and never leave the
+  gitignored `runs/`. The CV's rules do not apply there: it has no print
+  stylesheet, no screenshot baseline and no weight budget.
+- **The sweep is run by hand.** `make jobs` sweeps, publishes the day's file
+  and commits it; you push when you want it on the page, and CI builds the site
+  as it always did. There is no schedule. Scheduling it under launchd was tried
+  and abandoned — macOS refuses a LaunchAgent access to `~/Documents`, and the
+  grant is per binary rather than per process tree, so allowing `/bin/sh` still
+  left `go` refused. `docs/adr/0006` has the measurements.
 - **`make check` before calling anything done** (types, lint, format), plus
   `make unit`. Run `make test` when a change could move a pixel or the byte
   count.

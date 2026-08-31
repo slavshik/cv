@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Jobs — sweep</title>
+
+  <!-- This page is on a public host because the repository that builds it is
+       public, but it is not part of the site. It is not linked from the CV, it
+       is out of public/sitemap.xml and out of public/robots.txt, and these two
+       lines are what keep it from being indexed or summarised. Nothing on it is
+       private data — titles, companies and links to public LinkedIn postings —
+       but a list of where somebody is applying does not belong in search. -->
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="referrer" content="no-referrer">
+
+  <link rel="icon" href="/cv/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#f4f1ec" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#101014" media="(prefers-color-scheme: dark)">
+
+  <!-- The same pre-paint theme read as the CV, so the two pages agree about
+       which one the visitor chose. It is the only script on this page, and the
+       page reads exactly the same without it. -->
+  <script>
+    try {
+      var t = localStorage.getItem('theme');
+      if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  </script>
+
+  <link rel="stylesheet" href="/src/jobs.css">
+
+</head>
+<body>
+
+  <!-- The list, baked in at build time from content/jobs/*.json — see
+       vite.config.ts. Nothing here is fetched in the browser. -->
+  <!--jobs-->
+
+</body>
+</html>

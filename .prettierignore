@@ -11,3 +11,7 @@ package-lock.json
 # reflows both and gives nothing back — this HTML does not grow and is not
 # generated.
 *.html
+
+# Written by `jobsweep publish`, one file per sweep. Machine output that no
+# hand edits: reformatting it would put a diff in every run for nothing.
+content/jobs
