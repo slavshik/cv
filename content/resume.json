@@ -27,15 +27,6 @@
 	},
 	"work": [
 		{
-			"name": "BrainRocket",
-			"position": "Senior Game Developer",
-			"location": "Valencia, Spain",
-			"startDate": "2025-09",
-			"endDate": "2026-07",
-			"keywords": ["TypeScript", "Cocos Creator 2", "Spine"],
-			"summary": "**Built slot games with rich graphics** on __Cocos Creator 2__."
-		},
-		{
 			"name": "Evolution",
 			"position": "Frontend Engineer",
 			"location": "Warsaw, Poland",

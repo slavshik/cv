@@ -11,8 +11,16 @@ gap: a gap is left as a gap.
 - **Summary is verbatim from LinkedIn.** It is the one piece of prose on the
   page written in marketing voice ("eager to make meaningful contributions to my
   clients' success"). Tightening it would help; that is an authorial call.
-- **Overlapping dates, carried over as-is.** Evolution runs to 2026-05 while
-  BrainRocket starts 2025-09.
+- **BrainRocket is off the page by decision.** Senior Game Developer, Valencia,
+  2025-09 to 2026-07, slot games on Cocos Creator 2 and Spine — Alexander's
+  most recent role, and taken out on 2026-09-01 at his request. The entry is
+  gone from the data rather than flagged in it: this repository is public, so a
+  `hidden: true` next to the entry would have hidden nothing. Git history still
+  has it. Two effects worth knowing: the newest role on the page now ends
+  2026-05 rather than 2026-07, and Cocos Creator 2 and Spine no longer appear
+  anywhere on the CV. They were not added to `skills` to compensate — the only
+  evidence for them was the entry that just left, and a keyword whose story is
+  off the page is a question with no answer behind it.
 - **Diesel Puppet is one entry here, 2020-03 to 2023-02.** LinkedIn splits that
   spell in two — Game Developer, full-time, 2020-03 to 2022-08 in Minsk, and
   Game Developer, self-employed, 2022-08 to 2023-02, remote — with the long
@@ -112,8 +120,9 @@ words from 2021; none are on the page yet because they are his call:
 - **Certificate issuers and dates confirmed** on the live profile: CSS for
   JavaScript Developers (Josh Comeau) and NestJS Zero to Hero (Udemy), both
   March 2024.
-- **Two tech lines the PDF export dropped** are restored from the live profile:
-  Cocos Creator at BrainRocket, TypeScript and Babylon.js at Gismart.
+- **Two tech lines the PDF export dropped** were restored from the live profile:
+  Cocos Creator at BrainRocket, TypeScript and Babylon.js at Gismart. Only the
+  Gismart one is still on the page; BrainRocket has since been removed.
 - **The FRVR description was truncated in the PDF export** and has been restored
   in full from the profile itself, including the parenthetical after "SDK
   integration", the long-term goals sentence, the 436-releases clause and
