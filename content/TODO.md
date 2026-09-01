@@ -20,11 +20,25 @@ gap: a gap is left as a gap.
   The description still says "roughly five years", which neither those dates nor
   the separate 2013 stint at the same company add up to; that sentence is
   Alexander's own and only he can decide what it should say.
-- **Projects have no descriptions, and cannot get them from LinkedIn.** The
-  `/details/projects/` page carries names, dates and the associated company and
-  nothing else — Chain Cube 3D, Hidden Object: Brain Teaser, Color Galaxy,
-  Fireballs and Friends and Blackjack Card Game all deserve a line each, and
-  those lines have to be written, not imported.
+- **Settled: the Projects section is gone and the titles moved into the work.**
+  It was four names and their dates — Chain Cube 3D, Hidden Object: Brain
+  Teaser, Color Galaxy, Fireballs and Friends — with no descriptions, because
+  `/details/projects/` on LinkedIn carries names, dates and the associated
+  company and nothing else. A bare title says nothing a reader can use, and the
+  work entries already described the same games without naming them. Alexander
+  confirmed the mapping on 2026-09-01:
+    - **Chain Cube 3D** is the 3D physics puzzle (Babylon.js/cannon.js) at Diesel
+      Puppet;
+    - **Hidden Object: Brain Teaser** is the hidden-object title there;
+    - **Fireballs and Friends** is one of the 2D games at Gismart;
+    - **Color Galaxy** was already named in the Gismart entry.
+
+    All four are now in the highlights instead. `projects` is optional in
+    `src/resume.ts` and absent from the data; the renderer drops the section on
+    its own. Do not restore the list — a name with its context beats a name in a
+    column of dates. The block-fit puzzle, the word game and the strategy engine
+    are still unnamed; only Alexander can name them.
+
 - **Gap 2015-06 → 2016-01** between Playtika and Exadel.
 - **Settled: the Gismart game and its three names.** `Color.io` / `Color Galaxy`
   is the game Alexander built the core gameplay for, on Facebook Instant. It was

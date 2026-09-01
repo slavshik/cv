@@ -5,7 +5,7 @@
 		"label": "Senior Frontend Engineer · Game Developer",
 		"email": "slavshik@me.com",
 		"url": "https://slavshik.me",
-		"summary": "I have been building for the browser since 2007, most of it games. **Real-money live casino clients** at Evolution, **HTML5 instant games** at Gismart and FRVR, and the shared engine, backend and release pipeline that put one codebase on ==7+ web platforms==. The work I like is the awkward kind — interactive UX with real physics in it, rendering that has to survive a cheap phone, and a pipeline that lets a small team ship often. TypeScript throughout; the engine changes with the job.\n\nLately my own time goes into **LLM agents and self-hosted infrastructure**: a home cloud of six Docker stacks with an __OpenClaw__ agent on Telegram in front of it, taking a request in text or a voice note, calling out across half a dozen services and filing the result away. Go and Python rather than TypeScript, run for real rather than demonstrated. Underneath all of it a dotfiles repo kept since 2022: Neovim in Lua, tmux, and enough glue that Jira, GitLab and commit messages never leave the terminal — lazygit and lf included, forked and patched.",
+		"summary": "I have been building for the browser since 2007, most of it games. **Real-money betting games over live video** at Evolution, **HTML5 instant games** at Gismart and FRVR, and, at Diesel Puppet, the shared engine, backend and release pipeline that put one codebase on 7+ web platforms. The same problems keep coming back — interactive UX with real physics in it, rendering that has to survive a cheap phone, and a pipeline that lets a small team ship often. TypeScript throughout; the engine changes with the job.\n\nLately my own time goes into **LLM agents and self-hosted infrastructure**: a home cloud of six Docker stacks with an __OpenClaw__ agent on Telegram in front of it, taking a request in text or a voice note, calling out across half a dozen services and filing the result away. Go and Python rather than TypeScript, run for real rather than demonstrated. Underneath all of it a dotfiles repo kept since 2022: Neovim in Lua, tmux, and enough glue that Jira, GitLab and commit messages never leave the terminal — lazygit and lf included, forked and patched.",
 		"image": "portrait.webp",
 		"location": {
 			"city": "Warsaw",
@@ -74,7 +74,7 @@
 			"endDate": "2023-02",
 			"summary": "**Built and owned the core technology** for Diesel Puppet, a casual HTML5 instant-games studio, across roughly five years. Designed and maintained a shared __TypeScript/PixiJS/Preact game engine__ (dp-instant) and its __NestJS/Firebase backend__, used to ship the same game codebase to ==7+ web platforms== including Facebook Instant Games, VK, OK.ru, Yandex Games, GameDistribution and YouTube Playables.",
 			"highlights": [
-				"**Built several titles end to end** on that platform: a 3D physics puzzle game (Babylon.js/cannon.js), a block-fit puzzle game, an asynchronous multiplayer word game, a hidden-object puzzle game, and the core simulation engine for a territory-conquest strategy game built with an __entity-component-system architecture__.",
+				"**Built several titles end to end** on that platform: Chain Cube 3D, a 3D physics puzzle (Babylon.js/cannon.js); Hidden Object: Brain Teaser; a block-fit puzzle game; an asynchronous multiplayer word game; and the core simulation engine for a territory-conquest strategy game built with an __entity-component-system architecture__.",
 				"Built the backend systems behind these games: a Firebase-backed Messenger bot service, and its successor, a __multi-tenant NestJS backend__ serving ==8+ titles== with shared auth, scoring, leaderboards, in-game payments and an asynchronous challenge/matchmaking system.",
 				"Set up and iterated on the studio's __CI/CD release pipeline__, including a migration from Bitbucket Pipelines to GitHub Actions."
 			],
@@ -126,7 +126,7 @@
 			"keywords": ["TypeScript", "Babylon.js", "Preact"],
 			"highlights": [
 				"**Built the core gameplay** for __Color Galaxy__, a 3D io game in the vein of paper.io, and took it to release on Facebook Instant. It was later reworked as Galaxy.io and shipped on Snapchat Games, after I had left.",
-				"Developed a range of 2D games in a team of two developers, plus __two 3D games__ for Facebook Instant."
+				"Developed a range of 2D games in a team of two developers, among them Fireballs and Friends, plus __two 3D games__ for Facebook Instant."
 			]
 		},
 		{
@@ -196,27 +196,6 @@
 			"startDate": "2007-11",
 			"endDate": "2008-06",
 			"summary": "GUI and interface animations."
-		}
-	],
-	"projects": [
-		{
-			"name": "Chain Cube 3D",
-			"startDate": "2020-09"
-		},
-		{
-			"name": "Hidden Object: Brain Teaser (web)",
-			"startDate": "2020-03",
-			"endDate": "2020-03"
-		},
-		{
-			"name": "Color Galaxy",
-			"startDate": "2018-11",
-			"endDate": "2019-05"
-		},
-		{
-			"name": "Fireballs and Friends",
-			"startDate": "2018-03",
-			"endDate": "2019-02"
 		}
 	],
 	"skills": [
