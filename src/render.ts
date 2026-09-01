@@ -259,9 +259,7 @@ export function renderResume(resume: Resume, options: RenderOptions = {}): strin
 		section('Skills', resume.skills.map(skillRow).join('')) +
 		section('Experience', detailed.map(jobRow).join('')) +
 		(earlier.length > 0 ? section('Earlier', earlier.map(briefRow).join('')) : '') +
-		(resume.projects.length > 0
-			? section('Projects', resume.projects.map(projectRow).join(''))
-			: '') +
+		(resume.projects ? section('Projects', resume.projects.map(projectRow).join('')) : '') +
 		section('Education', resume.education.map(educationRow).join('')) +
 		section('Languages', resume.languages.map(languageRow).join('')) +
 		tail(resume.basics.url) +

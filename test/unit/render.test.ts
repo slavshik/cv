@@ -151,6 +151,23 @@ describe('renderResume', () => {
 			expect(html).toContain('class="portrait" src="portrait.webp" alt=""');
 		});
 	});
+
+	/* The data currently has no `projects`, and the section has to disappear
+	   with it rather than leave an empty heading behind. */
+	describe('the Projects section', () => {
+		it('is absent while the data has no projects', () => {
+			expect(html).not.toContain('Projects');
+		});
+
+		it('comes back if projects are ever put back', () => {
+			const withProjects = renderResume({
+				...resume,
+				projects: [{ name: 'Chain Cube 3D', startDate: '2020-09' }],
+			});
+			expect(withProjects).toContain('Projects');
+			expect(withProjects).toContain('Chain Cube 3D');
+		});
+	});
 });
 
 describe('renderJsonLd', () => {

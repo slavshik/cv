@@ -198,27 +198,6 @@
 			"summary": "GUI and interface animations."
 		}
 	],
-	"projects": [
-		{
-			"name": "Chain Cube 3D",
-			"startDate": "2020-09"
-		},
-		{
-			"name": "Hidden Object: Brain Teaser (web)",
-			"startDate": "2020-03",
-			"endDate": "2020-03"
-		},
-		{
-			"name": "Color Galaxy",
-			"startDate": "2018-11",
-			"endDate": "2019-05"
-		},
-		{
-			"name": "Fireballs and Friends",
-			"startDate": "2018-03",
-			"endDate": "2019-02"
-		}
-	],
 	"skills": [
 		{
 			"name": "Core",

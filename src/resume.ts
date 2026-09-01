@@ -72,7 +72,10 @@ export interface Language {
 export interface Resume {
 	basics: Basics;
 	work: Work[];
-	projects: Project[];
+	/* Optional. Absent is a decision, not an oversight: a project list of bare
+	   titles said nothing the work entries above did not already say. See
+	   content/TODO.md. */
+	projects?: Project[];
 	skills: Skill[];
 	education: Education[];
 	languages: Language[];
@@ -162,12 +165,13 @@ function assertResume(raw: unknown): asserts raw is Resume {
 		if (w['keywords'] !== undefined) strList(w['keywords'], `${at}.keywords`);
 	});
 
-	each(raw['projects'], 'projects', (p, at) => {
-		str(p['name'], `${at}.name`);
-		date(p['startDate'], `${at}.startDate`);
-		optDate(p['endDate'], `${at}.endDate`);
-		optStr(p['description'], `${at}.description`);
-	});
+	if (raw['projects'] !== undefined)
+		each(raw['projects'], 'projects', (p, at) => {
+			str(p['name'], `${at}.name`);
+			date(p['startDate'], `${at}.startDate`);
+			optDate(p['endDate'], `${at}.endDate`);
+			optStr(p['description'], `${at}.description`);
+		});
 
 	each(raw['skills'], 'skills', (s, at) => {
 		str(s['name'], `${at}.name`);
