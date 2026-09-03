@@ -1,4 +1,5 @@
 import './styles.css';
+import { recordVisit } from './hit.ts';
 
 /* ── Accent ─────────────────────────────────────────────────────────────
  * Follows the visitor's local clock through four phases: dawn, day, sunset,
@@ -85,3 +86,10 @@ import './styles.css';
 		});
 	}
 }
+
+/* ── Visit ─────────────────────────────────────────────────────────────
+ * One request to /api/hit — my own Worker, on this same origin. It is the
+ * only request this page makes that is not part of reading it, and the page
+ * is complete without it: see src/hit.ts for what goes and what does not.
+ */
+recordVisit();
