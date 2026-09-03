@@ -83,7 +83,16 @@ PDF are never committed.
   about the wording.
 - **Keep the page free of JavaScript.** The CV must be entirely readable with
   scripting off — an e2e test enforces it. `src/main.ts` may grow only for
-  things that are genuinely decoration.
+  things that are genuinely decoration, and for the one thing below.
+- **The visit counter is the exception, and it is mine.** `src/hit.ts` sends a
+  single same-origin request to `/api/hit` — the Worker that already serves
+  slavshik.me, on the same zone, so there is no third party, no cookie and no
+  identity that survives midnight. It is silent anywhere but the live host, on
+  `?aqa=1`, and for a visitor sending Do-Not-Track or Global Privacy Control,
+  which is why neither the screenshots nor the PDF ever count as a reader.
+  `/cv/jobs/` is deliberately not counted: that page carries no module script
+  at all and is not for anybody but me. The rows are read with `make stats` in
+  the `slavshik.github.io` repository, where the Worker and its D1 live.
 - **`make size`** holds the whole page under 12 kB gzip. It is a text document;
   there is no reason for it to grow.
 
