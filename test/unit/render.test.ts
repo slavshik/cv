@@ -174,6 +174,9 @@ describe('renderJsonLd', () => {
 	it('claims only what the page shows', () => {
 		const data = JSON.parse(renderJsonLd(resume)) as Record<string, unknown>;
 		expect(data['name']).toBe('Alexander Slavschik');
+		// The passport transliteration is here and nowhere else — the header
+		// and the PDF carry one name.
+		expect(data['alternateName']).toEqual(['Aliaksandr Slaushchyk', 'slavshik']);
 		expect(data['sameAs']).toEqual([
 			'https://github.com/slavshik',
 			'https://www.linkedin.com/in/slavshik',

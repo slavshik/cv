@@ -21,6 +21,12 @@ export interface Profile {
 
 export interface Basics {
 	name: string;
+	/* Optional. The other spellings of the same person — the passport
+	   transliteration and the handle every profile is under. They stay off the
+	   page and out of the PDF: a CV header carries one name, or a parser reads
+	   "Alexander (Aliaksandr)" as a first name. JSON-LD is where they belong,
+	   so a search for either form resolves to the same Person. */
+	alternateNames?: string[];
 	label: string;
 	email: string;
 	url: string;
@@ -143,6 +149,8 @@ function assertResume(raw: unknown): asserts raw is Resume {
 		str(basics[key], `basics.${key}`);
 	}
 	optStr(basics['image'], 'basics.image');
+	if (basics['alternateNames'] !== undefined)
+		strList(basics['alternateNames'], 'basics.alternateNames');
 	const location = basics['location'];
 	if (!isObject(location)) fail('basics.location', 'must be an object');
 	str(location['city'], 'basics.location.city');

@@ -296,14 +296,18 @@ const tail = (url: string): string =>
 	`<a href="${escape(url)}">${icon('back')}<span>${escape(bareHost(url))}</span></a>` +
 	`</footer>`;
 
-/** Machine-readable business card. Claims nothing the page does not say. */
+/*
+ * Machine-readable business card. It claims no experience the page does not
+ * claim; the one thing here that is not printed anywhere is `alternateName`,
+ * which is identity rather than a claim — see basics.alternateNames.
+ */
 export function renderJsonLd(resume: Resume): string {
 	const { basics } = resume;
 	return JSON.stringify({
 		'@context': 'https://schema.org',
 		'@type': 'Person',
 		name: basics.name,
-		alternateName: 'slavshik',
+		...(basics.alternateNames ? { alternateName: basics.alternateNames } : {}),
 		url: basics.url,
 		email: `mailto:${basics.email}`,
 		jobTitle: basics.label,
