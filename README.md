@@ -27,6 +27,20 @@ make test       # the above plus unit, screenshot and weight checks
 
 `make help` lists the rest.
 
+### Testing on an iPad over Tailscale
+
+Connect the Mac and iPad to the same Tailscale network, then run `make tailscale`
+on the Mac. Open the printed `http://<tailscale-ip>:5173/cv/` URL in Safari on
+the iPad. Edits reload the page, just as with `make dev`; keep the Mac awake and
+the command running. Ctrl-C stops the server.
+
+The target uses the [Tailscale CLI](https://tailscale.com/docs/reference/tailscale-cli)
+to find the Mac's IPv4 address and binds Vite to that address. It uses the
+installed `tailscale` command by default; override it with
+`make tailscale TAILSCALE=/path/to/tailscale-cli` if needed. To use another port,
+run `make tailscale PORT=9000`. Tailnet access rules must allow the iPad to reach
+that port on the Mac.
+
 ## Editing the CV
 
 Change `content/resume.json`. Nothing else needs touching: the page, the

@@ -9,6 +9,7 @@
 
 PORT   ?= 5173
 URL    := http://localhost:$(PORT)/cv/
+TAILSCALE ?= tailscale
 
 PW_IMAGE := mcr.microsoft.com/playwright:v1.62.1-noble
 DOCKER   := docker run --rm -v "$(CURDIR)":/repo -v /repo/node_modules -w /repo
@@ -20,7 +21,7 @@ DOCKER   := docker run --rm -v "$(CURDIR)":/repo -v /repo/node_modules -w /repo
 FONTS := apt-get update -qq && apt-get install -y -qq fonts-texgyre
 
 .DEFAULT_GOAL := help
-.PHONY: help install dev preview build pdf pdf-ci check test unit e2e e2e-update size format lint jobs
+.PHONY: help install dev tailscale preview build pdf pdf-ci check test unit e2e e2e-update size format lint jobs
 
 help: ## Show this list
 	@grep -hE '^[a-z-]+:.*?## ' $(MAKEFILE_LIST) \
@@ -36,6 +37,15 @@ install: ## Install dependencies exactly as locked
 dev: ## Dev server with hot reload; editing content/resume.json reloads the page
 	@echo "$(URL) — Ctrl-C to stop"
 	@npx vite --port $(PORT) --strictPort
+
+tailscale: ## Dev server on this Mac's Tailscale IP; prints the URL for iPad testing
+	@command -v "$(TAILSCALE)" >/dev/null 2>&1 || { echo "Tailscale CLI not found; set TAILSCALE=/path/to/cli" >&2; exit 1; }
+	@set -eu; \
+		tailnet_ip=$$("$(TAILSCALE)" ip -4); \
+		printf '%s\n' "$$tailnet_ip" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$$' || \
+			{ echo "No Tailscale IPv4 address; connect this Mac to Tailscale first." >&2; exit 1; }; \
+		echo "http://$$tailnet_ip:$(PORT)/cv/ — open on your iPad with Tailscale connected; Ctrl-C to stop"; \
+		exec npx vite --host "$$tailnet_ip" --port $(PORT) --strictPort
 
 build: ## Build the site into dist/
 	npm run build
