@@ -8,9 +8,12 @@ gap: a gap is left as a gap.
 
 ## For Alexander to decide
 
-- **Summary is verbatim from LinkedIn.** It is the one piece of prose on the
-  page written in marketing voice ("eager to make meaningful contributions to my
-  clients' success"). Tightening it would help; that is an authorial call.
+- **AI positioning confirmed on 2026-09-07.** Agentic workflows are mainly
+  personal, with use at Evolution: routine Jira, wiki and GitLab automation
+  through Alexander's own skills, using Claude, Codex, DeepSeek and Ollama.
+  The headline now includes Agentic Workflows; the lead summary and Evolution
+  entry carry the context. No start date or new metric was supplied, and MCP
+  remains unconfirmed, so none is claimed.
 - **BrainRocket is off the page by decision.** Senior Game Developer, Valencia,
   2025-09 to 2026-07, slot games on Cocos Creator 2 and Spine — Alexander's
   most recent role, and taken out on 2026-09-01 at his request. The entry is

@@ -3,10 +3,10 @@
 	"basics": {
 		"name": "Alexander Slavschik",
 		"alternateNames": ["Aliaksandr Slaushchyk", "slavshik"],
-		"label": "Senior Frontend Engineer · Game Developer",
+		"label": "Senior Frontend Engineer · Games · Agentic Workflows",
 		"email": "slavshik@me.com",
 		"url": "https://slavshik.me",
-		"summary": "I have been building for the browser since 2007, most of it games. **Real-money betting games over live video** at Evolution, **HTML5 instant games** at Gismart and FRVR, and, at Diesel Puppet, the shared engine, backend and release pipeline that put one codebase on 7+ web platforms. The same problems keep coming back — interactive UX with real physics in it, rendering that has to survive a cheap phone, and a pipeline that lets a small team ship often. TypeScript throughout; the engine changes with the job.\n\nLately my own time goes into **LLM agents and self-hosted infrastructure**: a home cloud of six Docker stacks with an __OpenClaw__ agent on Telegram in front of it, taking a request in text or a voice note, calling out across half a dozen services and filing the result away. Go and Python rather than TypeScript, run for real rather than demonstrated. Underneath all of it a dotfiles repo kept since 2022: Neovim in Lua, tmux, and enough glue that Jira, GitLab and commit messages never leave the terminal — lazygit and lf included, forked and patched.",
+		"summary": "I have been building for the browser since 2007, most of it games. **Real-money betting games over live video** at Evolution, **HTML5 instant games** at Gismart and FRVR, and, at Diesel Puppet, the shared engine, backend and release pipeline that put one codebase on 7+ web platforms. The same problems keep coming back — interactive UX with real physics in it, rendering that has to survive a cheap phone, and a pipeline that lets a small team ship often. TypeScript throughout; the engine changes with the job. I use **agentic workflows**, mainly in personal projects, and brought them into routine Jira, wiki and GitLab tasks at Evolution with skills I wrote myself.\n\nLately my own time goes into **LLM agents and self-hosted infrastructure**: a home cloud of 6 Docker stacks with an __OpenClaw__ agent on Telegram in front of it, taking a request in text or a voice note, calling out across half a dozen services and filing the result away. Go and Python rather than TypeScript, run for real rather than demonstrated. Underneath all of it a dotfiles repo kept since 2022: Neovim in Lua, tmux, and enough glue that Jira, GitLab and commit messages never leave the terminal — lazygit and lf included, forked and patched.",
 		"image": "portrait.webp",
 		"location": {
 			"city": "Warsaw",
@@ -40,7 +40,8 @@
 				"Delivered responsive, multi-orientation layouts across desktop, tablet and mobile.",
 				"Integrated __Rive real-time animations__ behind feature flags and built audio / voice-over systems with regulatory variants.",
 				"Implemented regulatory and compliance features and operator-specific branding for multiple game skins.",
-				"Drove code quality and testing: **led migration** from Enzyme to React Testing Library, set up Jest/SWC, and maintained GitLab CI visual-regression (WDIO) coverage."
+				"Drove code quality and testing: **led migration** from Enzyme to React Testing Library, set up Jest/SWC, and maintained GitLab CI visual-regression (WDIO) coverage.",
+				"**Automated routine Jira, wiki and GitLab tasks** with skills I wrote myself, using Claude, Codex, DeepSeek and Ollama."
 			],
 			"keywords": [
 				"TypeScript",
@@ -218,6 +219,18 @@
 				"WebGL / Canvas",
 				"Rive",
 				"Entity-component-system"
+			]
+		},
+		{
+			"name": "AI & agents",
+			"keywords": [
+				"LLM agents",
+				"Agentic workflows",
+				"Claude",
+				"Codex",
+				"DeepSeek",
+				"Ollama",
+				"OpenClaw"
 			]
 		},
 		{
