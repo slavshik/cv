@@ -61,13 +61,11 @@ jobs:
         steps:
             - uses: actions/checkout@v4
 
-            # Chromium picks the typeface for the PDF and the screenshots, and
-            # this image has no Palatino-class serif — see the comment on
-            # --serif in src/styles.css. `make e2e` installs the same package,
-            # and the baselines only mean something while the two agree.
-            - name: fonts
-              run: apt-get update -qq && apt-get install -y -qq fonts-texgyre
-
+            # No font step. Chromium picks the typeface for the PDF and the
+            # screenshots, and this image already ships every face the stacks
+            # fall back to on Linux — see the comment on --sans in
+            # src/tokens.css. `make e2e` installs nothing either, and the
+            # baselines only mean something while the two agree.
             - run: npm ci
 
             - name: build

@@ -44,18 +44,31 @@ body {
 	--mark: #f3e099;
 
 	/*
-	 * The Linux names at the end of both stacks are not decoration: the PDF is
-	 * rendered by Chromium inside the Playwright container, which has none of
-	 * the faces above them. Without 'TeX Gyre Pagella' — a metric clone of
-	 * Palatino — the published PDF comes out in Liberation Serif, a different
-	 * document from the one on screen; without 'Liberation Mono' the labels
-	 * fall all the way through to a CJK face. Both are installed by the build,
-	 * see .github/workflows/pages.yml and `make e2e`.
+	 * Two faces for two surfaces. The screen gets a humanist sans; the printed
+	 * document gets Charter. Palatino sat here until 2026-09-15 and read as
+	 * decorative rather than legible at the sizes this page uses — which is a
+	 * complaint about the PDF, so the answer is a face per surface rather than
+	 * one compromise for both.
+	 *
+	 * The Linux names at the end of every stack are not decoration: the PDF and
+	 * the screenshots are rendered by Chromium inside the Playwright container,
+	 * which has none of the faces above them. What it does have — checked with
+	 * `fc-list` against mcr.microsoft.com/playwright:v1.62.1-noble — is Bitstream
+	 * Charter, Liberation Sans and Liberation Mono, so all three stacks land on
+	 * a real face and the build installs no fonts at all. Drop one of those
+	 * names and the text falls through silently: to Liberation Serif for the
+	 * body, to a CJK face for the labels.
 	 */
-	--serif:
-		'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', 'TeX Gyre Pagella',
-		Georgia, serif;
+	--sans:
+		-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', 'Liberation Sans',
+		Arial, sans-serif;
+	--serif: Charter, 'Bitstream Charter', 'Source Serif 4', Cambria, Georgia, serif;
 	--mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+
+	/* What the body is set in. Screen: sans. Print: redefined to --serif in
+	   src/styles.css, which is the only place it is overridden — the jobs page
+	   has no print stylesheet and never sees that. */
+	--body: var(--sans);
 
 	--gutter: 8.5rem;
 }

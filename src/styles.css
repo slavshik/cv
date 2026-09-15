@@ -3,9 +3,11 @@
  *
  *  — the page is paper, not an interface. Warm neutral, a serif for the words,
  *    a mono only where something is being labelled rather than read;
- *  — every section is the same two-column row: a narrow gutter for dates or a
- *    label, the body beside it. Repeating one shape is what keeps a document
- *    this long quiet, and it is why the print rules below are short.
+ *  — every section is the same row, with one narrow column of monospace
+ *    beside the body. Where that column holds a label it is a gutter on the
+ *    left; where it holds a date it is floated to the right of the title, so
+ *    the prose keeps the full width. Repeating one shape is what keeps a
+ *    document this long quiet, and it is why the print rules below are short.
  */
 
 @import './tokens.css';
@@ -13,8 +15,8 @@
 body {
 	background: var(--paper);
 	color: var(--ink);
-	font-family: var(--serif);
-	font-size: 17px;
+	font-family: var(--body);
+	font-size: 16px;
 	line-height: 1.6;
 	-webkit-font-smoothing: antialiased;
 	transition:
@@ -112,13 +114,25 @@ a:hover {
 	background: var(--accent-text);
 }
 
+/*
+ * Four facts, one per line, in two columns.
+ *
+ * They used to be a single wrapping run of monospace with dots between them,
+ * and at 0.76rem that is a wall: the eye has nothing to land on and the two
+ * addresses run into each other. A grid gives each fact its own line with its
+ * icon in front of it, and the icons then form a column of their own, which is
+ * most of what makes the block scannable.
+ *
+ * Paper does the opposite — see the print rules, where these go back to one
+ * line because the vertical space is worth more there than the scanning is.
+ */
 .contacts {
 	list-style: none;
 	margin: 1.3rem 0 0;
 	padding: 0;
-	display: flex;
-	flex-wrap: wrap;
-	gap: 0.15rem 0.6rem;
+	display: grid;
+	grid-template-columns: repeat(2, max-content);
+	gap: 0.3rem 2.5rem;
 	font-family: var(--mono);
 	font-size: 0.76rem;
 	color: var(--muted);
@@ -214,11 +228,45 @@ h2 {
 	border-bottom: 1px solid var(--hair);
 }
 
+/*
+ * One row shape, and the left-hand column was doing two different jobs in it.
+ *
+ * A **label** — "Frontend", "Testing" — is the subject of its row, it is short,
+ * and those rows stack into a list you read down the left of. That is a column,
+ * and it keeps one.
+ *
+ * A **date** is the subject of nothing. It sat in the same 8.5rem column, where
+ * it stood empty for the whole height of a forty-millimetre entry and took a
+ * quarter of the line length off every paragraph inside it. So the dated rows
+ * hand the width back and put the date at the right-hand end of the title's own
+ * line: still a column to read down, now on the other edge, and free.
+ *
+ * The float also retires a print workaround. The gutter used to *become* a
+ * float under @media print, because Chromium will not fragment a grid container
+ * across pages and a long entry was pushed whole to the next sheet, leaving a
+ * quarter of the previous one white. These rows are not grids any more, so
+ * there is nothing left to fragment and print has nothing to say about them.
+ */
 .row {
 	display: grid;
 	grid-template-columns: var(--gutter) 1fr;
 	gap: 1.6rem;
 	margin-bottom: 2rem;
+}
+.row.entry,
+.row.brief {
+	display: block;
+}
+.row.entry::after,
+.row.brief::after {
+	content: '';
+	display: table;
+	clear: both;
+}
+.row.entry > .side,
+.row.brief > .side {
+	float: right;
+	margin: 0.3rem 0 0 1.5rem;
 }
 .row.brief {
 	margin-bottom: 1.1rem;
@@ -251,6 +299,41 @@ h2 {
 	font-size: 0.74rem;
 	color: var(--muted);
 	margin: 0.25rem 0 0;
+}
+/*
+ * The employer, in the accent. It is the single thing a reader scans this page
+ * for — "where has this person worked" — and it was set as a muted footnote
+ * under the job title. Only on the work and showcase entries: the same class
+ * carries "Associate's degree · Computer Science" further down, and a degree
+ * is not something to point at.
+ */
+.row.entry .org {
+	color: var(--accent-text);
+}
+
+/*
+ * A rule between entries, with the space that used to separate them split
+ * either side of it. The page is long and almost all prose; without a line
+ * every few centimetres one job runs into the next and there is nothing for
+ * the eye to catch on. It stays on screen — print resets it below, because a
+ * printed CV wants a plain document and a border is one more thing that can
+ * land badly across a page break.
+ */
+.row.entry {
+	margin-bottom: 0;
+	padding-bottom: 1.1rem;
+}
+.row.entry + .row.entry {
+	border-top: 1px solid var(--hair);
+	padding-top: 1.1rem;
+}
+
+/* Skills is the label-and-list section — the one that keeps the column, and
+   `.facts` is the class for that shape rather than for Skills by name; adding
+   another such section needs no new rule. Two rem of air under each row turns
+   seven facts into half a screen; on paper they are squeezed harder still. */
+.facts .row {
+	margin-bottom: 0.6rem;
 }
 
 .body p {
@@ -315,14 +398,110 @@ mark {
 	-webkit-box-decoration-break: clone;
 }
 
+/* --faint is the colour of things that are labels; this is content, and it
+   is the answer to "what did they actually work with". */
 .tech {
 	font-family: var(--mono);
-	font-size: 0.7rem;
+	font-size: 0.72rem;
 	line-height: 1.9;
-	color: var(--faint);
+	color: var(--muted);
 }
 .body .tech {
 	margin-top: 0.9rem;
+}
+
+/* ── Showcase ──────────────────────────────────────────────────────────── */
+
+/*
+ * The gallery under the CV rather than a section inside it.
+ *
+ * Everything above is a document: one shape, one column, no pictures. This is
+ * the footer — what the work looked like — and it is allowed to be a grid of
+ * cards, because that is the only form in which twelve titles are worth the
+ * room. Hence the extra distance above it and the rule across the top: the
+ * reader should see the document end before this begins.
+ *
+ * None of it is printed. The print rules hide the grid whole and keep the
+ * heading and the one line pointing at /cv/work/, which is the whole of what
+ * the showcase does on paper.
+ */
+.showcase {
+	margin-top: 5.5rem;
+	padding-top: 0.5rem;
+}
+
+.cards {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+	gap: 1.6rem 1.2rem;
+	margin-top: 0.4rem;
+}
+
+.card {
+	display: flex;
+	flex-direction: column;
+	text-decoration: none;
+	min-width: 0;
+}
+
+.thumb {
+	display: block;
+	width: 100%;
+	aspect-ratio: 8 / 5;
+	border-radius: 3px;
+	object-fit: cover;
+	/* Drawn before the file arrives, so a card reads as finished while its
+	   picture is still coming and nothing flashes white. */
+	background: var(--hair);
+	transition: opacity 0.2s ease;
+}
+.card:hover .thumb {
+	opacity: 0.86;
+}
+
+.card .name {
+	margin-top: 0.55rem;
+	font-size: 0.94rem;
+	line-height: 1.3;
+}
+.card:hover .name {
+	text-decoration: underline;
+	text-decoration-color: currentColor;
+	text-underline-offset: 0.2em;
+}
+.card .org {
+	margin-top: 0.15rem;
+	font-family: var(--mono);
+	font-size: 0.68rem;
+	line-height: 1.5;
+	color: var(--muted);
+}
+
+/* The link out to the long version. Set like the section labels rather than
+   like the prose, so it reads as an instrument of the page and not as one more
+   project in the list. */
+.more {
+	margin: 1.6rem 0 0;
+	font-family: var(--mono);
+	font-size: 0.72rem;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+.more a {
+	text-decoration: none;
+	color: var(--muted);
+	transition: color 0.2s ease;
+}
+.more a:hover {
+	color: var(--accent-text);
+	text-decoration: underline;
+	text-underline-offset: 0.35em;
+}
+/* The address the showcase link points at. Redundant on a screen that can
+   follow it; the one thing that makes this section usable once it has been
+   printed — see the print rules. */
+.more .at {
+	display: none;
 }
 
 /* ── Theme button ──────────────────────────────────────────────────────── */
@@ -397,7 +576,7 @@ mark {
 
 @media (max-width: 40rem) {
 	body {
-		font-size: 16px;
+		font-size: 15px;
 	}
 	main {
 		padding: 2.5rem 1.4rem 5rem;
@@ -406,9 +585,19 @@ mark {
 		grid-template-columns: 1fr;
 		gap: 0.35rem;
 	}
+	/* Two columns of monospace do not fit beside a name this size. */
+	.contacts {
+		grid-template-columns: 1fr;
+	}
 	.side {
 		margin: 0;
-		order: -1;
+	}
+	/* No room for a date beside a title at this width. It goes back above the
+	   heading, which is where it already is in the markup. */
+	.row.entry > .side,
+	.row.brief > .side {
+		float: none;
+		margin: 0 0 0.2rem;
 	}
 	/*
 	 * The name reaches the right-hand edge here, and the button is pinned over
@@ -469,15 +658,23 @@ mark {
 		--faint: #77716a;
 		--hair: #d0cac0;
 		--accent-text: var(--accent);
+
+		/* The screen is set in a sans and paper is set in Charter. This is the
+		   only place --body is overridden; src/tokens.css holds both stacks and
+		   knows about neither surface. */
+		--body: var(--serif);
 	}
 
 	@page {
 		size: A4;
-		margin: 14mm 15mm 16mm;
+		/* Tighter than it was. Every millimetre here is a millimetre of the
+		   first page, and the first page is the one that has to carry the
+		   header, the summary and the skills at once. */
+		margin: 12mm 14mm 12mm;
 	}
 
 	body {
-		font-size: 10.5pt;
+		font-size: 10pt;
 		line-height: 1.5;
 	}
 
@@ -520,6 +717,16 @@ mark {
 	.icon {
 		display: none;
 	}
+	/* Back to one line. Undoing the grid is not enough on its own — the
+	   separator below is a bare "·" and the space either side of it comes from
+	   the layout, so `display: block` would print "Poland ·slavshik@me.com". A
+	   wrapping flex row supplies it, and it is what this line was before the
+	   screen went to two columns. */
+	.contacts {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0 0.5rem;
+	}
 	.contacts li,
 	.contacts a {
 		display: inline;
@@ -560,55 +767,81 @@ mark {
 	}
 
 	.head h1 {
-		font-size: 24pt;
+		font-size: 20pt;
 	}
 	.head .label {
-		font-size: 11pt;
-	}
-	.summary {
-		margin-top: 1.4rem;
 		font-size: 10.5pt;
 	}
+	/* On screen these two have room to sit apart. On paper the whole header is
+	   competing with the rest of the first page for the same column. */
+	.head .status {
+		margin-top: 0.5rem;
+	}
+	.contacts {
+		margin-top: 0.6rem;
+	}
+	.summary {
+		margin-top: 1rem;
+		font-size: 10pt;
+	}
 	.summary + .summary {
-		font-size: 9.5pt;
+		font-size: 9pt;
 	}
 
 	section {
-		margin-top: 1.6rem;
+		margin-top: 1.1rem;
 	}
 	h2 {
-		margin-bottom: 0.9rem;
+		margin-bottom: 0.6rem;
 		/* A section heading at the foot of a page with its first entry
 		   overleaf is the classic way a printed CV looks broken. */
 		break-after: avoid;
 	}
 
 	/*
-	 * The gutter is a float here rather than a grid column. Chromium will not
-	 * fragment a grid container across pages: a long entry would be moved to
-	 * the next sheet whole, leaving a quarter of the previous one white. A
-	 * floated block splits where it has to, and the date stays with the first
-	 * half — which is where it belongs anyway.
+	 * Nothing here about the shape of an entry any more. The dated rows are
+	 * already blocks with a floated date on screen, and a float splits across a
+	 * page where it has to — which is the whole reason this block used to undo
+	 * the grid by hand. The fact rows stay grids and never need to split: one
+	 * line each, and they carry break-inside below.
 	 */
 	.row {
-		display: block;
 		margin-bottom: 1rem;
 	}
-	.row::after {
-		content: '';
-		display: table;
-		clear: both;
-	}
-	.side {
-		float: left;
-		width: var(--gutter);
-		margin: 0.25rem 0 0;
-	}
-	.body {
-		margin-left: calc(var(--gutter) + 1.6rem);
+	.row.entry > .side,
+	.row.brief > .side {
+		margin-top: 0.15rem;
 	}
 	.row.brief {
 		margin-bottom: 0.5rem;
+		break-inside: avoid;
+	}
+	/* The rule between entries is a screen affordance, like the icons and the
+	   marks. On paper it is one more thing that can land across a break. */
+	.row.entry {
+		padding: 0;
+	}
+	.row.entry + .row.entry {
+		border-top: 0;
+	}
+
+	/*
+	 * Skills, which decides on its own whether the first page is one a reader
+	 * can act on or one they have to turn over.
+	 *
+	 * Skills used to cost about 87mm of a ~267mm column, and 29mm of that was
+	 * the 1rem gap under each of the seven rows and nothing else. So the gap
+	 * goes. The gutter narrows rather than disappears — the label column is the
+	 * one shape every section on this page shares — but it does not need 8.5rem
+	 * to hold the word "Testing", and the width it hands back is what keeps
+	 * "Backend & infrastructure" on one line instead of two.
+	 *
+	 * Overriding --gutter on the row is enough — the grid template reads it —
+	 * so there is no second place to keep in step.
+	 */
+	.facts .row {
+		--gutter: 6.5rem;
+		margin-bottom: 0.15rem;
 		break-inside: avoid;
 	}
 	/*
@@ -628,19 +861,81 @@ mark {
 		widows: 2;
 	}
 
+	/*
+	 * The showcase is the last section, so it is on the last page by
+	 * construction, and it is left to flow there.
+	 *
+	 * Both stronger rules were tried and both waste a sheet. `break-before:
+	 * page` moves it somewhere it already was. `break-inside: avoid` is fine
+	 * while the section is short and actively harmful once it is not: at twelve
+	 * entries it is taller than a page, so the whole block jumped forward, left
+	 * the previous sheet three-quarters white, and pushed the closing line onto
+	 * a page of its own.
+	 *
+	 * So the section flows and the entries are what is held together — a
+	 * project split across two sheets is the only break here that actually
+	 * reads as broken.
+	 */
+	/*
+	 * The showcase is a screen section. Not one project reaches paper — the
+	 * fourth of this repository's print/screen splits, after the phone number,
+	 * the marks and the portrait, and the same argument as all three: the PDF
+	 * is the artefact that gets forwarded and parsed, and it stays a document.
+	 * Twelve titles and their studios is a directory, and it was costing a
+	 * sheet and a half to say what one line says.
+	 *
+	 * That one line stays. It is not a project — it is the address of the page
+	 * that has them, and without it a reader holding the PDF has no way to know
+	 * the portfolio is there at all.
+	 */
+	.cards {
+		display: none;
+	}
+	/* The screen pushes this block well clear of the document and rules a line
+	   over it; on paper it is one more section and must keep exactly the
+	   section spacing, or the last page reflows. It is settled — leave it. */
+	.showcase {
+		margin-top: 1.1rem;
+		padding-top: 0;
+	}
+	.more {
+		/* The label is set like a section heading on screen. On paper it has an
+		   address after it, and an uppercased, letter-spaced URL is a thing to
+		   be typed back in wrongly. Same move .tail makes below. */
+		letter-spacing: 0;
+		text-transform: none;
+	}
+	/*
+	 * Every link in this section is a dead end on paper, and exactly one
+	 * address is printed to answer that: the one that leads to all of them.
+	 *
+	 * Printing each project's own URL underneath it was tried, and it is the
+	 * wrong trade twice over. Nobody types
+	 * games.evolution.com/live-casino/live-craps-and-dice/monopoly-roll-em off
+	 * a sheet of paper, and twelve of those turned a section into a directory
+	 * and cost a fifth page. The work page carries them all, one click from
+	 * here, and on screen every name is already a link.
+	 */
+	.more .at {
+		display: inline;
+	}
+	.more .at::before {
+		content: ' — ';
+	}
+
 	.body h3 {
-		font-size: 11pt;
+		font-size: 10.5pt;
 	}
 	.body p,
 	.highlights {
-		font-size: 9.8pt;
+		font-size: 9.4pt;
 	}
 	.side,
 	.body .org {
-		font-size: 8.2pt;
+		font-size: 8pt;
 	}
 	.tech {
-		font-size: 8pt;
+		font-size: 7.8pt;
 		line-height: 1.7;
 	}
 }

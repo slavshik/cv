@@ -20,9 +20,13 @@ So: their schema, our renderer.
 - `content/resume.json` validates against the published schema, and a unit test
   keeps it that way — which is what makes the "other tools can read this"
   claim true rather than decorative.
-- One extension to the standard, `meta.openToWork`, because the schema has no
-  field for "currently looking". The schema permits additional properties, so
-  this costs nothing.
+- Two extensions to the standard, both under `meta` — which is where the
+  schema itself says "any other tooling configuration" belongs. `openToWork`,
+  because there is no field for "currently looking"; and `pdfRole`, the role the
+  downloadable file is named after, so that what lands in a recruiter's
+  downloads folder is `Alexander-Slavschik-Senior-Frontend-CV.pdf` and not a
+  second anonymous `CV.pdf`. The schema permits additional properties, so
+  neither costs the file its conformance and the unit test still validates it.
 - `src/resume.ts` re-states the shape as TypeScript types and checks it at build
   time. The published schema is checked in tests; the build needs its own check
   because a valid-but-empty field would still reach the page.

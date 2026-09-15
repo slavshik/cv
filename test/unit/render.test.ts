@@ -14,6 +14,15 @@ const withoutImage = (r: Resume): Resume => {
 	return { ...r, basics };
 };
 
+/** Every picture off: the portrait and the showcase thumbnails both. The
+    escaping test below asserts that no `<img` survives anywhere, and that is
+    only a check on the escaping while nothing else on the page draws one. */
+const withoutPictures = (r: Resume): Resume => {
+	const bare = withoutImage(r);
+	delete bare.projects;
+	return bare;
+};
+
 describe('renderResume', () => {
 	it('puts the name and the headline in the head', () => {
 		expect(html).toContain('<h1>Alexander Slavschik</h1>');
@@ -26,18 +35,36 @@ describe('renderResume', () => {
 		expect(renderResume(quiet)).not.toContain('Open to work');
 	});
 
-	/* The link and the file the CI produces are both derived from the name on
-	   the CV. If that ever stops being true, the download button 404s. */
+	/* The name on the CV, the role it is being sent out for, and what the
+	   document is. scripts/pdf.mjs reads the filename off this attribute rather
+	   than deriving it again, so this assertion is what keeps the download
+	   button from 404ing. */
 	it('links the download button at the file the build writes', () => {
-		expect(pdfFileName(resume)).toBe('Alexander-Slavschik-CV.pdf');
-		expect(html).toContain('href="Alexander-Slavschik-CV.pdf" download');
+		expect(pdfFileName(resume)).toBe('Alexander-Slavschik-Senior-Frontend-CV.pdf');
+		expect(html).toContain(
+			'href="Alexander-Slavschik-Senior-Frontend-CV.pdf" ' +
+				'download="Alexander-Slavschik-Senior-Frontend-CV.pdf"',
+		);
+	});
+
+	/* meta.pdfRole is an extension to the schema and therefore optional. A file
+	   without it still has to get a name. */
+	it('falls back to the bare name when no role is set', () => {
+		const meta = { ...resume.meta };
+		delete meta.pdfRole;
+		expect(pdfFileName({ ...resume, meta })).toBe('Alexander-Slavschik-CV.pdf');
 	});
 
 	/* The CDN caches the PDF for four hours at a fixed path, so a new build has
-	   to ask for it under a new URL or it hands out the previous document. */
+	   to ask for it under a new URL or it hands out the previous document. The
+	   download attribute is deliberately not stamped: it names the file, not
+	   the request. */
 	it('stamps the download link when given a version', () => {
 		const stamped = renderResume(resume, { pdfVersion: 'a1b2c3d4' });
-		expect(stamped).toContain('href="Alexander-Slavschik-CV.pdf?v=a1b2c3d4" download');
+		expect(stamped).toContain(
+			'href="Alexander-Slavschik-Senior-Frontend-CV.pdf?v=a1b2c3d4" ' +
+				'download="Alexander-Slavschik-Senior-Frontend-CV.pdf"',
+		);
 	});
 
 	it('dates an entry from its own span', () => {
@@ -66,7 +93,7 @@ describe('renderResume', () => {
 		   would otherwise make it pass for the wrong reason. */
 		const withProse = (summary: string): string =>
 			renderResume({
-				...withoutImage(resume),
+				...withoutPictures(resume),
 				work: [{ name: 'Somewhere', position: 'Engineer', startDate: '2026-01', summary }],
 			});
 
@@ -152,20 +179,79 @@ describe('renderResume', () => {
 		});
 	});
 
-	/* The data currently has no `projects`, and the section has to disappear
-	   with it rather than leave an empty heading behind. */
-	describe('the Projects section', () => {
+	/* `projects` is optional, and the section has to disappear with it rather
+	   than leave an empty heading and a link to an empty page behind. */
+	describe('the Showcase section', () => {
+		const without = (r: Resume): Resume => {
+			const bare = { ...r };
+			delete bare.projects;
+			return bare;
+		};
+
 		it('is absent while the data has no projects', () => {
-			expect(html).not.toContain('Projects');
+			expect(renderResume(without(resume))).not.toContain('Showcase');
 		});
 
-		it('comes back if projects are ever put back', () => {
-			const withProjects = renderResume({
+		/* A card, not a row: the whole thing is the link, so the picture is
+		   clickable too. Four slot games from one studio would otherwise carry
+		   four copies of the same sentence, so the kind and the studio share one
+		   mono line. */
+		it('makes the whole card a link and names what the thing is', () => {
+			const out = renderResume({
 				...resume,
-				projects: [{ name: 'Chain Cube 3D', startDate: '2020-09' }],
+				projects: [
+					{
+						name: 'Chain Cube 3D',
+						type: 'Puzzle game',
+						entity: 'Diesel Puppet',
+						url: 'https://example.com/chain-cube',
+						image: 'chain-cube.jpg',
+					},
+				],
 			});
-			expect(withProjects).toContain('Projects');
-			expect(withProjects).toContain('Chain Cube 3D');
+			expect(out).toContain('Showcase');
+			expect(out).toContain(
+				'<a class="card" href="https://example.com/chain-cube" rel="noopener">',
+			);
+			expect(out).toContain('<span class="name">Chain Cube 3D</span>');
+			expect(out).toContain('<span class="org">Puzzle game · Diesel Puppet</span>');
+			expect(out).toContain('href="work/"');
+			// The address is spelled out for the printed copy, where the link
+			// cannot be followed.
+			expect(out).toContain('slavshik.me/cv/work');
+		});
+
+		/* The picture is named relative to /cv/work/, which is the page that
+		   shows the showcase in full. From the CV it needs the directory. */
+		it('points a thumbnail at the work directory', () => {
+			const out = renderResume({ ...resume, projects: [{ name: 'X', image: 'x.jpg' }] });
+			expect(out).toContain('<img class="thumb" src="work/x.jpg" alt=""');
+			expect(out).toContain('width="224" height="140"');
+		});
+
+		/*
+		 * The footer is a gallery, so a project with no picture is not in it. It
+		 * is not hidden either — /cv/work/ shows every one, and the link under
+		 * the grid is how a reader gets there.
+		 */
+		it('shows only the projects that have a picture', () => {
+			const out = renderResume({
+				...resume,
+				projects: [{ name: 'Pictured', image: 'x.jpg' }, { name: 'Bare' }],
+			});
+			expect(out).toContain('<span class="name">Pictured</span>');
+			expect(out).not.toContain('Bare');
+			// And the way to the rest is still there.
+			expect(out).toContain('href="work/"');
+		});
+
+		it('leaves a project without a URL unlinked', () => {
+			const out = renderResume({
+				...resume,
+				projects: [{ name: 'Something unpublished', image: 'x.jpg' }],
+			});
+			expect(out).toContain('<div class="card">');
+			expect(out).toContain('<span class="name">Something unpublished</span>');
 		});
 	});
 });

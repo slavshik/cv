@@ -6,7 +6,7 @@
 		"label": "Senior Frontend Engineer · Games · Agentic Workflows",
 		"email": "slavshik@me.com",
 		"url": "https://slavshik.me",
-		"summary": "I have been building for the browser since 2007, most of it games. **Real-money betting games over live video** at Evolution, **HTML5 instant games** at Gismart and FRVR, and, at Diesel Puppet, the shared engine, backend and release pipeline that put one codebase on 7+ web platforms. The same problems keep coming back — interactive UX with real physics in it, rendering that has to survive a cheap phone, and a pipeline that lets a small team ship often. TypeScript throughout; the engine changes with the job. I use **agentic workflows**, mainly in personal projects, and brought them into routine Jira, wiki and GitLab tasks at Evolution with skills I wrote myself.\n\nLately my own time goes into **LLM agents and self-hosted infrastructure**: a home cloud of 6 Docker stacks with an __OpenClaw__ agent on Telegram in front of it, taking a request in text or a voice note, calling out across half a dozen services and filing the result away. Go and Python rather than TypeScript, run for real rather than demonstrated. Underneath all of it a dotfiles repo kept since 2022: Neovim in Lua, tmux, and enough glue that Jira, GitLab and commit messages never leave the terminal — lazygit and lf included, forked and patched.",
+		"summary": "I have been building for the browser since 2007, most of it games. **Real-money betting games over live video** at Evolution, **HTML5 instant games** at Gismart and FRVR, and, at Diesel Puppet, the shared engine, backend and release pipeline that put one codebase on 7+ web platforms. My work spans interactive interfaces, physics-based gameplay, performance optimization for low-end devices, and shared tooling that helps small teams release regularly. I work primarily in TypeScript, choosing frameworks and engines to suit each project. I also use AI agents in my personal projects and introduced custom skills at Evolution to help with everyday Jira, wiki, and GitLab tasks.",
 		"image": "portrait.webp",
 		"location": {
 			"city": "Warsaw",
@@ -28,12 +28,21 @@
 	},
 	"work": [
 		{
+			"name": "BrainRocket (Elagames)",
+			"position": "Senior Game Developer",
+			"location": "Valencia, Spain",
+			"startDate": "2025-09",
+			"endDate": "2026-07",
+			"keywords": ["TypeScript", "Cocos Creator 2", "Spine"],
+			"summary": "**Built slot games with rich graphics** on __Cocos Creator 2__."
+		},
+		{
 			"name": "Evolution",
 			"position": "Frontend Engineer",
 			"location": "Warsaw, Poland",
 			"startDate": "2023-02",
 			"endDate": "2026-05",
-			"summary": "Building real-money live casino and game-show titles for a global iGaming platform. Took multiple game clients **from empty repository to production** and maintained a portfolio of live titles played by users worldwide.",
+			"summary": "**Took multiple game clients from empty repository to production** — real-money live casino and game-show titles for a global iGaming platform — and maintained a portfolio of live titles played by users worldwide.",
 			"highlights": [
 				"**Built new game clients end-to-end** — project scaffolding, MobX stores, WebSocket transport and message handlers, betting grid, drag-and-drop chips, flying-chip animations, statistics and help screens.",
 				"**Engineered complex interactive betting UX**: drag-and-drop chip placement with distance/scaling math, bet and table-limit validation, real-time bet statistics and winner lists.",
@@ -191,6 +200,119 @@
 			"summary": "GUI and interface animations."
 		}
 	],
+	"projects": [
+		{
+			"name": "Flame Fruits Frenzy",
+			"type": "Slot game on Cocos Creator 2",
+			"entity": "BrainRocket (Elagames)",
+			"url": "https://expo.elaapi.com/demo/ela_flame_fruits_frenzy_hw",
+			"image": "flame-fruits-frenzy.jpg"
+		},
+		{
+			"name": "Golden Bunny",
+			"type": "Slot game on Cocos Creator 2",
+			"entity": "BrainRocket (Elagames)",
+			"url": "https://expo.elaapi.com/demo/ela_golden_bunny",
+			"image": "golden-bunny.jpg"
+		},
+		{
+			"name": "Golden Till",
+			"type": "Slot game on Cocos Creator 2",
+			"entity": "BrainRocket (Elagames)",
+			"url": "https://expo.elaapi.com/demo/ela_golden_till",
+			"image": "golden-till.jpg"
+		},
+		{
+			"name": "Tea Party of Fortune",
+			"type": "Slot game on Cocos Creator 2",
+			"entity": "BrainRocket (Elagames)",
+			"url": "https://expo.elaapi.com/demo/ela_tea_party_of_fortune",
+			"image": "tea-party-of-fortune.jpg"
+		},
+		{
+			"name": "Red Door Roulette",
+			"type": "Live casino title",
+			"entity": "Evolution",
+			"url": "https://games.evolution.com/live-casino/live-roulette/red-door-roulette/",
+			"roles": ["Game team"],
+			"image": "red-door-roulette.jpg"
+		},
+		{
+			"name": "Lightning Sic Bo",
+			"type": "Live casino title",
+			"entity": "Evolution",
+			"url": "https://games.evolution.com/live-casino/live-baccarat/lightning-sic-bo/",
+			"roles": ["Game team"]
+		},
+		{
+			"name": "Marble Race",
+			"type": "Live casino title",
+			"entity": "Evolution",
+			"url": "https://games.evolution.com/live-casino/game-shows/marble-race/",
+			"roles": ["Game team"]
+		},
+		{
+			"name": "Crazy Time",
+			"type": "Live casino title",
+			"entity": "Evolution",
+			"url": "https://games.evolution.com/live-casino/game-shows/crazy-time/",
+			"roles": ["Game team"],
+			"image": "crazy-time.jpg"
+		},
+		{
+			"name": "MONOPOLY Roll 'em",
+			"type": "Live casino title",
+			"entity": "Evolution",
+			"url": "https://games.evolution.com/live-casino/live-craps-and-dice/monopoly-roll-em/",
+			"roles": ["Game team"],
+			"image": "monopoly-roll-em.jpg"
+		},
+		{
+			"name": "Chain Cube 3D",
+			"type": "3D physics puzzle",
+			"entity": "Diesel Puppet",
+			"image": "chain-cube.jpg"
+		},
+		{
+			"name": "Basketball FRVR",
+			"type": "HTML5 sports game",
+			"entity": "FRVR",
+			"roles": ["Long-term goals and progression"],
+			"url": "https://basketball.frvr.com",
+			"image": "basketball-frvr.jpg"
+		},
+		{
+			"name": "Field Goal FRVR",
+			"type": "HTML5 sports game",
+			"entity": "FRVR",
+			"url": "https://fieldgoal.frvr.com/",
+			"image": "field-goal-frvr.jpg"
+		},
+		{
+			"name": "Color Galaxy",
+			"type": "3D io game",
+			"entity": "Gismart (Flime)",
+			"url": "https://www.youtube.com/watch?v=j92y8b9mPBQ",
+			"description": "**Built the core gameplay** for a __3D io game__ in the vein of paper.io, released on Facebook Instant. The picture and the link are both from the later Snapchat release, which was reworked after I had left.",
+			"image": "color-galaxy.jpg"
+		},
+		{
+			"name": "Legendary Dragons",
+			"type": "Slot game",
+			"entity": "Skywind Group",
+			"url": "http://gc.gaming.skywindgroup.com/legendarydragons/latest/index.html",
+			"roles": ["Game team"],
+			"image": "legendary-dragons.jpg"
+		},
+		{
+			"name": "Blackjack",
+			"type": "Card game",
+			"entity": "Skywind Group",
+			"url": "http://gc.gaming.skywindgroup.com/blackjack/latest/index.html",
+			"roles": ["Game team"],
+			"image": "blackjack.jpg"
+		}
+	],
 	"skills": [
 		{
 			"name": "Core",
@@ -273,22 +395,9 @@
 			"endDate": "2007"
 		}
 	],
-	"languages": [
-		{
-			"language": "English",
-			"fluency": "Professional working"
-		},
-		{
-			"language": "Russian",
-			"fluency": "Native or bilingual"
-		},
-		{
-			"language": "Polish",
-			"fluency": "Elementary"
-		}
-	],
 	"meta": {
 		"canonical": "https://slavshik.me/cv/",
+		"pdfRole": "Senior Frontend",
 		"version": "v1.0.0",
 		"openToWork": true
 	}

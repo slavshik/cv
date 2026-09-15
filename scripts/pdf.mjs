@@ -90,8 +90,15 @@ try {
 		console.warn('CV_PHONE is not set — the PDF will carry no phone number');
 	}
 
-	const name = await page.evaluate(() => document.querySelector('h1')?.textContent ?? 'CV');
-	const file = join(DIST, `${name.trim().replace(/\s+/g, '-')}-CV.pdf`);
+	// The page already states the name of the file it offers, in the download
+	// attribute of its own link — see pdfFileName in src/render.ts. Working it
+	// out a second time here is exactly how the link and the artefact come to
+	// disagree, and a download button that 404s is a silent failure.
+	const name = await page.evaluate(
+		() => document.querySelector('.download')?.getAttribute('download') ?? '',
+	);
+	if (!name.endsWith('.pdf')) throw new Error(`the page names no PDF to write (got "${name}")`);
+	const file = join(DIST, name);
 
 	await page.emulateMedia({ media: 'print' });
 	await page.pdf({

@@ -5,11 +5,11 @@
  *
  * Every section is the same two-column row: a narrow gutter on the left (dates,
  * or a label) and the body on the right. One shape for experience, skills,
- * education and languages keeps the page quiet and makes the
- * print stylesheet a handful of lines instead of a per-section special case.
+ * education and the showcase keeps the page quiet and makes the print
+ * stylesheet a handful of lines instead of a per-section special case.
  */
 
-import { escape } from './html.ts';
+import { escape, prose } from './html.ts';
 import type { Education, Language, Project, Resume, Skill, Work } from './resume.ts';
 
 /* Positions that started before this are listed as one line each, under
@@ -22,27 +22,6 @@ const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
 /* Only the countries this CV actually names. A lookup table beats pulling in
    Intl.DisplayNames for one string. */
 const COUNTRIES: Record<string, string> = { PL: 'Poland' };
-
-/*
- * Prose, with the three marks of progressive summarisation — the layer you read
- * when you are not going to read the whole thing.
- *
- *   **…**  what was done and owned      → strong
- *   __…__  the technical substance      → underlined
- *   ==…==  how much of it there was     → marked
- *
- * They are levels of meaning, not three ways of shouting: bold is the action,
- * the underline is the architecture, the mark is the number. On paper all three
- * are switched off — see the print rules in src/styles.css.
- *
- * Escaping runs first and the markers survive it untouched, so no text in the
- * data file can open a tag of its own.
- */
-const prose = (text: string): string =>
-	escape(text)
-		.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-		.replace(/__(.+?)__/g, '<span class="term">$1</span>')
-		.replace(/==(.+?)==/g, '<mark>$1</mark>');
 
 /** `2025-09` → `Sep 2025`; `2012` → `2012`. */
 const monthYear = (d: string): string => {
@@ -73,14 +52,17 @@ const bareHost = (url: string): string =>
 const joined = (parts: (string | undefined)[]): string =>
 	parts.filter((p): p is string => !!p).join(' · ');
 
+/* The side is omitted when it is empty rather than left as a bare tag to
+   float: only the dated rows can be missing one, and they are blocks, so
+   nothing shifts. A .facts row always has its label. */
 const row = (side: string, body: string, cls = ''): string =>
 	`<div class="row${cls ? ` ${cls}` : ''}">` +
-	`<p class="side">${side}</p>` +
+	(side ? `<p class="side">${side}</p>` : '') +
 	`<div class="body">${body}</div>` +
 	`</div>`;
 
-const section = (title: string, body: string): string =>
-	`<section><h2>${escape(title)}</h2>${body}</section>`;
+const section = (title: string, body: string, cls = ''): string =>
+	`<section${cls ? ` class="${cls}"` : ''}><h2>${escape(title)}</h2>${body}</section>`;
 
 const paragraph = (text: string | undefined): string => (text ? `<p>${prose(text)}</p>` : '');
 
@@ -124,12 +106,95 @@ const briefRow = (job: Work): string =>
 const skillRow = (skill: Skill): string =>
 	row(escape(skill.name), `<p>${skill.keywords.map(escape).join(', ')}</p>`);
 
-const projectRow = (project: Project): string =>
-	row(
-		escape(yearSpan(project.startDate, project.endDate)),
-		`<h3>${escape(project.name)}</h3>${paragraph(project.description)}`,
-		'brief',
+/*
+ * A showcase entry: the thing that was built, rather than the employer it was
+ * built at. The name is a link when there is somewhere to send the reader and
+ * plain text when there is not — a project with no live URL is still worth
+ * naming, and half the links in the 2021 CV are dead (see content/TODO.md).
+ *
+ * A full 'entry' row rather than a 'brief' one: these carry a stack line, and
+ * 'brief' mutes everything in the body down to the size the Earlier section
+ * uses. The date is optional here alone — a personal project that is still
+ * running often has no start worth printing.
+ */
+/*
+ * The picture on a card. The files live in public/work/ and are named relative
+ * to /cv/work/, which is the page that shows them in full — from the CV they
+ * need the directory in front. Relative either way, so neither page has to know
+ * where the site is deployed.
+ *
+ * Only entries that have one reach this footer — see showcase() — so there is
+ * no empty-frame case to handle here. width/height reserve the box so the
+ * gallery cannot reflow as the files land, and the alt is empty because the
+ * name is the next element along; docs/adr/0005 makes the same argument about
+ * the portrait.
+ */
+const thumb = (src: string): string =>
+	`<img class="thumb" src="${escape(WORK + src)}" alt="" width="224" height="140" ` +
+	`loading="lazy" decoding="async">`;
+
+/*
+ * A showcase entry, as a card in the footer rather than a row in the document.
+ *
+ * The sections above it are the CV; this is the gallery underneath, and it is
+ * shaped like one — a picture, a name, and the one mono line saying what it is
+ * and whose. Everything the row form carried and a card has no room for (the
+ * dates, the highlights, the description) lives on /cv/work/, which is where
+ * the link at the foot of the block goes.
+ *
+ * The whole card is the link when there is a URL, so the picture is clickable
+ * too. Nothing here reaches paper: the print rules hide the grid entire.
+ */
+const projectCard = (project: Pictured): string => {
+	const inner =
+		thumb(project.image) +
+		`<span class="name">${escape(project.name)}</span>` +
+		((about) => (about ? `<span class="org">${escape(about)}</span>` : ''))(
+			joined([project.type, project.entity, project.roles?.join(', ')]),
+		);
+	return project.url
+		? `<a class="card" href="${escape(project.url)}" rel="noopener">${inner}</a>`
+		: `<div class="card">${inner}</div>`;
+};
+
+/** Where the long version of the showcase lives. Relative, like the PDF
+    link, so it resolves under any base the site is served from. */
+const WORK = 'work/';
+
+/*
+ * The showcase, and the way to the longer version of it.
+ *
+ * One `projects` array feeds both this section and the page at /cv/work/ — see
+ * docs/adr/0007. What is here is the CV's share: a name, a line, a stack. The
+ * long form is on the other page, and this link is how a reader gets there.
+ *
+ * The address is spelled out inside the link and hidden on screen, because on
+ * paper "All projects" is a dead end. The renderer still does not know where
+ * the site is deployed; it reads that off meta.canonical, the one field that
+ * does.
+ */
+/** A project with a picture. The footer gallery takes nothing else. */
+type Pictured = Project & { image: string };
+
+const showcase = (projects: Project[], canonical: string | undefined): string => {
+	/*
+	 * Only the entries that have a picture. This is a gallery: a card with an
+	 * empty frame is a placeholder, and a row of placeholders makes the page
+	 * look unfinished rather than honest. The ones without are not hidden —
+	 * they are on /cv/work/ in full, which is where the link underneath goes,
+	 * and that page is built to show a title with no picture properly.
+	 */
+	const shown = projects.filter((p): p is Pictured => p.image !== undefined);
+
+	return section(
+		'Showcase',
+		`<div class="cards">${shown.map(projectCard).join('')}</div>` +
+			`<p class="more"><a href="${WORK}">All projects` +
+			(canonical ? `<span class="at">${escape(bareHost(canonical + WORK))}</span>` : '') +
+			`</a></p>`,
+		'showcase',
 	);
+};
 
 const educationRow = (school: Education): string =>
 	row(
@@ -212,15 +277,26 @@ const head = (resume: Resume, pdfVersion: string): string => {
 		`</div>` +
 		`<ul class="contacts">${contacts}</ul>` +
 		portrait(basics.image) +
-		`<a class="download" href="${escape(pdfHref(resume, pdfVersion))}" download aria-label="Download PDF">${icon('download')}<span>Download PDF</span></a>` +
+		`<a class="download" href="${escape(pdfHref(resume, pdfVersion))}" download="${escape(pdfFileName(resume))}" aria-label="Download PDF">${icon('download')}<span>Download PDF</span></a>` +
 		`</header>`
 	);
 };
 
-/** The name of the downloadable file, derived from the name on the CV so the
-    link and the artefact cannot drift apart. Used by scripts/pdf.mjs too. */
+/*
+ * The name of the downloadable file: the person, the role they are applying
+ * for, and what the document is — "Alexander-Slavschik-Senior-Frontend-CV.pdf".
+ * A file called CV.pdf in a recruiter's downloads folder is anonymous, and the
+ * role is what tells them which of the three CVs in that folder this is.
+ *
+ * Every part comes out of the data, and the anchor in the header carries the
+ * result in its `download` attribute. scripts/pdf.mjs reads it from there
+ * rather than working it out again — the link and the artefact used to be
+ * derived separately, which is exactly how they would come to disagree.
+ */
 export function pdfFileName(resume: Resume): string {
-	return `${resume.basics.name.replace(/\s+/g, '-')}-CV.pdf`;
+	const slug = (part: string): string => part.trim().replace(/\s+/g, '-');
+	const role = resume.meta?.pdfRole;
+	return [slug(resume.basics.name), ...(role ? [slug(role)] : []), 'CV.pdf'].join('-');
 }
 
 /*
@@ -253,15 +329,24 @@ export function renderResume(resume: Resume, options: RenderOptions = {}): strin
 		`<main>` +
 		head(resume, options.pdfVersion ?? '') +
 		summary(resume.basics.summary) +
-		// Skills before the history on purpose: it is the section a reader scans
-		// first to decide whether the history is worth reading, and the section a
-		// keyword filter looks for. Everything below it is chronological.
-		section('Skills', resume.skills.map(skillRow).join('')) +
+		// Skills before the history on purpose: it is what a reader scans to
+		// decide whether the history is worth reading, and what a keyword filter
+		// looks for. It also has to be on the first sheet of the PDF, which is
+		// what 'facts' is for — that class is how the print rules find the
+		// label-and-list sections and squeeze them. Languages sat here too until
+		// 2026-09-15 and is gone from the data; the renderer still draws it if
+		// it comes back. Everything below is chronological.
+		section('Skills', resume.skills.map(skillRow).join(''), 'facts') +
+		(resume.languages
+			? section('Languages', resume.languages.map(languageRow).join(''), 'facts')
+			: '') +
 		section('Experience', detailed.map(jobRow).join('')) +
 		(earlier.length > 0 ? section('Earlier', earlier.map(briefRow).join('')) : '') +
-		(resume.projects ? section('Projects', resume.projects.map(projectRow).join('')) : '') +
 		section('Education', resume.education.map(educationRow).join('')) +
-		section('Languages', resume.languages.map(languageRow).join('')) +
+		// Last, and on paper its own sheet — see the print rules. The reader has
+		// to get through the history first; this is what they look at once they
+		// have decided to be interested.
+		(resume.projects ? showcase(resume.projects, resume.meta?.canonical) : '') +
 		tail(resume.basics.url) +
 		`</main>`
 	);

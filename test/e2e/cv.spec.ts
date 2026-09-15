@@ -62,6 +62,32 @@ test('the portrait does not reach print', async ({ page }) => {
 	await expect(page.locator('.portrait')).toBeHidden();
 });
 
+/*
+ * The fourth print/screen split, and the newest — docs/adr/0007. Twelve titles
+ * and their studios belong on the screen and on /cv/work/; the PDF is the
+ * artefact that gets forwarded, and it stays a document. One line survives, and
+ * it is the address of the page that has them.
+ */
+test('no project reaches print', async ({ page }) => {
+	await page.goto('/cv/?aqa=1');
+	const cards = page.locator('.showcase .card');
+	await expect(cards.first()).toBeVisible();
+
+	await page.emulateMedia({ media: 'print' });
+	await expect(page.locator('.showcase .cards')).toBeHidden();
+	for (const card of await cards.all()) await expect(card).toBeHidden();
+	// The pictures least of all: the PDF is a plain document — docs/adr/0005.
+	// Not every card has one, so this asserts that whatever is there is hidden
+	// rather than counting them.
+	const shots = page.locator('.showcase img');
+	expect(await shots.count()).toBeGreaterThan(0);
+	for (const img of await shots.all()) await expect(img).toBeHidden();
+	// The way to them, however, has to survive — with its address spelled out,
+	// because a link is a dead end on paper.
+	await expect(page.locator('.showcase .more')).toBeVisible();
+	await expect(page.locator('.showcase .more .at')).toBeVisible();
+});
+
 test.describe('without javascript', () => {
 	test.use({ javaScriptEnabled: false });
 

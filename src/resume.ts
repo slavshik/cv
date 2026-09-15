@@ -2,9 +2,12 @@
  * The shape of content/resume.json.
  *
  * The file follows JSON Resume v1.0.0 — a published standard, so the data
- * outlives this particular page and other tools can read it. There is exactly
- * one extension to the standard, `meta.openToWork`, because the schema has no
- * field for "currently looking" and the page needs one.
+ * outlives this particular page and other tools can read it. There are two
+ * extensions to the standard, both under `meta`, which is where the schema
+ * itself puts "any other tooling configuration": `openToWork`, because the
+ * schema has no field for "currently looking", and `pdfRole`, the role the
+ * downloadable file is named after. `additionalProperties` is true throughout,
+ * so neither costs the file its conformance — see docs/adr/0002.
  *
  * `parseResume` is deliberately narrow: it checks the shape the renderer
  * actually relies on and nothing more. Conformance to the full published schema
@@ -49,11 +52,36 @@ export interface Work {
 	keywords?: string[];
 }
 
+/* Showcase entries — the things that were built, as opposed to the places
+   they were built at. Every field but the name is optional, including the
+   dates: a personal project that is still running often has no start worth
+   printing, and one that is no longer online still has a name. Each of these
+   is a standard JSON Resume field; the showcase needed no extension. */
 export interface Project {
 	name: string;
-	startDate: string;
+	startDate?: string;
 	endDate?: string;
 	description?: string;
+	url?: string;
+	/* The company or the site it belongs to, when that is not obvious. */
+	entity?: string;
+	/* What kind of thing it is — "Slot game", "Engine", "Agent". It sits beside
+	   the entity on one mono line, and it is what stops four games from the
+	   same studio needing four copies of the same sentence under them. */
+	type?: string;
+	/* What he was on it. Only where a source says so — a studio title with no
+	   role beside it is a gap, not a claim of having built it alone. */
+	roles?: string[];
+	/* A thumbnail, shown on /cv/work/ and nowhere else — not on the CV, which is
+	   a document, and never in the PDF. Relative to that page, so the files live
+	   in `public/work/` and this is a bare filename. Optional, and absent is the
+	   normal state: the row simply has no picture and nothing shifts.
+
+	   Not a JSON Resume field. `additionalProperties` is true on projects, so it
+	   costs the file nothing — see docs/adr/0002 and 0007. */
+	image?: string;
+	highlights?: string[];
+	keywords?: string[];
 }
 
 export interface Skill {
@@ -84,8 +112,10 @@ export interface Resume {
 	projects?: Project[];
 	skills: Skill[];
 	education: Education[];
-	languages: Language[];
-	meta?: { canonical?: string; version?: string; openToWork?: boolean };
+	/* Optional, and absent by decision since 2026-09-15 — see content/TODO.md.
+	   The renderer drops the section on its own when it is not there. */
+	languages?: Language[];
+	meta?: { canonical?: string; version?: string; openToWork?: boolean; pdfRole?: string };
 }
 
 /* A year, or a year and a month. The renderer prints these; anything else in
@@ -117,6 +147,15 @@ const date = (v: unknown, where: string): void => {
 
 const optDate = (v: unknown, where: string): void => {
 	if (v !== undefined) date(v, where);
+};
+
+/* A link in the data becomes an attribute on the page. Anything but an
+   http(s) URL there is either a typo or a javascript: scheme, and both should
+   fail the build rather than the reader — the same check src/jobs.ts makes of
+   the sweep's output. */
+const httpUrl = (v: unknown, where: string): void => {
+	str(v, where);
+	if (!/^https?:\/\//.test(v as string)) fail(where, 'must be an http(s) URL');
 };
 
 const list = (v: unknown, where: string): unknown[] => {
@@ -176,9 +215,16 @@ function assertResume(raw: unknown): asserts raw is Resume {
 	if (raw['projects'] !== undefined)
 		each(raw['projects'], 'projects', (p, at) => {
 			str(p['name'], `${at}.name`);
-			date(p['startDate'], `${at}.startDate`);
+			optDate(p['startDate'], `${at}.startDate`);
 			optDate(p['endDate'], `${at}.endDate`);
 			optStr(p['description'], `${at}.description`);
+			optStr(p['entity'], `${at}.entity`);
+			optStr(p['type'], `${at}.type`);
+			if (p['roles'] !== undefined) strList(p['roles'], `${at}.roles`);
+			optStr(p['image'], `${at}.image`);
+			if (p['url'] !== undefined) httpUrl(p['url'], `${at}.url`);
+			if (p['highlights'] !== undefined) strList(p['highlights'], `${at}.highlights`);
+			if (p['keywords'] !== undefined) strList(p['keywords'], `${at}.keywords`);
 		});
 
 	each(raw['skills'], 'skills', (s, at) => {
@@ -195,10 +241,20 @@ function assertResume(raw: unknown): asserts raw is Resume {
 		date(e['endDate'], `${at}.endDate`);
 	});
 
-	each(raw['languages'], 'languages', (l, at) => {
-		str(l['language'], `${at}.language`);
-		str(l['fluency'], `${at}.fluency`);
-	});
+	if (raw['languages'] !== undefined)
+		each(raw['languages'], 'languages', (l, at) => {
+			str(l['language'], `${at}.language`);
+			str(l['fluency'], `${at}.fluency`);
+		});
+
+	/* The only part of `meta` the page depends on: pdfRole ends up in the name
+	   of a downloaded file, so an empty string there would publish a CV called
+	   "Alexander-Slavschik--CV.pdf". */
+	const meta = raw['meta'];
+	if (meta !== undefined) {
+		if (!isObject(meta)) fail('meta', 'must be an object');
+		optStr(meta['pdfRole'], 'meta.pdfRole');
+	}
 }
 
 export function parseResume(raw: unknown): Resume {

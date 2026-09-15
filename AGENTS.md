@@ -21,12 +21,22 @@ PDF are never committed.
   — the second page, at **slavshik.me/cv/jobs**. One file per sweep, written by
   `jobsweep publish`; the renderer is pure the same way `render.ts` is. Read
   `docs/adr/0006` before touching it, and note what the page must never carry.
+- `content/resume.json` also carries `projects` — the showcase. It renders
+  twice, **on screen both times**: as a gallery of thumbnail cards in the CV's
+  footer, and in full at
+  **slavshik.me/cv/work**, from `src/work.ts`, `src/work.css` and
+  `work/index.html`. Not one project reaches the PDF — print hides the rows and
+  keeps a single line pointing at the work page. One array, two surfaces; read
+  `docs/adr/0007` before touching either, and note that this page is indexed
+  where the jobs page is deliberately not.
 - `src/styles.css` — the whole design of the CV, screen and print.
   `src/tokens.css` is the palette, the type stacks and the reset, shared with
-  the jobs page; neither page may fork it.
+  all three pages; none of them may fork it.
 - `index.html` — markup and metadata, and nothing else. `<!--resume-->` and
   `<!--jsonld-->` are where the build injects.
-- `scripts/pdf.mjs` — renders the built page to `dist/<Name>-CV.pdf`.
+- `scripts/pdf.mjs` — renders the built page to `dist/`, under the name the
+  page itself asks for in the `download` attribute of its own link. That name
+  is built by `pdfFileName` from `basics.name` and `meta.pdfRole`.
 - `docs/adr/` — why this repo looks the way it does. Read before changing the
   build, the deployment or where content lives.
 
@@ -60,6 +70,32 @@ PDF are never committed.
   and abandoned — macOS refuses a LaunchAgent access to `~/Documents`, and the
   grant is per binary rather than per process tree, so allowing `/bin/sh` still
   left `go` refused. `docs/adr/0006` has the measurements.
+- **Two faces, one per surface.** The screen is set in a humanist sans and the
+  PDF in Charter; `--body` is the token, and the print block in
+  `src/styles.css` is the only place it is overridden. Both stacks end in faces
+  the pinned Playwright image already ships — Bitstream Charter, Liberation Sans,
+  Liberation Mono — so the build installs no fonts. Palatino and the
+  `fonts-texgyre` apt step were removed on 2026-09-15; do not put either back
+  without checking `fc-list` in the container first.
+- **The PDF has four things the screen has and it does not**: the reading
+  marks, the portrait, the showcase, and — the other way round — the phone
+  number, which exists only there. All four are one rule each in `@media print`
+  and all four are load bearing. The showcase is the newest: twelve titles and
+  their studios is a directory, not a document, and it cost a sheet and a half.
+  **The last page of the PDF is settled** — if a change to the showcase moves
+  it, the change is wrong. `.showcase` keeps exactly `section`'s margin in
+  print for that reason, and `make pdf-ci` is how you check.
+- **The first page of the PDF is a budget.** Header, summary and Skills have
+  to fit on it, with the history started under them. That is what the section
+  order in `renderResume` and the `.facts` rules in the print stylesheet are
+  for — both look like fussiness until you render the PDF and count.
+  `make pdf-ci`.
+- **To test the download button, render the PDF first.** It is a build artefact,
+  so `make dev` alone has nothing to serve: `make pdf` once and the dev server
+  hands over the real file, or `make preview` for exactly what goes to Pages.
+  Asking for it before either answers 404 in words rather than 200 with the
+  page, which is what it used to do — and an HTML file saved under a `.pdf`
+  name looks like a corrupt PDF, not like a mistake.
 - **`make check` before calling anything done** (types, lint, format), plus
   `make unit`. Run `make test` when a change could move a pixel or the byte
   count.
@@ -99,12 +135,18 @@ PDF are never committed.
 ## Print is not a second document
 
 `@media print` in `src/styles.css` is what `scripts/pdf.mjs` renders, so the
-downloadable PDF and Cmd+P agree by construction. Two things there are load
+downloadable PDF and Cmd+P agree by construction. Three things there are load
 bearing and look wrong out of context:
 
-- the Gutter becomes a **float** in print. Chromium will not fragment a grid
-  container across pages, so a long entry would be pushed whole to the next
-  sheet and leave a quarter of a page white;
+- **a dated row is a block with the date floated right, on both surfaces.** It
+  reads as a layout choice and it is also what makes the entry paginate:
+  Chromium will not fragment a grid container across pages, so while these rows
+  were grids a long entry was pushed whole to the next sheet and left a quarter
+  of a page white. Print used to undo the grid by hand for exactly this reason;
+  it does not have to any more, and the rule that did it is gone. Turn these
+  rows back into grids and the white pages come back.
 - only `h3` carries `break-after: avoid`. Chaining it onto the company and
   date lines as well makes Chromium treat the run as one unbreakable lump,
   with the same result.
+- `.facts` rows **stay** grids, in print as on screen. They are one line each
+  and carry `break-inside: avoid`, so there is nothing for them to fragment.

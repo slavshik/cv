@@ -1,10 +1,11 @@
 import { createHash } from 'node:crypto';
-import { readFileSync, readdirSync } from 'node:fs';
+import { createReadStream, existsSync, readFileSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { defineConfig, type Plugin } from 'vite';
 import { parseJobDay, renderJobs, type JobDay } from './src/jobs.ts';
 import { parseResume } from './src/resume.ts';
 import { renderJsonLd, renderResume } from './src/render.ts';
+import { renderWork } from './src/work.ts';
 
 /*
  * The CV is baked into index.html at build time. Nothing about the content
@@ -17,9 +18,12 @@ import { renderJsonLd, renderResume } from './src/render.ts';
  * to carry that prefix. The one link that does not is the PDF itself: it is
  * written relative, so it resolves under any base.
  *
- * The second page, /cv/jobs/, is built the same way from content/jobs/*.json.
- * It shares the palette and nothing else: no PDF, no JSON-LD, no screenshot
- * baseline, and it is outside the CV's weight budget — see test/size.mjs.
+ * The other two pages are built the same way. /cv/jobs/ comes from
+ * content/jobs/*.json; /cv/work/ comes from the `projects` array of the very
+ * same resume.json the CV is built from — one dataset, two surfaces, see
+ * docs/adr/0007. Both share the palette and little else: no PDF, no JSON-LD,
+ * no screenshot baseline, and both sit outside the CV's weight budget — see
+ * test/size.mjs.
  */
 
 const RESUME = fileURLToPath(new URL('content/resume.json', import.meta.url));
@@ -62,6 +66,32 @@ const bakePages = (): Plugin => ({
 		server.watcher.on('change', (file) => {
 			if (file === RESUME || file.startsWith(JOBS)) server.ws.send({ type: 'full-reload' });
 		});
+
+		/*
+		 * The PDF is a build artefact, and the dev server has never heard of
+		 * it: a request for one falls through to the HTML fallback, which
+		 * answers 200 with the page itself. The download attribute then saves
+		 * that HTML under a .pdf name, and the first you hear of it is a
+		 * viewer calling the file damaged — which is a terrible way to find
+		 * out you were on the dev server. Serve the real file when a build
+		 * has left one, and say so plainly when it has not.
+		 *
+		 * The name is a basename, so there is no path to traverse out of.
+		 */
+		server.middlewares.use((req, res, next) => {
+			const name = (req.url ?? '').split('?')[0]?.split('/').pop() ?? '';
+			if (!name.endsWith('.pdf')) return next();
+
+			const file = fileURLToPath(new URL(`dist/${name}`, import.meta.url));
+			if (!existsSync(file)) {
+				res.statusCode = 404;
+				res.setHeader('content-type', 'text/plain; charset=utf-8');
+				res.end(`${name} has not been rendered yet — run \`make pdf\`.\n`);
+				return;
+			}
+			res.setHeader('content-type', 'application/pdf');
+			createReadStream(file).pipe(res);
+		});
 	},
 
 	transformIndexHtml: {
@@ -77,6 +107,13 @@ const bakePages = (): Plugin => ({
 			// Re-read on every request: in dev this is how an edit to the CV
 			// shows up, and a build only ever asks once.
 			const resume = readResume();
+
+			// The showcase is built from that same object, so it reloads on
+			// the same watcher and cannot describe a different CV.
+			if (html.includes('<!--work-->')) {
+				return html.replace('<!--work-->', renderWork(resume));
+			}
+
 			return html
 				.replace('<!--resume-->', renderResume(resume, { pdfVersion: documentVersion() }))
 				.replace(
@@ -97,6 +134,7 @@ export default defineConfig({
 			input: {
 				cv: fileURLToPath(new URL('index.html', import.meta.url)),
 				jobs: fileURLToPath(new URL('jobs/index.html', import.meta.url)),
+				work: fileURLToPath(new URL('work/index.html', import.meta.url)),
 			},
 		},
 	},

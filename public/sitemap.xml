@@ -3,4 +3,9 @@
 	<url>
 		<loc>https://slavshik.me/cv/</loc>
 	</url>
+	<!-- The showcase. Unlike /cv/jobs/, this one is meant to be found — see
+	     docs/adr/0007. -->
+	<url>
+		<loc>https://slavshik.me/cv/work/</loc>
+	</url>
 </urlset>

@@ -1,0 +1,263 @@
+/*
+ * The showcase at /cv/work/. Same paper, same type stacks, same gutter-and-body
+ * row as the CV — see src/tokens.css, which all three pages import and none may
+ * fork.
+ *
+ * What is deliberately different, and the same two things the jobs list gets
+ * wrong on purpose: there is no print stylesheet, and there is no screenshot
+ * baseline. The CV is a document somebody receives on paper; this is a page
+ * somebody follows a link to. If it ever needs printing, that is a new section
+ * here, not a reason to make styles.css serve three masters.
+ */
+
+@import './tokens.css';
+
+body {
+	background: var(--paper);
+	color: var(--ink);
+	font-family: var(--body);
+	font-size: 16px;
+	line-height: 1.6;
+	-webkit-font-smoothing: antialiased;
+}
+
+.work {
+	width: 100%;
+	max-width: 46rem;
+	margin: 0 auto;
+	padding: 4rem 2rem 6rem;
+}
+
+a {
+	color: inherit;
+	text-decoration-color: var(--hair);
+	text-underline-offset: 0.2em;
+}
+a:hover {
+	color: var(--accent-text);
+	text-decoration-color: currentColor;
+}
+
+/* ── Head ──────────────────────────────────────────────────────────────── */
+
+.head h1 {
+	font-size: clamp(2.1rem, 7vw, 2.9rem);
+	font-weight: 600;
+	letter-spacing: -0.02em;
+	line-height: 1.05;
+	margin: 0;
+}
+
+.head .label {
+	font-size: 1.05rem;
+	color: var(--muted);
+	margin: 0.5rem 0 0;
+}
+
+/* ── The list ──────────────────────────────────────────────────────────── */
+
+/*
+ * One block per employer: who, in the gutter; what they made, beside it. The
+ * CV's row shape one more time, which is what keeps the two pages reading as
+ * one site — and the reason the page is short. Flat, twelve entries repeat
+ * their studio twelve times and "Slot game on Cocos Creator 2" four times
+ * running; grouped, each of those is written once, above the titles it covers.
+ */
+.group {
+	display: grid;
+	grid-template-columns: 13rem 1fr;
+	gap: 1.6rem;
+	padding-bottom: 1.8rem;
+}
+.group + .group {
+	border-top: 1px solid var(--hair);
+	padding-top: 1.8rem;
+}
+.group:first-of-type {
+	margin-top: 3.2rem;
+}
+
+.who h2 {
+	font-size: 1.05rem;
+	font-weight: 600;
+	line-height: 1.35;
+	margin: 0;
+}
+/* What the whole group has in common — the kind of thing, and what he was on
+   it. Set like the CV's company line, because it is the same kind of fact. */
+.who .what {
+	font-family: var(--mono);
+	font-size: 0.72rem;
+	line-height: 1.6;
+	color: var(--accent-text);
+	margin: 0.3rem 0 0;
+}
+
+.items {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	min-width: 0;
+}
+
+/*
+ * One title per row: the name, then the address and whatever the group could
+ * not hoist. Two columns so the names and the addresses each line up down the
+ * page — the whole point of grouping was to make this readable at a glance.
+ *
+ * The thumbnail is a third column that only exists when there is a picture, so
+ * a row without one is not indented past a row with one.
+ */
+.items li {
+	display: grid;
+	grid-template-columns: minmax(0, 15rem) 1fr;
+	align-items: baseline;
+	gap: 0.1rem 1.2rem;
+	padding: 0.28rem 0;
+}
+/* The slot is reserved for the whole group, not per row: a group halfway
+   through gaining pictures must not have two different name columns. */
+.items.with-thumbs li {
+	grid-template-columns: auto minmax(0, 15rem) 1fr;
+	align-items: center;
+	padding: 0.45rem 0;
+}
+
+.thumb {
+	display: block;
+	width: 7rem;
+	height: 4.375rem;
+	border-radius: 3px;
+	object-fit: cover;
+	/* Drawn before the file arrives, so the row reads as finished while the
+	   image is still coming and nothing flashes white. */
+	background: var(--hair);
+}
+/* The placeholder holds the column open and draws nothing. */
+.thumb.is-empty {
+	background: none;
+}
+
+.name {
+	font-size: 0.98rem;
+}
+.name a {
+	text-decoration: none;
+}
+.name a:hover {
+	text-decoration: underline;
+	text-decoration-color: currentColor;
+	text-underline-offset: 0.2em;
+}
+
+/* Whatever the group could not hoist onto itself. Never an address — the name
+   is the link. */
+.where {
+	font-family: var(--mono);
+	font-size: 0.72rem;
+	line-height: 1.6;
+	color: var(--muted);
+}
+
+/* The one project that has something to say beyond its name. Spans the row so
+   it is not squeezed into the name column. */
+.note {
+	grid-column: 1 / -1;
+	margin: 0.4rem 0 0.2rem;
+	font-size: 0.94rem;
+}
+
+.highlights {
+	grid-column: 1 / -1;
+	list-style: none;
+	margin: 0.3rem 0 0.2rem;
+	padding: 0;
+	font-size: 0.94rem;
+}
+.highlights li {
+	display: block;
+	padding: 0 0 0 1.2rem;
+	margin-top: 0.35rem;
+}
+.highlights li::before {
+	content: '—';
+	color: var(--accent-text);
+	float: left;
+	margin-left: -1.2rem;
+}
+
+/* ── Marks ─────────────────────────────────────────────────────────────── */
+
+/* The same three levels the CV uses — docs/adr/0004. They are switched off in
+   print there; here there is no print. */
+strong {
+	font-weight: 700;
+}
+.term {
+	text-decoration: underline dashed;
+	text-decoration-color: var(--accent-text);
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.2em;
+}
+mark {
+	background: var(--mark);
+	color: inherit;
+	padding: 0.08em 0.18em;
+	margin: 0 -0.06em;
+	border-radius: 2px;
+	box-decoration-break: clone;
+	-webkit-box-decoration-break: clone;
+}
+
+.empty {
+	margin-top: 3.2rem;
+	color: var(--muted);
+}
+
+/* ── Foot ──────────────────────────────────────────────────────────────── */
+
+.foot {
+	margin-top: 5rem;
+	text-align: center;
+}
+.foot a {
+	font-family: var(--mono);
+	font-size: 0.7rem;
+	letter-spacing: 0.1em;
+	text-decoration: none;
+	color: var(--muted);
+	transition: color 0.2s ease;
+}
+.foot a:hover {
+	color: var(--accent-text);
+}
+
+/* ── Narrow screens ────────────────────────────────────────────────────── */
+
+@media (max-width: 40rem) {
+	body {
+		font-size: 15px;
+	}
+	.work {
+		padding: 2.5rem 1.4rem 5rem;
+	}
+	.group {
+		grid-template-columns: 1fr;
+		gap: 0.8rem;
+	}
+	/* The address goes under the name rather than beside it; there is no width
+	   here for two columns of it. */
+	.items li,
+	.items.with-thumbs li {
+		grid-template-columns: 1fr;
+		align-items: start;
+		gap: 0.1rem;
+	}
+	.items.with-thumbs .thumb {
+		margin-bottom: 0.4rem;
+	}
+	/* Nothing to hold open in a single column. */
+	.thumb.is-empty {
+		display: none;
+	}
+}
