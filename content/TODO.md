@@ -23,17 +23,16 @@ gap: a gap is left as a gap.
     because there is no second paragraph to mute. Leave the rule; it costs
     nothing and it is what makes a second paragraph work if one ever returns.
 
-- **BrainRocket is back on the page, as `BrainRocket (Elagames)`.** Senior Game
-  Developer, Valencia, 2025-09 to 2026-07, slot games on Cocos Creator 2 and
-  Spine. It was taken off on 2026-09-01 at Alexander's request (`dd4ea33`) and
-  put back on 2026-09-15, also at his request — restored verbatim from that
-  commit, so nothing about the entry was re-derived or re-worded. The
-  parenthetical follows the `Gismart (Flime)` precedent already in the data.
-  **Confirm with him that `Elagames` is the spelling he wants**; it came from
-  the sentence in which he asked for the entry back and from no other source.
-- **Overlapping dates, carried over as-is.** Evolution runs to 2026-05 while
-  BrainRocket starts 2025-09. This note existed before, was retired when
-  BrainRocket left the page, and is live again because both entries are.
+- **The BrainRocket work entry is off the page again.** Senior Game Developer,
+  Valencia, 2025-09 to 2026-07, slot games on Cocos Creator 2 and Spine. It
+  was taken off on 2026-09-01 (`dd4ea33`), put back on 2026-09-15 as
+  `BrainRocket (Elagames)`, and taken off again on 2026-09-21 — each time at
+  Alexander's request. The text is in git history if it is ever wanted; do
+  not restore it unasked. Cocos Creator 2 and Spine were not moved into
+  `skills`, for the same reason as the first time: the entry was their only
+  evidence. The meta description in `index.html` names Gismart instead.
+  With it gone, the overlapping-dates note (Evolution to 2026-05, BrainRocket
+  from 2025-09) is retired again.
 - **Diesel Puppet is one entry here, 2020-03 to 2023-02.** LinkedIn splits that
   spell in two — Game Developer, full-time, 2020-03 to 2022-08 in Minsk, and
   Game Developer, self-employed, 2022-08 to 2023-02, remote — with the long
