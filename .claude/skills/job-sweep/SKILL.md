@@ -27,11 +27,15 @@ cd .claude/skills/job-sweep && go build -o jobsweep .
 The binary is gitignored — build it, do not commit it. It is stdlib-only, so
 the build needs no network.
 
-Only public guest listings are used — no login, no LinkedIn account, nothing
-behind the auth wall. Keep it that way. Do not connect the tool to Alexander's
-signed-in Chrome profile to scrape more; automating a logged-in session is
-against LinkedIn's terms, and the guest endpoints already return everything this
-skill needs.
+**The tool uses public guest listings only** — no login, no LinkedIn account,
+nothing behind the auth wall. Keep it that way: `jobsweep` fetches guest
+endpoints through `agent-browser`, which is a stranger to LinkedIn, and it
+stays that way.
+
+The one thing that happens outside it is the feed. Hiring posts never become
+listings, so no guest endpoint has them, and post search answers a guest with a
+login redirect. They are read instead in Alexander's own Chrome, with him
+there — see **Posts** below and `docs/adr/0008`, which states what that costs.
 
 ## The run
 
@@ -45,6 +49,8 @@ cd .claude/skills/job-sweep
 ./jobsweep fetch                   # ~2 min, run in background
 ./jobsweep summarize               # stack signals, not raw text
 ./jobsweep publish                 # the day's list -> content/jobs/<date>.json
+
+./jobsweep posts -mark-seen        # hiring posts from the feed; see Posts below
 ```
 
 Everything defaults to `runs/<today>`; pass `-out DIR` to work on another run.
@@ -71,6 +77,51 @@ run wants.
 `queries.tsv` is the whole search strategy. Edit it rather than passing
 arguments — a new city, a new stack, a new title all belong there. Keep it under
 about fifteen lines; each one costs three page loads.
+
+## Posts
+
+The other half of the market: a recruiter writing "we are looking for a Pixi
+developer, Warsaw, DM me" in the feed, where no job id is ever minted. This
+part is **not** automated and cannot be — it needs his Chrome, his session and
+him watching.
+
+```
+Claude in Chrome, in his signed-in Chrome
+  → open the feed, or a content search, and scroll a few screens
+  → evaluate js/posts.js against the page
+  → write the JSON array out as runs/<today>/posts.raw.ndjson (one row per line)
+  → ./jobsweep posts -mark-seen          # same weights, same seen.json
+```
+
+Useful pages to open, in his own tab:
+
+- the plain feed, scrolled four or five screens;
+- content search sorted by date, e.g.
+  `linkedin.com/search/results/content/?keywords=hiring%20pixijs&sortBy=%22date_posted%22`
+  — one or two keyword sets a run, not fifteen;
+- a company's or a recruiter's posts tab when one keeps coming up.
+
+**The rules here are not negotiable, and `docs/adr/0008` says why:**
+
+- **Read only.** `js/posts.js` queries the DOM and returns JSON. Never click a
+  like, follow, connect, comment or message from his account. His HR contact's
+  advice to like matching posts is good and it is **his** to act on — a like
+  carries his name in public. Tell him to do it; do not do it for him.
+- **Human pace.** A few screens and a search or two. No pagination loop,
+  nothing that runs while he is asleep.
+- **Post text stays in `runs/`.** Never commit it, never publish it. A post is
+  a named person's writing; `jobsweep publish` writes listings only and is not
+  to be taught otherwise.
+- **Stop and ask** if the page wants a login, a captcha or a checkpoint. Never
+  work around one.
+
+`jobsweep posts` drops what the feed is full of before scoring: anything that
+never says it is hiring, and anything offering candidates rather than a job —
+open-to-work, outstaffing, bench lists. What survives is scored on its body
+with the weights from `score.go`, which were tuned for titles: over a
+paragraph they fire on incidental mentions, so a post saying "no Angular
+needed" loses three points it should not. Read `why` before believing a score,
+and read the post before believing the tier.
 
 ## Choosing what to fetch
 
@@ -148,7 +199,8 @@ worth the `go.sum`.
 | `fetch.go` | shortlist.txt → `desc.ndjson` |
 | `summarize.go` | Descriptions → stack signals |
 | `publish.go` | scored.json → content/jobs/&lt;date&gt;.json, the page's data |
-| `js/` | The two in-browser extractors, embedded with `go:embed` |
+| `posts.go` | Hiring posts from the feed: the two gates, body scoring, table |
+| `js/` | The in-browser extractors. `extract.js` and `desc.js` are embedded with `go:embed` and run by `browser.go`; `posts.js` is not — it is evaluated in his own Chrome |
 
 Two things to know before editing:
 

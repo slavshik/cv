@@ -10,10 +10,13 @@
 //	jobsweep shortlist  propose which postings earn a description fetch
 //	jobsweep fetch      pull the full descriptions for that shortlist
 //	jobsweep summarize  condense them to stack signals
+//	jobsweep posts      score hiring posts pulled out of the signed-in feed
 //	jobsweep publish    write the day's list into content/jobs/ for the site
 //
-// Page loads go through agent-browser, which must be on PATH. Only LinkedIn's
-// public guest endpoints are used; nothing here touches a signed-in session.
+// Page loads go through agent-browser, which must be on PATH, and use only
+// LinkedIn's public guest endpoints. The one exception is `posts`, which does
+// no fetching at all: it scores rows the agent extracted from Alexander's own
+// signed-in feed, in his own browser. See docs/adr/0008.
 package main
 
 import (
@@ -35,6 +38,7 @@ Usage:
   jobsweep fetch      [-out DIR] [-root DIR]
   jobsweep summarize  [-out DIR]
   jobsweep publish    [-out DIR] [-root DIR] [-repo DIR] [-min N]
+  jobsweep posts      [-out DIR] [-in FILE] [-mark-seen] [-new-only] [-min N]
 
   -out    run directory, default runs/<today>
   -root   skill directory holding queries.tsv and runs/, default: next to the
@@ -61,6 +65,8 @@ func main() {
 		err = cmdSummarize(os.Args[2:])
 	case "publish":
 		err = cmdPublish(os.Args[2:])
+	case "posts":
+		err = cmdPosts(os.Args[2:])
 	case "-h", "--help", "help":
 		fmt.Print(usage)
 		return
