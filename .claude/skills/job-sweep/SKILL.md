@@ -1,11 +1,12 @@
 ---
 name: job-sweep
-description: Sweep LinkedIn for roles matching content/resume.json, read the descriptions, and publish a ranked shortlist. Use when Alexander asks to look for jobs, refresh the shortlist, check what is new this week, or search a different city or stack.
+description: Sweep LinkedIn and the Y Combinator job board for roles matching content/resume.json, read the descriptions, and publish a ranked shortlist. Use when Alexander asks to look for jobs, refresh the shortlist, check what is new this week, or search a different city or stack.
 ---
 
-# Sweeping LinkedIn for roles
+# Sweeping LinkedIn and the YC board for roles
 
-A weekly pass over public LinkedIn job listings, matched against
+A weekly pass over public LinkedIn job listings and the Y Combinator job board
+(ycombinator.com/jobs), matched against
 `content/resume.json`. It ends with a ranked, published shortlist and a list of
 what was ruled out and why — so the same postings do not get re-litigated seven
 days later.
@@ -65,7 +66,7 @@ see `docs/adr/0006` for why the cron was abandoned.
 
 `publish` applies the same drop rules as `shortlist` and no cap, and it writes
 titles, companies, locations, links and scores — **never** description bodies.
-Those are LinkedIn's text; the page links to a posting rather than reprinting
+Those are LinkedIn's or YC's text; the page links to a posting rather than reprinting
 it.
 
 `-mark-seen` records every URL in `runs/seen.json`, so the next run can flag
@@ -74,9 +75,44 @@ experimenting with queries, or the next run will think a backlog is old news.
 `-new-only` prints just the new postings, which is usually what a week-two
 run wants.
 
-`queries.tsv` is the whole search strategy. Edit it rather than passing
+`queries.tsv` is the whole LinkedIn search strategy. Edit it rather than passing
 arguments — a new city, a new stack, a new title all belong there. Keep it under
 about fifteen lines; each one costs three page loads.
+
+## The YC board
+
+`sweep` reads ycombinator.com/jobs after LinkedIn, one slice per line of
+`yc.tsv` (`software-engineer` × `remote`, `europe`, `london`, `berlin`…). It is
+nine plain HTTP GETs and ten seconds: the board is server-rendered, so there is
+no browser and no `agent-browser` involved. `-source yc` runs just that part,
+which is the quick way to see what it holds.
+
+What to know before judging a YC row:
+
+- **Most of it is US-only.** `shortlist` and `publish` drop anything that is
+  not worldwide remote, remote with Poland or Europe in its list, or sited in
+  Europe — about half of what the slices return. The reason shows up as
+  `YC, not open to Poland`.
+- **Only YC's own place slugs filter.** `warsaw` and `poland` are not among
+  them; an unknown slug answers with a random sample, so `sweep` refuses it and
+  says so. Add a city to `yc.tsv` only after checking it filters.
+- **Titles are thin.** "Software Engineer" at an AI startup is the norm, so the
+  scorer also reads the board's role label (`Frontend`, `Full stack`) and the
+  company's one-liner. A YC row will rarely clear 5 on title alone — read the
+  score as a rough cut, not as a verdict on the board.
+- **Dates are approximate.** The board says "8 months", not a date; the posted
+  day is computed from that and is as precise as the phrase. Rows whose
+  company has not been active on the board within `-days` are skipped at sweep
+  time — YC postings stay up long after anybody reads them.
+- **`fetch` gets more than LinkedIn gives.** Salary, equity, visa policy,
+  minimum experience and the remote countries come as criteria, not buried in
+  the body. Visa "US citizen/visa only" is about working *in* the US; it does
+  not rule out a remote-from-Poland role, and the location line is what does.
+- **A listing can link to a posting that is gone.** `fetch` reports the 404 and
+  moves on. It is YC's stale data, not a bug here.
+
+The company column carries the batch, `Flick (YC F25)`, so the page and the
+shortlist say which board a row came from.
 
 ## Posts
 
@@ -184,8 +220,8 @@ is a useful line because it is checkable, not because it is flattering.
 
 ## The code
 
-Go, stdlib only, one package. `go build -o jobsweep .` and `go vet ./...` are
-the whole toolchain; keep it that way — a dependency here would have to be
+Go, stdlib only, one package. `go build -o jobsweep .`, `go vet ./...` and
+`go test ./...` are the whole toolchain; keep it that way — a dependency here would have to be
 worth the `go.sum`.
 
 | | |
@@ -193,10 +229,11 @@ worth the `go.sum`.
 | `main.go` | Subcommand dispatch, and how the skill directory is located |
 | `job.go` | The `Job` and `Desc` types, NDJSON helpers, rune-safe padding |
 | `browser.go` | The entire agent-browser dependency, three functions wide |
-| `sweep.go` | queries.tsv → guest search URLs → `raw.ndjson` |
+| `sweep.go` | queries.tsv → guest search URLs, then yc.tsv → YC slices, → `raw.ndjson` |
+| `yc.go` | The YC board: listing and posting pages over plain HTTP, relative dates, where a role can be done from |
 | `score.go` | Weights, dedupe, `seen.json`, the ranked table |
 | `shortlist.go` | The always-drop and always-fetch rules, as code |
-| `fetch.go` | shortlist.txt → `desc.ndjson` |
+| `fetch.go` | shortlist.txt → `desc.ndjson`, YC URLs over HTTP and the rest through the browser |
 | `summarize.go` | Descriptions → stack signals |
 | `publish.go` | scored.json → content/jobs/&lt;date&gt;.json, the page's data |
 | `posts.go` | Hiring posts from the feed: the two gates, body scoring, table |
@@ -211,8 +248,9 @@ Two things to know before editing:
   sweep are `Cracow, Małopolskie` or `Wrocław`; `pad` and `trunc` in `job.go`
   exist for this and the table columns should go through them.
 
-Swapping the fetcher out — for a plain HTTP client, or a different browser
-driver — means rewriting `browser.go` and nothing else.
+Swapping the LinkedIn fetcher out — for a plain HTTP client, or a different
+browser driver — means rewriting `browser.go` and nothing else. `yc.go` does
+not go through it: the YC board needs no browser.
 
 ## Publishing
 

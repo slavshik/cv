@@ -21,13 +21,18 @@ func cmdFetch(args []string) error {
 	if *out == "" {
 		*out = defaultOut(*root)
 	}
-	if err := browserAvailable(); err != nil {
-		return err
-	}
-
 	urls, err := readLines(filepath.Join(*out, "shortlist.txt"))
 	if err != nil {
 		return err
+	}
+	// The browser is only for LinkedIn; a YC-only shortlist does not need it.
+	for _, u := range urls {
+		if !isYC(u) {
+			if err := browserAvailable(); err != nil {
+				return err
+			}
+			break
+		}
 	}
 	descJS, err := mustJS("desc.js")
 	if err != nil {
@@ -44,6 +49,20 @@ func cmdFetch(args []string) error {
 	enc := json.NewEncoder(w)
 
 	for i, u := range urls {
+		if isYC(u) {
+			d, err := fetchYCDesc(u)
+			if err != nil {
+				progressf("  [%d/%d] %v", i+1, len(urls), err)
+				continue
+			}
+			if err := enc.Encode(d); err != nil {
+				return err
+			}
+			w.Flush()
+			progressf("  [%d/%d] %s", i+1, len(urls), u)
+			time.Sleep(time.Second)
+			continue
+		}
 		if err := browserOpen(u); err != nil {
 			progressf("  [%d/%d] open failed: %s", i+1, len(urls), u)
 			continue

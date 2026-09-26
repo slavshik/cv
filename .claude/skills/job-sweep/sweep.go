@@ -28,29 +28,44 @@ func cmdSweep(args []string) error {
 	fs := flag.NewFlagSet("sweep", flag.ExitOnError)
 	root := fs.String("root", defaultRoot(), "skill directory")
 	out := fs.String("out", "", "run directory (default runs/<today>)")
-	days := fs.Int("days", 30, "posting age window in days")
+	days := fs.Int("days", 30, "posting age window in days (YC: days since the company was last active)")
+	source := fs.String("source", "all", "linkedin, yc, or all")
 	if err := fs.Parse(args); err != nil {
 		return err
 	}
 	if *out == "" {
 		*out = defaultOut(*root)
 	}
-	if err := browserAvailable(); err != nil {
-		return err
+	doLinkedIn, doYC := *source == "all" || *source == "linkedin", *source == "all" || *source == "yc"
+	if !doLinkedIn && !doYC {
+		return fmt.Errorf("-source must be linkedin, yc or all, not %q", *source)
 	}
 
-	queries, err := readQueries(filepath.Join(*root, "queries.tsv"))
-	if err != nil {
-		return err
+	var queries []query
+	var extract string
+	if doLinkedIn {
+		if err := browserAvailable(); err != nil {
+			return err
+		}
+		var err error
+		if queries, err = readQueries(filepath.Join(*root, "queries.tsv")); err != nil {
+			return err
+		}
+		if len(queries) == 0 {
+			return fmt.Errorf("no queries in %s", filepath.Join(*root, "queries.tsv"))
+		}
+		if extract, err = mustJS("extract.js"); err != nil {
+			return err
+		}
 	}
-	if len(queries) == 0 {
-		return fmt.Errorf("no queries in %s", filepath.Join(*root, "queries.tsv"))
+	var slices []ycSlice
+	if doYC {
+		var err error
+		if slices, err = readYCSlices(filepath.Join(*root, "yc.tsv")); err != nil {
+			return err
+		}
 	}
 
-	extract, err := mustJS("extract.js")
-	if err != nil {
-		return err
-	}
 	if err := os.MkdirAll(*out, 0o755); err != nil {
 		return err
 	}
@@ -106,6 +121,25 @@ func cmdSweep(args []string) error {
 		}
 	}
 
+	now := time.Now()
+	for _, sl := range slices {
+		jobs, err := readYCSlice(sl, *days, now)
+		if err != nil {
+			progressf("  [yc %s] %v", sl.path(), err)
+			continue
+		}
+		for _, j := range jobs {
+			j.Q, j.QLoc = "yc:"+sl.Role, sl.Place
+			if err := enc.Encode(j); err != nil {
+				return err
+			}
+			rows++
+		}
+		w.Flush()
+		progressf("  [yc %s] rows=%d", sl.path(), rows)
+		time.Sleep(time.Second)
+	}
+
 	progressf("SWEEP DONE %d rows -> %s", rows, raw)
 	return nil
 }
@@ -144,6 +178,35 @@ func readQueries(path string) ([]query, error) {
 		if q.Keywords != "" {
 			out = append(out, q)
 		}
+	}
+	return out, sc.Err()
+}
+
+// readYCSlices reads yc.tsv. A missing file means no YC slices, not an error:
+// the board is an addition to the sweep, not a requirement of it.
+func readYCSlices(path string) ([]ycSlice, error) {
+	f, err := os.Open(path)
+	if os.IsNotExist(err) {
+		return nil, nil
+	}
+	if err != nil {
+		return nil, err
+	}
+	defer f.Close()
+
+	var out []ycSlice
+	sc := bufio.NewScanner(f)
+	for sc.Scan() {
+		line := strings.TrimSpace(sc.Text())
+		if line == "" || strings.HasPrefix(line, "#") {
+			continue
+		}
+		parts := strings.Split(line, "\t")
+		s := ycSlice{Role: strings.TrimSpace(parts[0])}
+		if len(parts) > 1 {
+			s.Place = strings.TrimSpace(parts[1])
+		}
+		out = append(out, s)
 	}
 	return out, sc.Err()
 }

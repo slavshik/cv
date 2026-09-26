@@ -10,14 +10,21 @@ import (
 	"unicode/utf8"
 )
 
-// Job is one LinkedIn posting. The lowercase JSON names match what the
-// in-browser extractors in js/ produce, so a scraped row unmarshals directly.
+// Job is one posting, from LinkedIn or the YC board. The lowercase JSON names
+// match what the in-browser extractors in js/ produce, so a scraped row
+// unmarshals directly.
 type Job struct {
 	Title   string `json:"title"`
 	Company string `json:"company"`
 	Loc     string `json:"loc"`
 	Date    string `json:"date"`
 	URL     string `json:"url"`
+
+	// YC only: the board's own role label ("Frontend", "Full stack") and the
+	// company's one-liner. A YC title is usually just "Software Engineer", so
+	// these carry most of what the scorer can see.
+	Role  string `json:"role,omitempty"`
+	About string `json:"about,omitempty"`
 
 	// Provenance: which query surfaced this row.
 	Q    string `json:"q,omitempty"`

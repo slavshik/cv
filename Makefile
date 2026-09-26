@@ -58,7 +58,7 @@ pdf: build ## Build the site and render the downloadable PDF into dist/
 preview: pdf ## Serve exactly what goes to Pages, PDF included
 	@npx vite preview --port $(PORT) --strictPort
 
-jobs: ## Sweep LinkedIn and commit today's list into content/jobs/ (~7 min)
+jobs: ## Sweep LinkedIn and the YC board, commit today's list into content/jobs/ (~7 min)
 	scripts/sweep.sh
 
 ## ─── checks ──────────────────────────────────────────────────────────────

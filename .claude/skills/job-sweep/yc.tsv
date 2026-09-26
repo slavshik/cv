@@ -1,0 +1,16 @@
+# Y Combinator job board slices: role slug <TAB> place slug (blank = no place).
+# Read by `jobsweep sweep` after queries.tsv; one plain HTTP GET each, ~40 rows.
+# Only the places YC itself lists filter anything — an unknown slug (warsaw,
+# poland, barcelona) is refused by the sweep rather than read as a random
+# sample. Checked 2026-09-26: remote, europe, london, berlin, amsterdam, paris,
+# dublin, munich and lisbon filter. Most rows are US-only; `shortlist` and
+# `publish` drop what cannot be done from Poland.
+software-engineer	remote
+software-engineer	europe
+software-engineer	london
+software-engineer	berlin
+software-engineer	amsterdam
+software-engineer	paris
+software-engineer	dublin
+software-engineer	munich
+software-engineer	lisbon

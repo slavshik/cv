@@ -74,8 +74,19 @@ var gamingCo = regexp.MustCompile(`(?i)` +
 	`cd projekt|techland|11 bit|people can fly|bloober|creative assembly|king\b|zynga|voodoo|` +
 	`gismart|frvr|patrianna|kaizen|game|studio|entertainment|interactive|casino|bet\b`)
 
+// ycPoland: the YC board writes countries as ISO codes, "Remote (DE; PL)".
+var ycPoland = regexp.MustCompile(`\bPL\b`)
+
 func scoreJob(j *Job) {
 	title, company, loc := j.Title, j.Company, strings.ToLower(j.Loc)
+	// A YC title is mostly "Software Engineer"; the board's role label and the
+	// company's one-liner are where "Frontend" and "browser games" turn up.
+	if j.Role != "" {
+		title += " · " + j.Role
+	}
+	if j.About != "" {
+		company += " · " + j.About
+	}
 	j.Score, j.Why = 0, nil
 
 	for _, r := range positive {
@@ -97,7 +108,7 @@ func scoreJob(j *Job) {
 	switch {
 	case strings.Contains(loc, "warsaw"):
 		j.Score += 2
-	case strings.Contains(loc, "poland"):
+	case strings.Contains(loc, "poland"), ycPoland.MatchString(j.Loc):
 		j.Score += 1
 	}
 }

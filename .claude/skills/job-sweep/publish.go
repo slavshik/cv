@@ -5,14 +5,13 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"strings"
 )
 
 // One run's scored.json, trimmed down to what may be shown on a web page and
 // written into content/jobs/<date>.json, where the site build picks it up.
 //
 // Two things are deliberately not published. Description bodies: desc.ndjson is
-// LinkedIn's text, and a page that reprints thirty of them is republishing
+// LinkedIn's and YC's text, and a page that reprints thirty of them is republishing
 // somebody else's copy rather than linking to it. And the query provenance:
 // which of the thirteen searches surfaced a row is a tuning signal for
 // queries.tsv, not something a reader of the list needs. `why` goes the same
@@ -76,11 +75,7 @@ func cmdPublish(args []string) error {
 	day := PubDay{Date: runDate(*out), Swept: len(jobs), Dropped: map[string]int{}}
 
 	for _, j := range jobs {
-		if aaaStudio.MatchString(j.Company) && !strings.Contains(strings.ToLower(j.Title), "front") {
-			day.Dropped["AAA studio (C++)"]++
-			continue
-		}
-		if reason, drop := dropReason(j.Title); drop {
+		if reason, drop := ruledOut(j); drop {
 			day.Dropped[reason]++
 			continue
 		}

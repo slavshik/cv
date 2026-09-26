@@ -69,17 +69,11 @@ func cmdShortlist(args []string) error {
 		if len(picked) >= *limit {
 			break
 		}
-		title := j.Title
-
-		if aaaStudio.MatchString(j.Company) && !strings.Contains(strings.ToLower(title), "front") {
-			dropped["AAA studio (C++)"]++
-			continue
-		}
-		if reason, drop := dropReason(title); drop {
+		if reason, drop := ruledOut(j); drop {
 			dropped[reason]++
 			continue
 		}
-		if alwaysFetch.MatchString(title) || j.Score >= *min {
+		if alwaysFetch.MatchString(j.Title) || j.Score >= *min {
 			picked = append(picked, j)
 		}
 	}
@@ -106,6 +100,18 @@ func cmdShortlist(args []string) error {
 	}
 	fmt.Println("\nEdit shortlist.txt before running `jobsweep fetch` — this is a proposal, not a verdict.")
 	return nil
+}
+
+// ruledOut is every always-drop rule, shared by shortlist and publish so the
+// fetch proposal and the page agree about what is noise.
+func ruledOut(j *Job) (string, bool) {
+	if isYC(j.URL) && !ycReach(j.Loc) {
+		return "YC, not open to Poland", true
+	}
+	if aaaStudio.MatchString(j.Company) && !strings.Contains(strings.ToLower(j.Title), "front") {
+		return "AAA studio (C++)", true
+	}
+	return dropReason(j.Title)
 }
 
 func dropReason(title string) (string, bool) {

@@ -20,7 +20,8 @@ export interface Posting {
 	title: string;
 	company: string;
 	loc: string;
-	/** When LinkedIn says the posting went up. */
+	/** When the board says the posting went up — to the day on LinkedIn, to the
+	 * month or year on YC, whose ages are relative ("8 months"). */
 	posted: string;
 	url: string;
 	score: number;
@@ -172,7 +173,7 @@ export function renderJobs(days: JobDay[]): string {
 
 	<header class="head">
 		<h1>Jobs</h1>
-		<p class="label">A LinkedIn sweep against the CV, once a day. Titles and links only — open a row to read the posting.</p>
+		<p class="label">A sweep of LinkedIn and the YC job board against the CV, once a day. Titles and links only — open a row to read the posting.</p>
 	</header>
 
 	<section class="today">

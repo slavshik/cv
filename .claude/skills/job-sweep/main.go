@@ -1,4 +1,5 @@
-// Command jobsweep harvests public LinkedIn guest job listings, scores them
+// Command jobsweep harvests public LinkedIn guest job listings and the Y
+// Combinator job board (ycombinator.com/jobs), scores them
 // against the CV in content/resume.json, and condenses the results for reading.
 //
 // The four subcommands are meant to be run in order, with a human or an agent
@@ -13,8 +14,9 @@
 //	jobsweep posts      score hiring posts pulled out of the signed-in feed
 //	jobsweep publish    write the day's list into content/jobs/ for the site
 //
-// Page loads go through agent-browser, which must be on PATH, and use only
-// LinkedIn's public guest endpoints. The one exception is `posts`, which does
+// LinkedIn page loads go through agent-browser, which must be on PATH, and use
+// only LinkedIn's public guest endpoints. The YC board is server-rendered and
+// is read with a plain HTTP GET; see yc.go. The one exception is `posts`, which does
 // no fetching at all: it scores rows the agent extracted from Alexander's own
 // signed-in feed, in his own browser. See docs/adr/0008.
 package main
@@ -29,10 +31,10 @@ import (
 //go:embed js
 var jsFS embed.FS
 
-const usage = `jobsweep - LinkedIn sweep against content/resume.json
+const usage = `jobsweep - LinkedIn and YC board sweep against content/resume.json
 
 Usage:
-  jobsweep sweep      [-out DIR] [-days N] [-root DIR]
+  jobsweep sweep      [-out DIR] [-days N] [-source all|linkedin|yc] [-root DIR]
   jobsweep score      [-out DIR] [-mark-seen] [-new-only] [-root DIR]
   jobsweep shortlist  [-out DIR] [-min N] [-limit N]
   jobsweep fetch      [-out DIR] [-root DIR]
@@ -41,7 +43,7 @@ Usage:
   jobsweep posts      [-out DIR] [-in FILE] [-mark-seen] [-new-only] [-min N]
 
   -out    run directory, default runs/<today>
-  -root   skill directory holding queries.tsv and runs/, default: next to the
+  -root   skill directory holding queries.tsv, yc.tsv and runs/, default: next to the
           binary if queries.tsv is there, otherwise the working directory
 `
 
