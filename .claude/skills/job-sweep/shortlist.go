@@ -28,7 +28,7 @@ var alwaysDrop = []struct {
 	{regexp.MustCompile(`(?i)react native|\bandroid\b|\bios\b|flutter`), "mobile native"},
 	{regexp.MustCompile(`(?i)\.net|c#`), ".NET"},
 	{regexp.MustCompile(`(?i)devops|\bsre\b|data scien|data (analyst|engineer)|security|monetization`), "off-role"},
-	{regexp.MustCompile(`(?i)intern|junior|graduate|trainee`), "too junior"},
+	{regexp.MustCompile(`(?i)\bintern(s|ship)?\b|junior|graduate|trainee`), "too junior"},
 }
 
 // aaaStudio: "Senior Game Programmer" at these is C++ engine work every time,

@@ -59,7 +59,7 @@ var negative = rules(map[string]int{
 	`\bphp\b|\bruby\b|\bgolang\b|\bpython\b`: -2,
 	`\bqa\b|tester|manual`:                   -4,
 	`\bandroid\b|\bios\b|flutter|react native|kotlin|swift`:            -3,
-	`intern|junior|graduate|trainee`:                                   -4,
+	`\bintern(s|ship)?\b|junior|graduate|trainee`:                      -4,
 	`designer|artist|ux/ui|producer|manager|analyst|marketing|recruit`: -4,
 	`\bunreal\b|c\+\+`:                          -3,
 	`data engineer|devops|sre|backend engineer`: -3,
