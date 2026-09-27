@@ -11,6 +11,7 @@
 //	jobsweep shortlist  propose which postings earn a description fetch
 //	jobsweep fetch      pull the full descriptions for that shortlist
 //	jobsweep summarize  condense them to stack signals
+//	jobsweep judge      ask TypeSafe's Jev for tier, stack, location and caveats
 //	jobsweep posts      score hiring posts pulled out of the signed-in feed
 //	jobsweep publish    write the day's list into content/jobs/ for the site
 //
@@ -39,6 +40,7 @@ Usage:
   jobsweep shortlist  [-out DIR] [-min N] [-limit N]
   jobsweep fetch      [-out DIR] [-root DIR]
   jobsweep summarize  [-out DIR]
+  jobsweep judge      [-out DIR] [-workers N]    needs TYPESAFE_API_KEY
   jobsweep publish    [-out DIR] [-root DIR] [-repo DIR] [-min N]
   jobsweep posts      [-out DIR] [-in FILE] [-mark-seen] [-new-only] [-min N]
 
@@ -65,6 +67,8 @@ func main() {
 		err = cmdFetch(os.Args[2:])
 	case "summarize":
 		err = cmdSummarize(os.Args[2:])
+	case "judge":
+		err = cmdJudge(os.Args[2:])
 	case "publish":
 		err = cmdPublish(os.Args[2:])
 	case "posts":
