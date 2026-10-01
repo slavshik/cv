@@ -6,7 +6,7 @@
 		"label": "Senior Frontend Engineer · Games · Agentic Workflows",
 		"email": "slavshik@me.com",
 		"url": "https://slavshik.me",
-		"summary": "I have been building for the browser since 2007, most of it games. **Real-money betting games over live video** at Evolution, **HTML5 instant games** at Gismart and FRVR, and, at Diesel Puppet, the shared engine, backend and release pipeline that put one codebase on 7+ web platforms. My work spans interactive interfaces, physics-based gameplay, performance optimization for low-end devices, and shared tooling that helps small teams release regularly. I work primarily in TypeScript, choosing frameworks and engines to suit each project. I also use AI agents in my personal projects and introduced custom skills at Evolution to help with everyday Jira, wiki, and GitLab tasks.",
+		"summary": "I have been building for the browser since 2007, most of it games. **Real-money betting games over live video** at Evolution, **HTML5 instant games** at Gismart and FRVR, and, at Diesel Puppet, where I headed the web games department, the shared engine, backend and release pipeline that put one codebase on 7+ web platforms. My work spans interactive interfaces, physics-based gameplay, performance optimization for low-end devices, and shared tooling that helps small teams release regularly. I work primarily in TypeScript, choosing frameworks and engines to suit each project. I also use AI agents in my personal projects and introduced custom skills at Evolution to help with everyday Jira, wiki, and GitLab tasks.",
 		"image": "portrait.webp",
 		"location": {
 			"city": "Warsaw",
@@ -37,6 +37,7 @@
 			"highlights": [
 				"**Built new game clients end-to-end** — project scaffolding, MobX stores, WebSocket transport and message handlers, betting grid, drag-and-drop chips, flying-chip animations, statistics and help screens.",
 				"**Engineered complex interactive betting UX**: drag-and-drop chip placement with distance/scaling math, bet and table-limit validation, real-time bet statistics and winner lists.",
+				"Worked across backend, Unreal, hardware, studio and AI-recognition teams, from a 3-person UI team.",
 				"Delivered responsive, multi-orientation layouts across desktop, tablet and mobile.",
 				"Integrated __Rive real-time animations__ behind feature flags and built audio / voice-over systems with regulatory variants.",
 				"Implemented regulatory and compliance features and operator-specific branding for multiple game skins.",
@@ -61,12 +62,13 @@
 		},
 		{
 			"name": "Diesel Puppet",
-			"position": "Game Developer",
+			"position": "Head of Web Games",
 			"location": "Minsk, Belarus",
 			"startDate": "2020-03",
 			"endDate": "2023-02",
 			"summary": "**Built and owned the core technology** for Diesel Puppet, a casual HTML5 instant-games studio, across roughly five years. Designed and maintained a shared __TypeScript/PixiJS/Preact game engine__ (dp-instant) and its __NestJS/Firebase backend__, used to ship the same game codebase to ==7+ web platforms== including Facebook Instant Games, VK, OK.ru, Yandex Games, GameDistribution and YouTube Playables.",
 			"highlights": [
+				"**Headed the web games department and led its projects**, reporting to the owners and handling clients and publishers.",
 				"**Built several titles end to end** on that platform: Chain Cube 3D, a 3D physics puzzle (Babylon.js/cannon.js); Hidden Object: Brain Teaser; a block-fit puzzle game; an asynchronous multiplayer word game; and the core simulation engine for a territory-conquest strategy game built with an __entity-component-system architecture__.",
 				"Built the backend systems behind these games: a Firebase-backed Messenger bot service, and its successor, a __multi-tenant NestJS backend__ serving ==8+ titles== with shared auth, scoring, leaderboards, in-game payments and an asynchronous challenge/matchmaking system.",
 				"Set up and iterated on the studio's __CI/CD release pipeline__, including a migration from Bitbucket Pipelines to GitHub Actions."

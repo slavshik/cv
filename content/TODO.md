@@ -33,6 +33,16 @@ gap: a gap is left as a gap.
   evidence. The meta description in `index.html` names Gismart instead.
   With it gone, the overlapping-dates note (Evolution to 2026-05, BrainRocket
   from 2025-09) is retired again.
+- **Diesel Puppet title is Head of Web Games (Alexander, 2026-10-01).** Added
+  after a recruiter said the CV did not show stakeholder management or team
+  handling. Sourced from him: he headed the web games department for the whole
+  spell, led its projects, reported to the studio's owners and dealt with
+  external clients and publishers. At Evolution he worked with the backend,
+  Unreal, hardware, studio and AI-recognition teams from a 3-person UI team.
+  **Still missing:** how many people he led and in which roles — the line has
+  no number until he gives one. LinkedIn still says Game Developer and must be
+  changed to match. He told the recruiter "2 years" of both; the page dates the
+  headship at about 3 — he should settle which.
 - **Diesel Puppet is one entry here, 2020-03 to 2023-02.** LinkedIn splits that
   spell in two — Game Developer, full-time, 2020-03 to 2022-08 in Minsk, and
   Game Developer, self-employed, 2022-08 to 2023-02, remote — with the long
