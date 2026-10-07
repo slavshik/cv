@@ -1,0 +1,981 @@
+{
+ "date": "2026-10-07",
+ "swept": 507,
+ "dropped": {
+  ".NET": 3,
+  "AAA studio (C++)": 3,
+  "Angular": 26,
+  "C++": 6,
+  "QA": 1,
+  "Unity": 4,
+  "Vue": 1,
+  "YC, not open to Poland": 113,
+  "below the line": 208,
+  "mobile native": 10,
+  "not an engineering role": 13,
+  "off-role": 5,
+  "too junior": 18
+ },
+ "jobs": [
+  {
+   "title": "HTML5/JavaScript Game Developer",
+   "company": "GamePoint",
+   "loc": "Poland",
+   "posted": "2026-09-18",
+   "url": "https://pl.linkedin.com/jobs/view/html5-javascript-game-developer-at-gamepoint-4466659756",
+   "score": 13,
+   "new": false,
+   "firstSeen": "2026-09-19"
+  },
+  {
+   "title": "Senior Frontend Developer (React / TypeScript)",
+   "company": "DCG",
+   "loc": "Warsaw Metropolitan Area",
+   "posted": "2026-10-02",
+   "url": "https://pl.linkedin.com/jobs/view/senior-frontend-developer-react-typescript-at-dcg-4474704978",
+   "score": 12,
+   "new": true,
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "title": "Slot Game Developer",
+   "company": "Pateplay",
+   "loc": "Sofia, Sofia City, Bulgaria",
+   "posted": "2026-09-08",
+   "url": "https://bg.linkedin.com/jobs/view/slot-game-developer-at-pateplay-4464609590",
+   "score": 11,
+   "new": false,
+   "firstSeen": "2026-09-10"
+  },
+  {
+   "title": "Senior Fullstack Engineer - Node.js/TypeScript",
+   "company": "Twin Harbour Interactive",
+   "loc": "Valletta, Malta",
+   "posted": "2026-09-25",
+   "url": "https://mt.linkedin.com/jobs/view/senior-fullstack-engineer-node-js-typescript-at-twin-harbour-interactive-4470148185",
+   "score": 11,
+   "new": false,
+   "firstSeen": "2026-09-25"
+  },
+  {
+   "title": "Senior Front-end Developer (React, next.js)",
+   "company": "Luxoft",
+   "loc": "Poland",
+   "posted": "2026-09-07",
+   "url": "https://pl.linkedin.com/jobs/view/senior-front-end-developer-react-next-js-at-luxoft-4464315828",
+   "score": 10,
+   "new": false,
+   "firstSeen": "2026-09-10"
+  },
+  {
+   "title": "Game Developer (frontend)",
+   "company": "Hacksaw Studios",
+   "loc": "Stockholm, Stockholm County, Sweden",
+   "posted": "2026-09-23",
+   "url": "https://se.linkedin.com/jobs/view/game-developer-frontend-at-hacksaw-studios-4364443439",
+   "score": 10,
+   "new": false,
+   "firstSeen": "2026-09-09"
+  },
+  {
+   "title": "Senior Fullstack Engineer (TypeScript, Node.js and Effect.js)",
+   "company": "Appfire",
+   "loc": "Warsaw, Mazowieckie, Poland",
+   "posted": "2026-10-06",
+   "url": "https://pl.linkedin.com/jobs/view/senior-fullstack-engineer-typescript-node-js-and-effect-js-at-appfire-4476344459",
+   "score": 10,
+   "new": true,
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "title": "Staff Frontend Software Engineer - React and Next.js",
+   "company": "Mindera",
+   "loc": "Coimbra, Coimbra, Portugal",
+   "posted": "2026-09-07",
+   "url": "https://pt.linkedin.com/jobs/view/staff-frontend-software-engineer-react-and-next-js-at-mindera-4474746967",
+   "score": 9,
+   "new": true,
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "title": "Gameplay Programmer",
+   "company": "Larian Studios",
+   "loc": "Warsaw, Mazowieckie, Poland",
+   "posted": "2026-09-15",
+   "url": "https://pl.linkedin.com/jobs/view/gameplay-programmer-at-larian-studios-4467703580",
+   "score": 9,
+   "new": false,
+   "firstSeen": "2026-09-15"
+  },
+  {
+   "title": "Gameplay \u0026 UI Developer - Paper.io2",
+   "company": "Voodoo",
+   "loc": "Warsaw, Mazowieckie, Poland",
+   "posted": "2026-09-30",
+   "url": "https://pl.linkedin.com/jobs/view/gameplay-ui-developer-paper-io2-at-voodoo-4464679150",
+   "score": 9,
+   "new": false,
+   "firstSeen": "2026-09-09"
+  },
+  {
+   "title": "Game Developer - Puzzle Games",
+   "company": "Voodoo",
+   "loc": "Warsaw, Mazowieckie, Poland",
+   "posted": "2026-10-02",
+   "url": "https://pl.linkedin.com/jobs/view/game-developer-puzzle-games-at-voodoo-4474751680",
+   "score": 9,
+   "new": true,
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "title": "Senior Frontend Developer - React.js (all genders)",
+   "company": "Lightspeed Commerce",
+   "loc": "Berlin, Berlin, Germany",
+   "posted": "2026-10-02",
+   "url": "https://de.linkedin.com/jobs/view/senior-frontend-developer-react-js-all-genders-at-lightspeed-commerce-4463910895",
+   "score": 9,
+   "new": false,
+   "firstSeen": "2026-09-13"
+  },
+  {
+   "title": "Senior Game Developer",
+   "company": "Playson",
+   "loc": "European Union",
+   "posted": "2026-10-05",
+   "url": "https://www.linkedin.com/jobs/view/senior-game-developer-at-playson-4440841075",
+   "score": 9,
+   "new": false,
+   "firstSeen": "2026-09-14"
+  },
+  {
+   "title": "Développeur front-end Senior React / Next.js H/F",
+   "company": "SQLI",
+   "loc": "Levallois-Perret, Île-de-France, France",
+   "posted": "2026-10-05",
+   "url": "https://fr.linkedin.com/jobs/view/d%C3%A9veloppeur-front-end-senior-react-next-js-h-f-at-sqli-4364334126",
+   "score": 9,
+   "new": false,
+   "firstSeen": "2026-09-07"
+  },
+  {
+   "title": "Développeur Senior Front End React JS - Plateforme Digitale haute visibilité",
+   "company": "Mobile Tech People",
+   "loc": "Paris, Île-de-France, France",
+   "posted": "2026-10-06",
+   "url": "https://fr.linkedin.com/jobs/view/d%C3%A9veloppeur-senior-front-end-react-js-plateforme-digitale-haute-visibilit%C3%A9-at-mobile-tech-people-4476383126",
+   "score": 9,
+   "new": true,
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "title": "Principal Node.js Engineer",
+   "company": "Twin Harbour Interactive",
+   "loc": "Greater Hamburg Area",
+   "posted": "2026-09-25",
+   "url": "https://de.linkedin.com/jobs/view/principal-node-js-engineer-at-twin-harbour-interactive-4470129896",
+   "score": 8,
+   "new": false,
+   "firstSeen": "2026-09-25"
+  },
+  {
+   "title": "Senior Frontend Software Engineer - React",
+   "company": "Luxoft",
+   "loc": "Cracow, Małopolskie, Poland",
+   "posted": "2026-10-01",
+   "url": "https://pl.linkedin.com/jobs/view/senior-frontend-software-engineer-react-at-luxoft-4474138255",
+   "score": 8,
+   "new": false,
+   "firstSeen": "2026-10-01"
+  },
+  {
+   "title": "Senior React + WordPress Developer (Front-end focus)",
+   "company": "Digis, a Fiverr company (NYSE: FVRR)",
+   "loc": "Poland",
+   "posted": "2026-10-06",
+   "url": "https://pl.linkedin.com/jobs/view/senior-react-%2B-wordpress-developer-front-end-focus-at-digis-a-fiverr-company-nyse-fvrr-4476321357",
+   "score": 8,
+   "new": true,
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "title": "Lead Frontend Developer",
+   "company": "Searchability®",
+   "loc": "Warsaw Metropolitan Area",
+   "posted": "2026-09-08",
+   "url": "https://pl.linkedin.com/jobs/view/lead-frontend-developer-at-searchability%C2%AE-4464473291",
+   "score": 7,
+   "new": false,
+   "firstSeen": "2026-09-09"
+  },
+  {
+   "title": "Senior Frontend Engineer",
+   "company": "Tango",
+   "loc": "Warsaw, Mazowieckie, Poland",
+   "posted": "2026-09-11",
+   "url": "https://pl.linkedin.com/jobs/view/senior-frontend-engineer-at-tango-4463987699",
+   "score": 7,
+   "new": false,
+   "firstSeen": "2026-09-13"
+  },
+  {
+   "title": "Frontend Engineer (React)",
+   "company": "Shelf",
+   "loc": "Warsaw, Mazowieckie, Poland",
+   "posted": "2026-09-14",
+   "url": "https://pl.linkedin.com/jobs/view/frontend-engineer-react-at-shelf-4467252992",
+   "score": 7,
+   "new": false,
+   "firstSeen": "2026-09-15"
+  },
+  {
+   "title": "Lead Tools Programmer",
+   "company": "Larian Studios",
+   "loc": "Warsaw, Mazowieckie, Poland",
+   "posted": "2026-09-15",
+   "url": "https://pl.linkedin.com/jobs/view/lead-tools-programmer-at-larian-studios-4467732097",
+   "score": 7,
+   "new": false,
+   "firstSeen": "2026-09-15"
+  },
+  {
+   "title": "Senior Frontend Engineer - React (m/f/d)",
+   "company": "ResearchGate",
+   "loc": "Berlin, Berlin, Germany",
+   "posted": "2026-09-15",
+   "url": "https://de.linkedin.com/jobs/view/senior-frontend-engineer-react-m-f-d-at-researchgate-4465540013",
+   "score": 7,
+   "new": false,
+   "firstSeen": "2026-09-18"
+  },
+  {
+   "title": "Senior JavaScript Engineer - Gaming",
+   "company": "LeoVegas Group",
+   "loc": "Málaga, Andalusia, Spain",
+   "posted": "2026-09-18",
+   "url": "https://es.linkedin.com/jobs/view/senior-javascript-engineer-gaming-at-leovegas-group-4449111348",
+   "score": 7,
+   "new": false,
+   "firstSeen": "2026-09-07"
+  },
+  {
+   "title": "Software Developer (TypeScript / React / Azure) - K/M",
+   "company": "Astek",
+   "loc": "Warsaw, Mazowieckie, Poland",
+   "posted": "2026-09-25",
+   "url": "https://pl.linkedin.com/jobs/view/software-developer-typescript-react-azure-k-m-at-astek-4461154135",
+   "score": 7,
+   "new": false,
+   "firstSeen": "2026-09-07"
+  },
+  {
+   "title": "Senior Next.Js Front End Developer",
+   "company": "Americaneagle.com",
+   "loc": "Sofia, Sofia City, Bulgaria",
+   "posted": "2026-09-25",
+   "url": "https://bg.linkedin.com/jobs/view/senior-next-js-front-end-developer-at-americaneagle-com-4463281964",
+   "score": 7,
+   "new": false,
+   "firstSeen": "2026-09-13"
+  },
+  {
+   "title": "Senior Frontend Developer | React 18",
+   "company": "Accenture España",
+   "loc": "Madrid, Community of Madrid, Spain",
+   "posted": "2026-09-25",
+   "url": "https://es.linkedin.com/jobs/view/senior-frontend-developer-react-18-at-accenture-espa%C3%B1a-4470729216",
+   "score": 7,
+   "new": true,
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "title": "Senior JavaScript Engineer - Gaming",
+   "company": "LeoVegas Group",
+   "loc": "Stockholm, Stockholm County, Sweden",
+   "posted": "2026-09-26",
+   "url": "https://se.linkedin.com/jobs/view/senior-javascript-engineer-gaming-at-leovegas-group-4453730373",
+   "score": 7,
+   "new": false,
+   "firstSeen": "2026-09-07"
+  },
+  {
+   "title": "Senior Full Stack Engineer (Node/React) - Remote",
+   "company": "Kake",
+   "loc": "Warsaw, Mazowieckie, Poland",
+   "posted": "2026-09-28",
+   "url": "https://pl.linkedin.com/jobs/view/senior-full-stack-engineer-node-react-remote-at-kake-4459200820",
+   "score": 7,
+   "new": false,
+   "firstSeen": "2026-09-07"
+  },
+  {
+   "title": "Développeur Front-end React / Next.js (F/H)",
+   "company": "Cabinet EKINOX",
+   "loc": "Levallois-Perret, Île-de-France, France",
+   "posted": "2026-09-29",
+   "url": "https://fr.linkedin.com/jobs/view/d%C3%A9veloppeur-front-end-react-next-js-f-h-at-cabinet-ekinox-4473566447",
+   "score": 7,
+   "new": false,
+   "firstSeen": "2026-09-30"
+  },
+  {
+   "title": "FR - Senior React Front-End Developer",
+   "company": "Valtech",
+   "loc": "Paris, Île-de-France, France",
+   "posted": "2026-09-29",
+   "url": "https://fr.linkedin.com/jobs/view/fr-senior-react-front-end-developer-at-valtech-4464603112",
+   "score": 7,
+   "new": false,
+   "firstSeen": "2026-09-18"
+  },
+  {
+   "title": "Gameplay \u0026 UI Developer - Paper.io2",
+   "company": "Voodoo",
+   "loc": "Lisbon, Lisbon, Portugal",
+   "posted": "2026-09-30",
+   "url": "https://pt.linkedin.com/jobs/view/gameplay-ui-developer-paper-io2-at-voodoo-4464683019",
+   "score": 7,
+   "new": false,
+   "firstSeen": "2026-09-14"
+  },
+  {
+   "title": "Senior UI/UX Design \u0026 Front-End Lead",
+   "company": "DCG",
+   "loc": "Warsaw, Mazowieckie, Poland",
+   "posted": "2026-10-01",
+   "url": "https://pl.linkedin.com/jobs/view/senior-ui-ux-design-front-end-lead-at-dcg-4474359107",
+   "score": 7,
+   "new": true,
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "title": "Senior Frontend Engineer",
+   "company": "Tango",
+   "loc": "Warsaw, Mazowieckie, Poland",
+   "posted": "2026-10-02",
+   "url": "https://pl.linkedin.com/jobs/view/senior-frontend-engineer-at-tango-4466311438",
+   "score": 7,
+   "new": false,
+   "firstSeen": "2026-09-13"
+  },
+  {
+   "title": "Senior Frontend Developer",
+   "company": "MEDvidi",
+   "loc": "Warsaw, Mazowieckie, Poland",
+   "posted": "2026-10-02",
+   "url": "https://pl.linkedin.com/jobs/view/senior-frontend-developer-at-medvidi-4473802553",
+   "score": 7,
+   "new": true,
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "title": "Senior Node.js Developer (f/m/x)",
+   "company": "Sii Poland",
+   "loc": "Warsaw, Mazowieckie, Poland",
+   "posted": "2026-10-02",
+   "url": "https://pl.linkedin.com/jobs/view/senior-node-js-developer-f-m-x-at-sii-poland-4473169873",
+   "score": 7,
+   "new": true,
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "title": "Lead Front-End Developer - Design System",
+   "company": "Worldline",
+   "loc": "Warsaw, Mazowieckie, Poland",
+   "posted": "2026-10-06",
+   "url": "https://pl.linkedin.com/jobs/view/lead-front-end-developer-design-system-at-worldline-4467072795",
+   "score": 7,
+   "new": false,
+   "firstSeen": "2026-09-24"
+  },
+  {
+   "title": "Senior Web Application Engineer - React",
+   "company": "cerebre",
+   "loc": "Poznań, Wielkopolskie, Poland",
+   "posted": "2026-09-07",
+   "url": "https://pl.linkedin.com/jobs/view/senior-web-application-engineer-react-at-cerebre-4464366515",
+   "score": 6,
+   "new": false,
+   "firstSeen": "2026-09-09"
+  },
+  {
+   "title": "Senior Frontend Developer",
+   "company": "Luxoft Poland",
+   "loc": "Poland",
+   "posted": "2026-09-07",
+   "url": "https://pl.linkedin.com/jobs/view/senior-frontend-developer-at-luxoft-poland-4464327775",
+   "score": 6,
+   "new": false,
+   "firstSeen": "2026-09-10"
+  },
+  {
+   "title": "Tech Lead (f/m/d)",
+   "company": "Ten Square Games",
+   "loc": "Wrocław, Dolnośląskie, Poland",
+   "posted": "2026-09-10",
+   "url": "https://pl.linkedin.com/jobs/view/tech-lead-f-m-d-at-ten-square-games-4465649123",
+   "score": 6,
+   "new": false,
+   "firstSeen": "2026-09-10"
+  },
+  {
+   "title": "Senior Frontend Engineer",
+   "company": "SOFTETA",
+   "loc": "Cracow, Małopolskie, Poland",
+   "posted": "2026-09-10",
+   "url": "https://pl.linkedin.com/jobs/view/senior-frontend-engineer-at-softeta-4475546039",
+   "score": 6,
+   "new": true,
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "title": "Senior Frontend Developer - Headless CMS Expert",
+   "company": "Vattenfall",
+   "loc": "Katowice, Śląskie, Poland",
+   "posted": "2026-09-16",
+   "url": "https://pl.linkedin.com/jobs/view/senior-frontend-developer-headless-cms-expert-at-vattenfall-4448553276",
+   "score": 6,
+   "new": false,
+   "firstSeen": "2026-09-07"
+  },
+  {
+   "title": "Lead Frontend Engineer",
+   "company": "Relativity",
+   "loc": "Cracow, Małopolskie, Poland",
+   "posted": "2026-09-17",
+   "url": "https://pl.linkedin.com/jobs/view/lead-frontend-engineer-at-relativity-4459354477",
+   "score": 6,
+   "new": false,
+   "firstSeen": "2026-09-09"
+  },
+  {
+   "title": "Tech Lead React",
+   "company": "BlueSoft",
+   "loc": "Warsaw, Mazowieckie, Poland",
+   "posted": "2026-09-18",
+   "url": "https://pl.linkedin.com/jobs/view/tech-lead-react-at-bluesoft-4469122163",
+   "score": 6,
+   "new": false,
+   "firstSeen": "2026-09-22"
+  },
+  {
+   "title": "Senior Software Engineer - Frontend - Consumer",
+   "company": "Kraken",
+   "loc": "Poland",
+   "posted": "2026-09-18",
+   "url": "https://pl.linkedin.com/jobs/view/senior-software-engineer-frontend-consumer-at-kraken-4437052823",
+   "score": 6,
+   "new": false,
+   "firstSeen": "2026-09-07"
+  },
+  {
+   "title": "Senior Frontend Engineer",
+   "company": "Trading 212",
+   "loc": "Poland",
+   "posted": "2026-09-22",
+   "url": "https://pl.linkedin.com/jobs/view/senior-frontend-engineer-at-trading-212-4468911962",
+   "score": 6,
+   "new": false,
+   "firstSeen": "2026-09-24"
+  },
+  {
+   "title": "Staff Frontend Engineer",
+   "company": "Trading 212",
+   "loc": "Poland",
+   "posted": "2026-09-22",
+   "url": "https://pl.linkedin.com/jobs/view/staff-frontend-engineer-at-trading-212-4468925187",
+   "score": 6,
+   "new": false,
+   "firstSeen": "2026-09-25"
+  },
+  {
+   "title": "Développeur logiciel principal (React)/ Senior Software Developer (React)",
+   "company": "IQVIA Laboratories",
+   "loc": "Warsaw, Mazowieckie, Poland",
+   "posted": "2026-09-24",
+   "url": "https://pl.linkedin.com/jobs/view/d%C3%A9veloppeur-logiciel-principal-react-senior-software-developer-react-at-iqvia-laboratories-4464153107",
+   "score": 6,
+   "new": false,
+   "firstSeen": "2026-10-01"
+  },
+  {
+   "title": "Senior Full Stack Games Engineer (Remote)",
+   "company": "over99",
+   "loc": "Berlin, Berlin, Germany",
+   "posted": "2026-09-28",
+   "url": "https://de.linkedin.com/jobs/view/senior-full-stack-games-engineer-remote-at-over99-4471525954",
+   "score": 6,
+   "new": false,
+   "firstSeen": "2026-09-29"
+  },
+  {
+   "title": "Senior Frontend Engineer",
+   "company": "ClickUp",
+   "loc": "Poland",
+   "posted": "2026-09-29",
+   "url": "https://pl.linkedin.com/jobs/view/senior-frontend-engineer-at-clickup-4407699904",
+   "score": 6,
+   "new": false,
+   "firstSeen": "2026-09-07"
+  },
+  {
+   "title": "Full Stack Software Engineer 4/5, Game Lifecycle Engineering",
+   "company": "Netflix",
+   "loc": "Warsaw, Mazowieckie, Poland",
+   "posted": "2026-09-30",
+   "url": "https://pl.linkedin.com/jobs/view/full-stack-software-engineer-4-5-game-lifecycle-engineering-at-netflix-4462561355",
+   "score": 6,
+   "new": false,
+   "firstSeen": "2026-09-09"
+  },
+  {
+   "title": "Senior Frontend Engineer",
+   "company": "Coralogix",
+   "loc": "Cracow, Małopolskie, Poland",
+   "posted": "2026-09-30",
+   "url": "https://pl.linkedin.com/jobs/view/senior-frontend-engineer-at-coralogix-4465097048",
+   "score": 6,
+   "new": false,
+   "firstSeen": "2026-09-10"
+  },
+  {
+   "title": "Staff Frontend Engineer",
+   "company": "ClickUp",
+   "loc": "Poland",
+   "posted": "2026-09-30",
+   "url": "https://pl.linkedin.com/jobs/view/staff-frontend-engineer-at-clickup-4407699905",
+   "score": 6,
+   "new": false,
+   "firstSeen": "2026-09-07"
+  },
+  {
+   "title": "Senior Design/Developer (React \u0026 UI/UX)",
+   "company": "Billennium",
+   "loc": "Warsaw, Mazowieckie, Poland",
+   "posted": "2026-10-01",
+   "url": "https://pl.linkedin.com/jobs/view/senior-design-developer-react-ui-ux-at-billennium-4474185569",
+   "score": 6,
+   "new": true,
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "title": "Senior React Developer",
+   "company": "Adecco",
+   "loc": "Warsaw, Mazowieckie, Poland",
+   "posted": "2026-10-05",
+   "url": "https://pl.linkedin.com/jobs/view/senior-react-developer-at-adecco-4473633435",
+   "score": 6,
+   "new": true,
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "title": "Staff/Lead Front-end Engineer",
+   "company": "Mimica",
+   "loc": "Poland",
+   "posted": "2026-10-05",
+   "url": "https://pl.linkedin.com/jobs/view/staff-lead-front-end-engineer-at-mimica-4475589416",
+   "score": 6,
+   "new": true,
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "title": "Senior Software Engineer",
+   "company": "Caesars Sportsbook \u0026 Casino",
+   "loc": "Cracow, Małopolskie, Poland",
+   "posted": "2026-10-06",
+   "url": "https://pl.linkedin.com/jobs/view/senior-software-engineer-at-caesars-sportsbook-casino-4474401408",
+   "score": 6,
+   "new": true,
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "title": "Senior Software Engineer",
+   "company": "Caesars Entertainment",
+   "loc": "Cracow, Małopolskie, Poland",
+   "posted": "2026-10-06",
+   "url": "https://pl.linkedin.com/jobs/view/senior-software-engineer-at-caesars-entertainment-4476513079",
+   "score": 6,
+   "new": true,
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "title": "Lead Game Programmer",
+   "company": "Triband",
+   "loc": "Copenhagen Municipality, Capital Region of Denmark, Denmark",
+   "posted": "2026-10-06",
+   "url": "https://dk.linkedin.com/jobs/view/lead-game-programmer-at-triband-4474096771",
+   "score": 6,
+   "new": true,
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "title": "Senior/Staff Frontend Engineer",
+   "company": "Flick (YC F25)",
+   "loc": "Sunnyvale, CA, US / Remote",
+   "posted": "2025-12-11",
+   "url": "https://www.ycombinator.com/companies/flick/jobs/Tdu6FH6-senior-staff-frontend-engineer",
+   "score": 5,
+   "new": false,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "title": "Senior Full Stack Engineer",
+   "company": "Deed (YC S21)",
+   "loc": "Berlin, BE, DE",
+   "posted": "2026-01-10",
+   "url": "https://www.ycombinator.com/companies/deed/jobs/w6AUXdO-senior-full-stack-engineer",
+   "score": 5,
+   "new": false,
+   "firstSeen": "2026-09-26"
+  },
+  {
+   "title": "Frontend Developer",
+   "company": "Searchability®",
+   "loc": "Warsaw Metropolitan Area",
+   "posted": "2026-09-08",
+   "url": "https://pl.linkedin.com/jobs/view/frontend-developer-at-searchability%C2%AE-4464469312",
+   "score": 5,
+   "new": false,
+   "firstSeen": "2026-09-09"
+  },
+  {
+   "title": "UI/UX \u0026 Frontend Developer",
+   "company": "New Wave International Cargo",
+   "loc": "Warsaw, Mazowieckie, Poland",
+   "posted": "2026-09-09",
+   "url": "https://pl.linkedin.com/jobs/view/ui-ux-frontend-developer-at-new-wave-international-cargo-4465049054",
+   "score": 5,
+   "new": false,
+   "firstSeen": "2026-09-10"
+  },
+  {
+   "title": "Développeur front-end react H/F",
+   "company": "Cegedim Santé",
+   "loc": "Nantes, Pays de la Loire, France",
+   "posted": "2026-09-09",
+   "url": "https://fr.linkedin.com/jobs/view/d%C3%A9veloppeur-front-end-react-h-f-at-cegedim-sant%C3%A9-4459686329",
+   "score": 5,
+   "new": false,
+   "firstSeen": "2026-09-07"
+  },
+  {
+   "title": "Senior Frontend Engineer",
+   "company": "Poki",
+   "loc": "Amsterdam, North Holland, Netherlands",
+   "posted": "2026-09-10",
+   "url": "https://nl.linkedin.com/jobs/view/senior-frontend-engineer-at-poki-4465647618",
+   "score": 5,
+   "new": false,
+   "firstSeen": "2026-09-10"
+  },
+  {
+   "title": "Front-End Developer (React)",
+   "company": "Tickmill",
+   "loc": "Tallinn, Harjumaa, Estonia",
+   "posted": "2026-09-10",
+   "url": "https://ee.linkedin.com/jobs/view/front-end-developer-react-at-tickmill-4385008024",
+   "score": 5,
+   "new": false,
+   "firstSeen": "2026-09-07"
+  },
+  {
+   "title": "Frontend Engineer (React)",
+   "company": "Robert Walters",
+   "loc": "Barcelona, Catalonia, Spain",
+   "posted": "2026-09-10",
+   "url": "https://es.linkedin.com/jobs/view/frontend-engineer-react-at-robert-walters-4465670177",
+   "score": 5,
+   "new": false,
+   "firstSeen": "2026-09-21"
+  },
+  {
+   "title": "(Senior) Fullstack Engineer - Node / React (all genders)",
+   "company": "gamigo group",
+   "loc": "Hamburg, Hamburg, Germany",
+   "posted": "2026-09-11",
+   "url": "https://de.linkedin.com/jobs/view/senior-fullstack-engineer-node-react-all-genders-at-gamigo-group-4466085345",
+   "score": 5,
+   "new": false,
+   "firstSeen": "2026-09-15"
+  },
+  {
+   "title": "Frontend Developer (M/F/D)",
+   "company": "DSV - Global Transport and Logistics",
+   "loc": "Warsaw, Mazowieckie, Poland",
+   "posted": "2026-09-15",
+   "url": "https://pl.linkedin.com/jobs/view/frontend-developer-m-f-d-at-dsv-global-transport-and-logistics-4439156373",
+   "score": 5,
+   "new": false,
+   "firstSeen": "2026-09-07"
+  },
+  {
+   "title": "Front End Engineer",
+   "company": "WPP",
+   "loc": "Warsaw, Mazowieckie, Poland",
+   "posted": "2026-09-16",
+   "url": "https://pl.linkedin.com/jobs/view/front-end-engineer-at-wpp-4466208580",
+   "score": 5,
+   "new": false,
+   "firstSeen": "2026-09-18"
+  },
+  {
+   "title": "Frontend Engineer",
+   "company": "Cisco",
+   "loc": "Warsaw, Mazowieckie, Poland",
+   "posted": "2026-09-16",
+   "url": "https://pl.linkedin.com/jobs/view/frontend-engineer-at-cisco-4467986001",
+   "score": 5,
+   "new": false,
+   "firstSeen": "2026-09-24"
+  },
+  {
+   "title": "Senior Frontend Developer",
+   "company": "ahead AG",
+   "loc": "Barcelona, Catalonia, Spain",
+   "posted": "2026-09-16",
+   "url": "https://es.linkedin.com/jobs/view/senior-frontend-developer-at-ahead-ag-4465994791",
+   "score": 5,
+   "new": false,
+   "firstSeen": "2026-09-22"
+  },
+  {
+   "title": "Frontend Developer",
+   "company": "Global Payments Inc.",
+   "loc": "Warsaw, Mazowieckie, Poland",
+   "posted": "2026-09-19",
+   "url": "https://pl.linkedin.com/jobs/view/frontend-developer-at-global-payments-inc-4441466930",
+   "score": 5,
+   "new": false,
+   "firstSeen": "2026-09-14"
+  },
+  {
+   "title": "Scripter",
+   "company": "Larian Studios",
+   "loc": "Warsaw, Mazowieckie, Poland",
+   "posted": "2026-09-21",
+   "url": "https://pl.linkedin.com/jobs/view/scripter-at-larian-studios-4468158811",
+   "score": 5,
+   "new": false,
+   "firstSeen": "2026-09-25"
+  },
+  {
+   "title": "Senior Développeur Front-End - Team Poker (H/F)",
+   "company": "WINAMAX",
+   "loc": "Paris, Île-de-France, France",
+   "posted": "2026-09-21",
+   "url": "https://fr.linkedin.com/jobs/view/senior-d%C3%A9veloppeur-front-end-team-poker-h-f-at-winamax-4461080421",
+   "score": 5,
+   "new": false,
+   "firstSeen": "2026-09-07"
+  },
+  {
+   "title": "(Senior) Software Engineer – Frontend, Backend oder Full-Stack (m/w/d)",
+   "company": "i22 Digital Agency",
+   "loc": "Bonn, North Rhine-Westphalia, Germany",
+   "posted": "2026-09-23",
+   "url": "https://de.linkedin.com/jobs/view/senior-software-engineer-%E2%80%93-frontend-backend-oder-full-stack-m-w-d-at-i22-digital-agency-4469333948",
+   "score": 5,
+   "new": true,
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "title": "Game Math Design Manager",
+   "company": "IGT",
+   "loc": "Warsaw, Mazowieckie, Poland",
+   "posted": "2026-09-24",
+   "url": "https://pl.linkedin.com/jobs/view/game-math-design-manager-at-igt-4469727697",
+   "score": 5,
+   "new": false,
+   "firstSeen": "2026-09-24"
+  },
+  {
+   "title": "Senior Advanced Frontend Software Engineer (m/f/d) - hybrid",
+   "company": "Honeywell Technologies",
+   "loc": "Gdansk Metropolitan Area",
+   "posted": "2026-09-24",
+   "url": "https://pl.linkedin.com/jobs/view/senior-advanced-frontend-software-engineer-m-f-d-hybrid-at-honeywell-technologies-4462806939",
+   "score": 5,
+   "new": false,
+   "firstSeen": "2026-09-15"
+  },
+  {
+   "title": "Senior Software Engineer (m/f/d)",
+   "company": "Sportradar",
+   "loc": "Ljubljana, Ljubljana, Slovenia",
+   "posted": "2026-09-24",
+   "url": "https://si.linkedin.com/jobs/view/senior-software-engineer-m-f-d-at-sportradar-4471438655",
+   "score": 5,
+   "new": false,
+   "firstSeen": "2026-09-24"
+  },
+  {
+   "title": "React Front end Developer",
+   "company": "Starapple",
+   "loc": "Breda, North Brabant, Netherlands",
+   "posted": "2026-09-24",
+   "url": "https://nl.linkedin.com/jobs/view/react-front-end-developer-at-starapple-4471432758",
+   "score": 5,
+   "new": false,
+   "firstSeen": "2026-09-25"
+  },
+  {
+   "title": "Frontend dveloper",
+   "company": "Brightstar Lottery",
+   "loc": "Warsaw, Mazowieckie, Poland",
+   "posted": "2026-09-25",
+   "url": "https://pl.linkedin.com/jobs/view/frontend-dveloper-at-brightstar-lottery-4470096904",
+   "score": 5,
+   "new": false,
+   "firstSeen": "2026-09-25"
+  },
+  {
+   "title": "Frontend platform engineer",
+   "company": "BEC Financial Technologies",
+   "loc": "Warsaw, Mazowieckie, Poland",
+   "posted": "2026-09-25",
+   "url": "https://pl.linkedin.com/jobs/view/frontend-platform-engineer-at-bec-financial-technologies-4471886617",
+   "score": 5,
+   "new": false,
+   "firstSeen": "2026-09-25"
+  },
+  {
+   "title": "Front-end Engineer - Warszawa (Mazowieckie), Polska K/M",
+   "company": "Astek",
+   "loc": "Warsaw, Mazowieckie, Poland",
+   "posted": "2026-09-25",
+   "url": "https://pl.linkedin.com/jobs/view/front-end-engineer-warszawa-mazowieckie-polska-k-m-at-astek-4441546029",
+   "score": 5,
+   "new": false,
+   "firstSeen": "2026-09-07"
+  },
+  {
+   "title": "Front End Developer",
+   "company": "Box",
+   "loc": "Warsaw, Mazowieckie, Poland",
+   "posted": "2026-09-28",
+   "url": "https://pl.linkedin.com/jobs/view/front-end-developer-at-box-4472711042",
+   "score": 5,
+   "new": false,
+   "firstSeen": "2026-09-28"
+  },
+  {
+   "title": "Frontend Software Engineer",
+   "company": "N-able",
+   "loc": "Warsaw, Mazowieckie, Poland",
+   "posted": "2026-09-28",
+   "url": "https://pl.linkedin.com/jobs/view/frontend-software-engineer-at-n-able-4471201503",
+   "score": 5,
+   "new": false,
+   "firstSeen": "2026-09-29"
+  },
+  {
+   "title": "Développeur Front-End (React) H/F",
+   "company": "Kicklox",
+   "loc": "Paris, Île-de-France, France",
+   "posted": "2026-09-28",
+   "url": "https://fr.linkedin.com/jobs/view/d%C3%A9veloppeur-front-end-react-h-f-at-kicklox-4472713483",
+   "score": 5,
+   "new": false,
+   "firstSeen": "2026-09-28"
+  },
+  {
+   "title": "Mobile Application Engineer - Netherlands market",
+   "company": "LeoVegas Group",
+   "loc": "Warsaw, Mazowieckie, Poland",
+   "posted": "2026-09-29",
+   "url": "https://pl.linkedin.com/jobs/view/mobile-application-engineer-netherlands-market-at-leovegas-group-4471954190",
+   "score": 5,
+   "new": false,
+   "firstSeen": "2026-09-30"
+  },
+  {
+   "title": "Senior Backend Developer (Node.Js)",
+   "company": "Basic-Fit",
+   "loc": "Tilburg, North Brabant, Netherlands",
+   "posted": "2026-09-30",
+   "url": "https://nl.linkedin.com/jobs/view/senior-backend-developer-node-js-at-basic-fit-4414924526",
+   "score": 5,
+   "new": true,
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "title": "Senior Software Engineer (React)",
+   "company": "Kingfisher plc",
+   "loc": "Cracow, Małopolskie, Poland",
+   "posted": "2026-10-01",
+   "url": "https://pl.linkedin.com/jobs/view/senior-software-engineer-react-at-kingfisher-plc-4369690697",
+   "score": 5,
+   "new": false,
+   "firstSeen": "2026-09-29"
+  },
+  {
+   "title": "Senior Web \u0026 Video Player Engineer - Remote",
+   "company": "Kake",
+   "loc": "Warsaw, Mazowieckie, Poland",
+   "posted": "2026-10-02",
+   "url": "https://pl.linkedin.com/jobs/view/senior-web-video-player-engineer-remote-at-kake-4448426790",
+   "score": 5,
+   "new": false,
+   "firstSeen": "2026-09-07"
+  },
+  {
+   "title": "Senior Frontend Engineer - Send Convenience",
+   "company": "Wise",
+   "loc": "Tallinn, Harjumaa, Estonia",
+   "posted": "2026-10-02",
+   "url": "https://ee.linkedin.com/jobs/view/senior-frontend-engineer-send-convenience-at-wise-4472877802",
+   "score": 5,
+   "new": true,
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "title": "Regular Frontend Software Engineer/1",
+   "company": "Inetum",
+   "loc": "Warsaw, Mazowieckie, Poland",
+   "posted": "2026-10-03",
+   "url": "https://pl.linkedin.com/jobs/view/regular-frontend-software-engineer-1-at-inetum-4457315720",
+   "score": 5,
+   "new": false,
+   "firstSeen": "2026-09-07"
+  },
+  {
+   "title": "Senior Software Engineer (Backend/Frontend/Fullstack)",
+   "company": "adidas",
+   "loc": "Zaragoza, Aragon, Spain",
+   "posted": "2026-10-03",
+   "url": "https://es.linkedin.com/jobs/view/senior-software-engineer-backend-frontend-fullstack-at-adidas-4454148584",
+   "score": 5,
+   "new": false,
+   "firstSeen": "2026-09-25"
+  },
+  {
+   "title": "Senior Front-End Engineer",
+   "company": "Vivid Resourcing",
+   "loc": "Brussels, Brussels Region, Belgium",
+   "posted": "2026-10-05",
+   "url": "https://be.linkedin.com/jobs/view/senior-front-end-engineer-at-vivid-resourcing-4454022676",
+   "score": 5,
+   "new": false,
+   "firstSeen": "2026-09-10"
+  },
+  {
+   "title": "Développeur Front-End (React) H/F",
+   "company": "Kicklox",
+   "loc": "Toulouse, Occitanie, France",
+   "posted": "2026-10-05",
+   "url": "https://fr.linkedin.com/jobs/view/d%C3%A9veloppeur-front-end-react-h-f-at-kicklox-4475568202",
+   "score": 5,
+   "new": true,
+   "firstSeen": "2026-10-07"
+  },
+  {
+   "title": "Senior Web \u0026 Video Player Engineer - Remote",
+   "company": "Kake",
+   "loc": "Cracow, Małopolskie, Poland",
+   "posted": "2026-09-18",
+   "url": "https://pl.linkedin.com/jobs/view/senior-web-video-player-engineer-remote-at-kake-4453888853",
+   "score": 4,
+   "new": false,
+   "firstSeen": "2026-09-07"
+  }
+ ]
+}
