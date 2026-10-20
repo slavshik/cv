@@ -304,6 +304,13 @@
 			"url": "http://gc.gaming.skywindgroup.com/blackjack/latest/index.html",
 			"roles": ["Game team"],
 			"image": "blackjack.jpg"
+		},
+		{
+			"name": "Land.io",
+			"type": "3D io game",
+			"entity": "Side projects",
+			"url": "https://slavshik.me/games/land.io/",
+			"description": "**Built a paper.io-style territory game** in 3D: a __Rust engine compiled to WebAssembly__, a Three.js renderer, and a multiplayer server in Rust running rooms on the same engine."
 		}
 	],
 	"skills": [
